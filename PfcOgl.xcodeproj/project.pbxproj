@@ -1,0 +1,632 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8B2DE6ED1F25A2A1005E6D6C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8B2DE6EF1F25A2B3005E6D6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8B2DE6F11F25A2BA005E6D6C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8B2DE6F31F25A2C7005E6D6C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8B2DEA031F25B1EE005E6D6C /* fragment-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DEA011F25B1EE005E6D6C /* fragment-shader.txt */; };
+		8B2DEA041F25B1EE005E6D6C /* vertex-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DEA021F25B1EE005E6D6C /* vertex-shader.txt */; };
+		8B2DEC841F25C33C005E6D6C /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8B2DEC851F25C33C005E6D6C /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8B2DED1D1F25C410005E6D6C /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8B2DED1F1F25CC31005E6D6C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1E1F25CC31005E6D6C /* main.cpp */; };
+		8B2DED291F272A07005E6D6C /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BCC5B881F297E4200361EE5 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BCC5B8B1F297E8A00361EE5 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BCC5B8E1F297EF400361EE5 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BCC5B911F297F4400361EE5 /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BCC5B941F29896600361EE5 /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BCC5B9A1F298ADE00361EE5 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BEA39E31F297A6D00CAF2C8 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B2DE6C21F25A042005E6D6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B2DE6A01F25A042005E6D6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B2DE6A71F25A042005E6D6C;
+			remoteInfo = PfcOgl;
+		};
+		8B2DE6CD1F25A042005E6D6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B2DE6A01F25A042005E6D6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B2DE6A71F25A042005E6D6C;
+			remoteInfo = PfcOgl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8B2DE6A81F25A042005E6D6C /* PfcOgl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PfcOgl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B2DE6C11F25A042005E6D6C /* PfcOglTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PfcOglTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PfcOglUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		8B2DEA011F25B1EE005E6D6C /* fragment-shader.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "fragment-shader.txt"; sourceTree = "<group>"; };
+		8B2DEA021F25B1EE005E6D6C /* vertex-shader.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vertex-shader.txt"; sourceTree = "<group>"; };
+		8B2DEA111F25C33C005E6D6C /* platform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
+		8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw3.a; sourceTree = "<group>"; };
+		8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = platform_osx.mm; sourceTree = "<group>"; };
+		8B2DED1C1F25C410005E6D6C /* glew.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glew.c; path = thirdparty/glew/src/glew.c; sourceTree = "<group>"; };
+		8B2DED1E1F25CC31005E6D6C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglObject.cpp; sourceTree = "<group>"; };
+		8B2DED281F272A07005E6D6C /* PfCOglObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglObject.h; sourceTree = "<group>"; };
+		8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglShader.cpp; sourceTree = "<group>"; };
+		8BCC5B871F297E4200361EE5 /* PfCOglShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglShader.h; sourceTree = "<group>"; };
+		8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglBitmap.cpp; sourceTree = "<group>"; };
+		8BCC5B8A1F297E8A00361EE5 /* PfCOglBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglBitmap.h; sourceTree = "<group>"; };
+		8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglTexture.cpp; sourceTree = "<group>"; };
+		8BCC5B8D1F297EF400361EE5 /* PfCOglTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglTexture.h; sourceTree = "<group>"; };
+		8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglCamera.cpp; sourceTree = "<group>"; };
+		8BCC5B901F297F4400361EE5 /* PfCOglCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglCamera.h; sourceTree = "<group>"; };
+		8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglModelAsset.cpp; sourceTree = "<group>"; };
+		8BCC5B931F29896600361EE5 /* PfCOglModelAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglModelAsset.h; sourceTree = "<group>"; };
+		8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglModelInstance.cpp; sourceTree = "<group>"; };
+		8BCC5B961F29897800361EE5 /* PfCOglModelInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglModelInstance.h; sourceTree = "<group>"; };
+		8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglLight.cpp; sourceTree = "<group>"; };
+		8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglLight.h; sourceTree = "<group>"; };
+		8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglProgram.cpp; sourceTree = "<group>"; };
+		8BEA39DE1F297A6D00CAF2C8 /* PfCOglProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglProgram.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8B2DE6A51F25A042005E6D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B2DE6F31F25A2C7005E6D6C /* IOKit.framework in Frameworks */,
+				8B2DEC841F25C33C005E6D6C /* libglfw3.a in Frameworks */,
+				8B2DE6F11F25A2BA005E6D6C /* Cocoa.framework in Frameworks */,
+				8B2DE6ED1F25A2A1005E6D6C /* OpenGL.framework in Frameworks */,
+				8B2DE6EF1F25A2B3005E6D6C /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6BE1F25A042005E6D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6C91F25A042005E6D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8B2DE69F1F25A042005E6D6C = {
+			isa = PBXGroup;
+			children = (
+				8B2DEA101F25C33C005E6D6C /* common */,
+				8B2DE6AA1F25A042005E6D6C /* PfcOgl */,
+				8B2DE6A91F25A042005E6D6C /* Products */,
+				8B2DE6EB1F25A2A1005E6D6C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8B2DE6A91F25A042005E6D6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DE6A81F25A042005E6D6C /* PfcOgl.app */,
+				8B2DE6C11F25A042005E6D6C /* PfcOglTests.xctest */,
+				8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8B2DE6AA1F25A042005E6D6C /* PfcOgl */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DEA051F25B1F5005E6D6C /* source */,
+				8B2DEA001F25B1EE005E6D6C /* resources */,
+			);
+			path = PfcOgl;
+			sourceTree = "<group>";
+		};
+		8B2DE6EB1F25A2A1005E6D6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */,
+				8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */,
+				8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */,
+				8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B2DEA001F25B1EE005E6D6C /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DEA011F25B1EE005E6D6C /* fragment-shader.txt */,
+				8B2DEA021F25B1EE005E6D6C /* vertex-shader.txt */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8B2DEA051F25B1F5005E6D6C /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DED231F27297E005E6D6C /* PfCOgl */,
+				8B2DED1E1F25CC31005E6D6C /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8B2DEA101F25C33C005E6D6C /* common */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DED1C1F25C410005E6D6C /* glew.c */,
+				8B2DEA111F25C33C005E6D6C /* platform.hpp */,
+				8B2DEA121F25C33C005E6D6C /* platforms */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		8B2DEA121F25C33C005E6D6C /* platforms */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DEAED1F25C33C005E6D6C /* osx */,
+			);
+			path = platforms;
+			sourceTree = "<group>";
+		};
+		8B2DEAED1F25C33C005E6D6C /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */,
+				8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		8B2DED231F27297E005E6D6C /* PfCOgl */ = {
+			isa = PBXGroup;
+			children = (
+				8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */,
+				8BEA39DE1F297A6D00CAF2C8 /* PfCOglProgram.h */,
+				8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */,
+				8B2DED281F272A07005E6D6C /* PfCOglObject.h */,
+				8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */,
+				8BCC5B871F297E4200361EE5 /* PfCOglShader.h */,
+				8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */,
+				8BCC5B8A1F297E8A00361EE5 /* PfCOglBitmap.h */,
+				8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */,
+				8BCC5B8D1F297EF400361EE5 /* PfCOglTexture.h */,
+				8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */,
+				8BCC5B901F297F4400361EE5 /* PfCOglCamera.h */,
+				8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */,
+				8BCC5B931F29896600361EE5 /* PfCOglModelAsset.h */,
+				8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */,
+				8BCC5B961F29897800361EE5 /* PfCOglModelInstance.h */,
+				8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */,
+				8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */,
+			);
+			path = PfCOgl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8B2DE6A71F25A042005E6D6C /* PfcOgl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B2DE6D51F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOgl" */;
+			buildPhases = (
+				8B2DE6A41F25A042005E6D6C /* Sources */,
+				8B2DE6A51F25A042005E6D6C /* Frameworks */,
+				8B2DE6A61F25A042005E6D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PfcOgl;
+			productName = PfcOgl;
+			productReference = 8B2DE6A81F25A042005E6D6C /* PfcOgl.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B2DE6C01F25A042005E6D6C /* PfcOglTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B2DE6D81F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOglTests" */;
+			buildPhases = (
+				8B2DE6BD1F25A042005E6D6C /* Sources */,
+				8B2DE6BE1F25A042005E6D6C /* Frameworks */,
+				8B2DE6BF1F25A042005E6D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B2DE6C31F25A042005E6D6C /* PBXTargetDependency */,
+			);
+			name = PfcOglTests;
+			productName = PfcOglTests;
+			productReference = 8B2DE6C11F25A042005E6D6C /* PfcOglTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8B2DE6CB1F25A042005E6D6C /* PfcOglUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B2DE6DB1F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOglUITests" */;
+			buildPhases = (
+				8B2DE6C81F25A042005E6D6C /* Sources */,
+				8B2DE6C91F25A042005E6D6C /* Frameworks */,
+				8B2DE6CA1F25A042005E6D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B2DE6CE1F25A042005E6D6C /* PBXTargetDependency */,
+			);
+			name = PfcOglUITests;
+			productName = PfcOglUITests;
+			productReference = 8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8B2DE6A01F25A042005E6D6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = developer;
+				TargetAttributes = {
+					8B2DE6A71F25A042005E6D6C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 89VKD6974F;
+						ProvisioningStyle = Automatic;
+					};
+					8B2DE6C01F25A042005E6D6C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 89VKD6974F;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8B2DE6A71F25A042005E6D6C;
+					};
+					8B2DE6CB1F25A042005E6D6C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 89VKD6974F;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8B2DE6A71F25A042005E6D6C;
+					};
+				};
+			};
+			buildConfigurationList = 8B2DE6A31F25A042005E6D6C /* Build configuration list for PBXProject "PfcOgl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8B2DE69F1F25A042005E6D6C;
+			productRefGroup = 8B2DE6A91F25A042005E6D6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8B2DE6A71F25A042005E6D6C /* PfcOgl */,
+				8B2DE6C01F25A042005E6D6C /* PfcOglTests */,
+				8B2DE6CB1F25A042005E6D6C /* PfcOglUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8B2DE6A61F25A042005E6D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B2DEA041F25B1EE005E6D6C /* vertex-shader.txt in Resources */,
+				8B2DEA031F25B1EE005E6D6C /* fragment-shader.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6BF1F25A042005E6D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6CA1F25A042005E6D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8B2DE6A41F25A042005E6D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BCC5B8B1F297E8A00361EE5 /* PfCOglBitmap.cpp in Sources */,
+				8B2DED1D1F25C410005E6D6C /* glew.c in Sources */,
+				8BCC5B881F297E4200361EE5 /* PfCOglShader.cpp in Sources */,
+				8BCC5B9A1F298ADE00361EE5 /* PfCOglLight.cpp in Sources */,
+				8BCC5B941F29896600361EE5 /* PfCOglModelAsset.cpp in Sources */,
+				8BEA39E31F297A6D00CAF2C8 /* PfCOglProgram.cpp in Sources */,
+				8B2DEC851F25C33C005E6D6C /* platform_osx.mm in Sources */,
+				8B2DED291F272A07005E6D6C /* PfCOglObject.cpp in Sources */,
+				8BCC5B8E1F297EF400361EE5 /* PfCOglTexture.cpp in Sources */,
+				8BCC5B911F297F4400361EE5 /* PfCOglCamera.cpp in Sources */,
+				8B2DED1F1F25CC31005E6D6C /* main.cpp in Sources */,
+				8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6BD1F25A042005E6D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B2DE6C81F25A042005E6D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8B2DE6C31F25A042005E6D6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B2DE6A71F25A042005E6D6C /* PfcOgl */;
+			targetProxy = 8B2DE6C21F25A042005E6D6C /* PBXContainerItemProxy */;
+		};
+		8B2DE6CE1F25A042005E6D6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B2DE6A71F25A042005E6D6C /* PfcOgl */;
+			targetProxy = 8B2DE6CD1F25A042005E6D6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8B2DE6D31F25A042005E6D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/common/thirdparty\"/**";
+				LIBRARY_SEARCH_PATHS = "\"$(PROJECT_DIR)/common/platforms/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8B2DE6D41F25A042005E6D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/common/thirdparty\"/**";
+				LIBRARY_SEARCH_PATHS = "\"$(PROJECT_DIR)/common/platforms/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8B2DE6D61F25A042005E6D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B2DE6D71F25A042005E6D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8B2DE6D91F25A042005E6D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				INFOPLIST_FILE = PfcOglTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOglTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PfcOgl.app/Contents/MacOS/PfcOgl";
+			};
+			name = Debug;
+		};
+		8B2DE6DA1F25A042005E6D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				INFOPLIST_FILE = PfcOglTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOglTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PfcOgl.app/Contents/MacOS/PfcOgl";
+			};
+			name = Release;
+		};
+		8B2DE6DC1F25A042005E6D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				INFOPLIST_FILE = PfcOglUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOglUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PfcOgl;
+			};
+			name = Debug;
+		};
+		8B2DE6DD1F25A042005E6D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				INFOPLIST_FILE = PfcOglUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOglUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PfcOgl;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8B2DE6A31F25A042005E6D6C /* Build configuration list for PBXProject "PfcOgl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B2DE6D31F25A042005E6D6C /* Debug */,
+				8B2DE6D41F25A042005E6D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B2DE6D51F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOgl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B2DE6D61F25A042005E6D6C /* Debug */,
+				8B2DE6D71F25A042005E6D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B2DE6D81F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOglTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B2DE6D91F25A042005E6D6C /* Debug */,
+				8B2DE6DA1F25A042005E6D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B2DE6DB1F25A042005E6D6C /* Build configuration list for PBXNativeTarget "PfcOglUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B2DE6DC1F25A042005E6D6C /* Debug */,
+				8B2DE6DD1F25A042005E6D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8B2DE6A01F25A042005E6D6C /* Project object */;
+}
