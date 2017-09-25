@@ -94,6 +94,14 @@ Program *loadShaders(){
     vector<Shader> shaders;
     //load vertex
     shaders.push_back(Shader::shaderFromFile("vertex-shader.txt", GL_VERTEX_SHADER));
+    
+    //load tessellation_control
+//    shaders.push_back(Shader::shaderFromFile("tessellation_control.txt", GL_TESS_CONTROL_SHADER));
+//    //load tessellation_evaluation
+//    shaders.push_back(Shader::shaderFromFile("tessellation_evaluation.txt", GL_TESS_EVALUATION_SHADER));
+//    //geometry shader
+//    shaders.push_back(Shader::shaderFromFile("geometry-shader.txt", GL_GEOMETRY_SHADER));
+    
     //load fragment
     shaders.push_back(Shader::shaderFromFile("fragment-shader.txt", GL_FRAGMENT_SHADER));
     
@@ -104,62 +112,70 @@ Program *loadShaders(){
 
 void createVBOAndVAO(){
     //生成buffer name(unique id)   param1:生成的数量
-    glGenBuffers(1,&mModelAsset->vbo);
-    //绑定name  param1：绑定的buffer类型
-    /**
-     GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TEXTURE_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER, or GL_UNIFORM_BUFFER.
-     直白来说，影响的是绘图时所使用的绘图函数，具体参考文档
-     比如本行代码，需要使用drawArray
-     
-     */
-    glBindBuffer(GL_ARRAY_BUFFER,mModelAsset->vbo);
-    //创建定点值  范围是-1~1
-    GLfloat vertex_data[] = {
-        0.0f,0.8f,0.0f,
-        -0.8f,-0.8f,0.0f,
-        0.8f,-0.8f,0.0f,
-    };
-    //填充数据了  填充到之前绑定的VBO中
-    //param1:跟之前绑定的buffer要一致
-    //param2:绑定数据的大小    param3:要绑定的数据
-    //param4:绑定的数据如何使用
-    /**
-     GL_STREAM_DRAW, GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW, GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
-     STREAM:修改一次，使用几次
-     STATIC:修改一次，使用很多次
-     DYNAMIC:修改多次，使用多次
-     DRAW:被application修改，并且作为GL绘图和图像的source
-     READ:被GL修改，当application查询时可以返回
-     COPY:被GL修改，并且作为GL绘图和图像的source
-     */
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
+//    glGenBuffers(1,&mModelAsset->vbo);
+//    //绑定name  param1：绑定的buffer类型
+//    /**
+//     GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TEXTURE_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER, or GL_UNIFORM_BUFFER.
+//     直白来说，影响的是绘图时所使用的绘图函数，具体参考文档
+//     比如本行代码，需要使用drawArray
+//     
+//     */
+//    glBindBuffer(GL_ARRAY_BUFFER,mModelAsset->vbo);
+//    //创建定点值  范围是-1~1
+//    GLfloat vertex_data[] = {
+//        0.0f,0.8f,0.0f,
+//        -0.8f,-0.8f,0.0f,
+//        0.8f,-0.8f,0.0f,
+//    };
+//    //填充数据了  填充到之前绑定的VBO中
+//    //param1:跟之前绑定的buffer要一致
+//    //param2:绑定数据的大小    param3:要绑定的数据
+//    //param4:绑定的数据如何使用
+//    /**
+//     GL_STREAM_DRAW, GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW, GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
+//     STREAM:修改一次，使用几次
+//     STATIC:修改一次，使用很多次
+//     DYNAMIC:修改多次，使用多次
+//     DRAW:被application修改，并且作为GL绘图和图像的source
+//     READ:被GL修改，当application查询时可以返回
+//     COPY:被GL修改，并且作为GL绘图和图像的source
+//     */
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
     
     glGenVertexArrays(1,&mModelAsset->vao);
-    glBindVertexArray(mModelAsset->vao);
+//    glBindVertexArray(mModelAsset->vao);
+//    
+//    //启用GL中的某个属性，传入属性对应的index
+//    glEnableVertexAttribArray(mModelAsset->shaders->attrib("vert"));
+//    //对属性赋值
+//    /**
+//     param1:属性索引
+//     param2:每次读取几个数据  或者可以理解成传入的是几维向量
+//     param3:数据类型
+//     param4:是否单位化
+//     param5:读取的步长，默认0
+//     param6:从哪开始读，默认0
+//     */
+//    glVertexAttribPointer(mModelAsset->shaders->attrib("vert"), 3, GL_FLOAT, GL_FALSE, 0, 0);
+////
+////    
+////    //解绑
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glBindVertexArray(0);
     
-    //启用GL中的某个属性，传入属性对应的index
-    glEnableVertexAttribArray(mModelAsset->shaders->attrib("vert"));
-    //对属性赋值
-    /**
-     param1:属性索引
-     param2:每次读取几个数据  或者可以理解成传入的是几维向量
-     param3:数据类型
-     param4:是否单位化
-     param5:读取的步长，默认0
-     param6:从哪开始读，默认0
-     */
-    glVertexAttribPointer(mModelAsset->shaders->attrib("vert"), 3, GL_FLOAT, GL_FALSE, 0, 0);
-    
-    
-    //解绑
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    //设置细分曲面控制点数目 默认是3
+//    glPatchParameteri(GL_PATCH_VERTICES, 3);
+    //设置绘画模式  使用线  无颜色
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //设置点大小
+//    glPointSize(5.0);
 }
 
 void loadModelAsset(){
     mModelAsset = new ModelAsset();
     mModelAsset->shaders = loadShaders();
     mModelAsset->drawType = GL_TRIANGLES;
+//    mModelAsset->drawType = GL_PATCHES;
     mModelAsset->drawStart = 0;
     mModelAsset->drawCount = 3;
     
@@ -173,13 +189,20 @@ void createInstances(){
     mModelInstances.push_back(triangle);
 }
 
-void RenderInstance(const ModelInstance& inst) {
+void renderInstance(const ModelInstance& inst, float currentTime) {
     ModelAsset* asset = inst.asset;
     Program* shaders = asset->shaders;
     
     //bind the shaders
     shaders->use();
     
+    //bind VAO and draw
+    glBindVertexArray(asset->vao);
+    
+    //set attributs
+    GLfloat attrib[] = { (float)sin(currentTime) * 0.5f, (float)cos(currentTime) * 0.6f, 0.0f };
+    shaders->setAttrib("offset", attrib[0], attrib[1], attrib[2]);
+//    shaders->setAttrib("color", 0.5f, 0.2f, 0.8f, 1.0f);
     //set the shader uniforms
 //    shaders->setUniform("camera", gCamera.matrix());
 //    shaders->setUniform("model", inst.transform);
@@ -191,8 +214,6 @@ void RenderInstance(const ModelInstance& inst) {
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D, asset->texture->object());
     
-    //bind VAO and draw
-    glBindVertexArray(asset->vao);
     //绘画  模式  开始索引  定点数量
     glDrawArrays(asset->drawType, asset->drawStart, asset->drawCount);
     
@@ -203,24 +224,23 @@ void RenderInstance(const ModelInstance& inst) {
 }
 
 
-void render(){
+void render(float currentTime){
     //清空画布为黑色rgba
-    glClearColor(0, 0, 0, 1);
+//    glClearColor(0.5, 0.5, 0.5, 1);
+    const GLfloat color[] = { (float)sin(currentTime) * 0.5f + 0.5f, (float)cos(currentTime) * 0.5f + 0.5f, 0.0f, 1.0f };
+    glClearBufferfv(GL_COLOR, 0, color);
     //glClear sets the bitplane area of the window to values previously selected by glClearColor, glClearDepth, and glClearStencil
     /**
      glClear 可以清空前面通过glClearColor, glClearDepth, and glClearStencil设置的
      值   GL_STENCIL_BUFFER_BIT：模板缓冲区
      */
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     // render all the instances
     std::list<ModelInstance>::const_iterator it;
     for(it = mModelInstances.begin(); it != mModelInstances.end(); ++it){
-        RenderInstance(*it);
+        renderInstance(*it, currentTime);
     }
-    
-    glBindVertexArray(0);
-    glUseProgram(0);
     
     glfwSwapBuffers(gWindow);
     
@@ -250,7 +270,7 @@ void AppMain(){
         Update(thisTime - lastTime);
         lastTime = thisTime;
         
-        render();
+        render(thisTime);
     }
     
     glfwTerminate();

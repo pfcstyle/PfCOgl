@@ -12,7 +12,9 @@
 #include <glm/glm.hpp>
 #include "PfCOglObject.h"
 
-
+/**
+ Camera移动方向与物体移动方向相反
+ **/
 namespace PfCOgl {
     
     /**

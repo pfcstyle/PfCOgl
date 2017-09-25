@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2107FF1F789D570067A4A7 /* geometry-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B2107FE1F789D570067A4A7 /* geometry-shader.txt */; };
+		8B2108021F78D8500067A4A7 /* PfCOglExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2108001F78D8500067A4A7 /* PfCOglExt.cpp */; };
 		8B2DE6ED1F25A2A1005E6D6C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
 		8B2DE6EF1F25A2B3005E6D6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
 		8B2DE6F11F25A2BA005E6D6C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
@@ -26,6 +28,8 @@
 		8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
 		8BCC5B9A1F298ADE00361EE5 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
 		8BEA39E31F297A6D00CAF2C8 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BF76E221F70B98E009DCE87 /* tessellation_control.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BF76E211F70B98E009DCE87 /* tessellation_control.txt */; };
+		8BF76E241F70BB3A009DCE87 /* tessellation_evaluation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BF76E231F70BB39009DCE87 /* tessellation_evaluation.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B2107FE1F789D570067A4A7 /* geometry-shader.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "geometry-shader.txt"; sourceTree = "<group>"; };
+		8B2108001F78D8500067A4A7 /* PfCOglExt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglExt.cpp; sourceTree = "<group>"; };
+		8B2108011F78D8500067A4A7 /* PfCOglExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglExt.h; sourceTree = "<group>"; };
 		8B2DE6A81F25A042005E6D6C /* PfcOgl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PfcOgl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2DE6C11F25A042005E6D6C /* PfcOglTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PfcOglTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PfcOglUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +85,8 @@
 		8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglLight.h; sourceTree = "<group>"; };
 		8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglProgram.cpp; sourceTree = "<group>"; };
 		8BEA39DE1F297A6D00CAF2C8 /* PfCOglProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglProgram.h; sourceTree = "<group>"; };
+		8BF76E211F70B98E009DCE87 /* tessellation_control.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tessellation_control.txt; sourceTree = "<group>"; };
+		8BF76E231F70BB39009DCE87 /* tessellation_evaluation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tessellation_evaluation.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +164,9 @@
 			children = (
 				8B2DEA011F25B1EE005E6D6C /* fragment-shader.txt */,
 				8B2DEA021F25B1EE005E6D6C /* vertex-shader.txt */,
+				8BF76E211F70B98E009DCE87 /* tessellation_control.txt */,
+				8BF76E231F70BB39009DCE87 /* tessellation_evaluation.txt */,
+				8B2107FE1F789D570067A4A7 /* geometry-shader.txt */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -216,6 +228,8 @@
 				8BCC5B961F29897800361EE5 /* PfCOglModelInstance.h */,
 				8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */,
 				8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */,
+				8B2108001F78D8500067A4A7 /* PfCOglExt.cpp */,
+				8B2108011F78D8500067A4A7 /* PfCOglExt.h */,
 			);
 			path = PfCOgl;
 			sourceTree = "<group>";
@@ -330,7 +344,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2DEA041F25B1EE005E6D6C /* vertex-shader.txt in Resources */,
+				8B2107FF1F789D570067A4A7 /* geometry-shader.txt in Resources */,
 				8B2DEA031F25B1EE005E6D6C /* fragment-shader.txt in Resources */,
+				8BF76E221F70B98E009DCE87 /* tessellation_control.txt in Resources */,
+				8BF76E241F70BB3A009DCE87 /* tessellation_evaluation.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +384,7 @@
 				8BCC5B911F297F4400361EE5 /* PfCOglCamera.cpp in Sources */,
 				8B2DED1F1F25CC31005E6D6C /* main.cpp in Sources */,
 				8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */,
+				8B2108021F78D8500067A4A7 /* PfCOglExt.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

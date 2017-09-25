@@ -1,9 +1,15 @@
-#version 150
+#version 410 core
 
+
+//通过块名称匹配
+in vec4 vs_color;
 out vec4 finalColor;
 
+
 void main(){
-    finalColor = vec4(1.0,1.0,1.0,1.0);
+    //会自动插值  所以颜色是渐变的
+    finalColor = vs_color;
+
 }
 
 
