@@ -6,12 +6,12 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglExt_h_
-#define _PfCOglExt_h_
+#ifndef PfCOglExt_h_
+#define PfCOglExt_h_
 #include <GL/glxew.h>
 namespace PfCOgl {
     void getProcAddress(const GLubyte * procName);
     int isExtensionSupported(const char * extname);
 }
 
-#endif /* _PfCOglExt_h_ */
+#endif /* PfCOglExt_h_ */

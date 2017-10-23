@@ -6,16 +6,32 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglProgram_h_
-#define _PfCOglProgram_h_
+#ifndef PfCOglProgram_h_
+#define PfCOglProgram_h_
 
 #include "PfCOglShader.h"
 #include "PfCOglObject.h"
 #include <vector>
 #include <glm/glm.hpp>
 
-namespace PfCOgl {
+#define MAX_SHADER_NAME_LENGTH 64
 
+namespace PfCOgl {
+    
+    enum GLT_STOCK_SHADER { GLT_SHADER_IDENTITY = 0, GLT_SHADER_FLAT, GLT_SHADER_SHADED, GLT_SHADER_DEFAULT_LIGHT, GLT_SHADER_POINT_LIGHT_DIFF,
+        GLT_SHADER_TEXTURE_REPLACE, GLT_SHADER_TEXTURE_MODULATE, GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, GLT_SHADER_TEXTURE_RECT_REPLACE,
+        GLT_SHADER_LAST };
+    
+    enum GLT_SHADER_ATTRIBUTE { GLT_ATTRIBUTE_VERTEX = 0, GLT_ATTRIBUTE_COLOR, GLT_ATTRIBUTE_NORMAL,
+        GLT_ATTRIBUTE_TEXTURE0, GLT_ATTRIBUTE_TEXTURE1, GLT_ATTRIBUTE_TEXTURE2, GLT_ATTRIBUTE_TEXTURE3,
+        GLT_ATTRIBUTE_LAST};
+    
+    struct SHADERLOOKUPETRY {
+        char szVertexShaderName[MAX_SHADER_NAME_LENGTH];
+        char szFragShaderName[MAX_SHADER_NAME_LENGTH];
+        GLuint    uiShaderID;
+    };
+    
     /**
      Represents an OpenGL program made by linking shaders.
      */
@@ -31,9 +47,20 @@ namespace PfCOgl {
          @see tdogl::Shader
          */
         Program(const std::vector<Shader>& shaders);
+        /**
+         use stock shaders
+         */
+        Program(void);
         ~Program();
         
-        
+        /**
+         init stock shaders
+         */
+        bool initializeStockShaders(void);
+        GLint useStockShader(GLT_STOCK_SHADER shaderId);
+
+        GLuint getProgramByShaders(const std::vector<Shader>& shaders);
+        GLuint getProgramByShaderSrcWithAttributes(const char *szVertexSrc, const char *szFragmentSrc, ...);
         /**
          @result The program's object ID, as returned from glCreateProgram
          */
@@ -99,6 +126,7 @@ namespace PfCOgl {
         
     private:
         GLuint _object;
+        GLuint uiStockShaders[GLT_SHADER_LAST];
         
         //copying disabled
         Program(const Program&);

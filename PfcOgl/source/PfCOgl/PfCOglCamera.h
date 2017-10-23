@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglCamera_h_
-#define _PfCOglCamera_h_
+#ifndef PfCOglCamera_h_
+#define PfCOglCamera_h_
 
 #include <glm/glm.hpp>
 #include "PfCOglObject.h"
@@ -152,4 +152,4 @@ namespace PfCOgl {
     
 }
 
-#endif /* _PfCOglCamera_h_ */
+#endif /* PfCOglCamera_h_ */

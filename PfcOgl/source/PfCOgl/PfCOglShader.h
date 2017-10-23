@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglShader_h_
-#define _PfCOglShader_h_
+#ifndef PfCOglShader_h_
+#define PfCOglShader_h_
 
 #include <GL/glew.h>
 #include <string>
@@ -66,4 +66,4 @@ namespace PfCOgl {
     
 }
 
-#endif /* _PfCOglShader_h_ */
+#endif /* PfCOglShader_h_ */

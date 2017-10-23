@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglModelInstance_h_
-#define _PfCOglModelInstance_h_
+#ifndef PfCOglModelInstance_h_
+#define PfCOglModelInstance_h_
 
 #include "PfCOglModelAsset.h"
 #include "PfCOglObject.h"
@@ -27,4 +27,4 @@ namespace PfCOgl {
     };
 }
 
-#endif /* _PfCOglModelInstance_h_ */
+#endif /* PfCOglModelInstance_h_ */

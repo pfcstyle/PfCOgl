@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8B2107FF1F789D570067A4A7 /* geometry-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B2107FE1F789D570067A4A7 /* geometry-shader.txt */; };
-		8B2108021F78D8500067A4A7 /* PfCOglExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2108001F78D8500067A4A7 /* PfCOglExt.cpp */; };
 		8B2DE6ED1F25A2A1005E6D6C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
 		8B2DE6EF1F25A2B3005E6D6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
 		8B2DE6F11F25A2BA005E6D6C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
@@ -27,7 +26,53 @@
 		8BCC5B941F29896600361EE5 /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
 		8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
 		8BCC5B9A1F298ADE00361EE5 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BDA55611F7E1B760042C4D9 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BDA55661F7E1B760042C4D9 /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BDA556E1F7E1B760042C4D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BDA556F1F7E1B760042C4D9 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BDA55701F7E1B760042C4D9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BDA55711F7E1B760042C4D9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BDA55721F7E1B760042C4D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BDA55A21F7E1C720042C4D9 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BDA55A41F7E1C720042C4D9 /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BDA55A61F7E1C720042C4D9 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BDA55A81F7E1C720042C4D9 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BDA55AA1F7E1C720042C4D9 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BDA55AC1F7E1C720042C4D9 /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BDA55AE1F7E1C720042C4D9 /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BDA55B01F7E1C720042C4D9 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BDA55B21F7E1C720042C4D9 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BDA55B61F7E1C910042C4D9 /* fragment-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA557F1F7E1BEC0042C4D9 /* fragment-shader.txt */; };
+		8BDA55B71F7E1C910042C4D9 /* geometry-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55811F7E1BEC0042C4D9 /* geometry-shader.txt */; };
+		8BDA55B81F7E1C910042C4D9 /* tessellation_control.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55821F7E1BEC0042C4D9 /* tessellation_control.txt */; };
+		8BDA55B91F7E1C910042C4D9 /* tessellation_evaluation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55831F7E1BEC0042C4D9 /* tessellation_evaluation.txt */; };
+		8BDA55BA1F7E1C910042C4D9 /* vertex-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55851F7E1BEC0042C4D9 /* vertex-shader.txt */; };
+		8BDA55BC1F7E23BF0042C4D9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA558A1F7E1BEC0042C4D9 /* main.cpp */; };
+		8BDA55C01F8A60120042C4D9 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BDA55C11F8A60120042C4D9 /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BDA55C21F8A60120042C4D9 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BDA55C31F8A60120042C4D9 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BDA55C41F8A60120042C4D9 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BDA55C51F8A60120042C4D9 /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BDA55C61F8A60120042C4D9 /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BDA55C71F8A60120042C4D9 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BDA55C81F8A60120042C4D9 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BDA55C91F8A60120042C4D9 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BDA55CA1F8A60120042C4D9 /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BDA55CC1F8A60120042C4D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BDA55CD1F8A60120042C4D9 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BDA55CE1F8A60120042C4D9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BDA55CF1F8A60120042C4D9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BDA55D01F8A60120042C4D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BDA55E51F8A60B40042C4D9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA55E41F8A60960042C4D9 /* main.cpp */; };
+		8BDA55E61F8A60C10042C4D9 /* fragment-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55DD1F8A60960042C4D9 /* fragment-shader.txt */; };
+		8BDA55E71F8A60C10042C4D9 /* geometry-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55DE1F8A60960042C4D9 /* geometry-shader.txt */; };
+		8BDA55E81F8A60C10042C4D9 /* tessellation_control.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55DF1F8A60960042C4D9 /* tessellation_control.txt */; };
+		8BDA55E91F8A60C10042C4D9 /* tessellation_evaluation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55E01F8A60960042C4D9 /* tessellation_evaluation.txt */; };
+		8BDA55EA1F8A60C10042C4D9 /* tessllation_evaluation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55E11F8A60960042C4D9 /* tessllation_evaluation.txt */; };
+		8BDA55EB1F8A60C10042C4D9 /* vertex-shader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BDA55E21F8A60960042C4D9 /* vertex-shader.txt */; };
 		8BEA39E31F297A6D00CAF2C8 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BF5EB301F9CD98700D021C2 /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
 		8BF76E221F70B98E009DCE87 /* tessellation_control.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BF76E211F70B98E009DCE87 /* tessellation_control.txt */; };
 		8BF76E241F70BB3A009DCE87 /* tessellation_evaluation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BF76E231F70BB39009DCE87 /* tessellation_evaluation.txt */; };
 /* End PBXBuildFile section */
@@ -69,6 +114,7 @@
 		8B2DED1E1F25CC31005E6D6C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglObject.cpp; sourceTree = "<group>"; };
 		8B2DED281F272A07005E6D6C /* PfCOglObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglObject.h; sourceTree = "<group>"; };
+		8B53D6B71F7A42D300E0960B /* vmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vmath.h; sourceTree = "<group>"; };
 		8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglShader.cpp; sourceTree = "<group>"; };
 		8BCC5B871F297E4200361EE5 /* PfCOglShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglShader.h; sourceTree = "<group>"; };
 		8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglBitmap.cpp; sourceTree = "<group>"; };
@@ -83,8 +129,48 @@
 		8BCC5B961F29897800361EE5 /* PfCOglModelInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglModelInstance.h; sourceTree = "<group>"; };
 		8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglLight.cpp; sourceTree = "<group>"; };
 		8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglLight.h; sourceTree = "<group>"; };
+		8BDA557C1F7E1B760042C4D9 /* PfcOgl4.x.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PfcOgl4.x.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BDA557F1F7E1BEC0042C4D9 /* fragment-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "fragment-shader.txt"; sourceTree = "<group>"; };
+		8BDA55801F7E1BEC0042C4D9 /* fragment-shader1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "fragment-shader1.txt"; sourceTree = "<group>"; };
+		8BDA55811F7E1BEC0042C4D9 /* geometry-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-shader.txt"; sourceTree = "<group>"; };
+		8BDA55821F7E1BEC0042C4D9 /* tessellation_control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessellation_control.txt; sourceTree = "<group>"; };
+		8BDA55831F7E1BEC0042C4D9 /* tessellation_evaluation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessellation_evaluation.txt; sourceTree = "<group>"; };
+		8BDA55841F7E1BEC0042C4D9 /* tessllation_evaluation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessllation_evaluation.txt; sourceTree = "<group>"; };
+		8BDA55851F7E1BEC0042C4D9 /* vertex-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vertex-shader.txt"; sourceTree = "<group>"; };
+		8BDA55861F7E1BEC0042C4D9 /* vertex-shader1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vertex-shader1.txt"; sourceTree = "<group>"; };
+		8BDA55871F7E1BEC0042C4D9 /* vertex-shader2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vertex-shader2.txt"; sourceTree = "<group>"; };
+		8BDA55881F7E1BEC0042C4D9 /* vertex-shader3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vertex-shader3.txt"; sourceTree = "<group>"; };
+		8BDA558A1F7E1BEC0042C4D9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8BDA55DA1F8A60120042C4D9 /* primitives.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = primitives.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BDA55DD1F8A60960042C4D9 /* fragment-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "fragment-shader.txt"; sourceTree = "<group>"; };
+		8BDA55DE1F8A60960042C4D9 /* geometry-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-shader.txt"; sourceTree = "<group>"; };
+		8BDA55DF1F8A60960042C4D9 /* tessellation_control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessellation_control.txt; sourceTree = "<group>"; };
+		8BDA55E01F8A60960042C4D9 /* tessellation_evaluation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessellation_evaluation.txt; sourceTree = "<group>"; };
+		8BDA55E11F8A60960042C4D9 /* tessllation_evaluation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tessllation_evaluation.txt; sourceTree = "<group>"; };
+		8BDA55E21F8A60960042C4D9 /* vertex-shader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vertex-shader.txt"; sourceTree = "<group>"; };
+		8BDA55E41F8A60960042C4D9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8BDA55EF1F9449650042C4D9 /* GLBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLBatch.h; sourceTree = "<group>"; };
+		8BDA55F01F9449650042C4D9 /* GLBatchBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLBatchBase.h; sourceTree = "<group>"; };
+		8BDA55F11F9449650042C4D9 /* GLFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLFrame.h; sourceTree = "<group>"; };
+		8BDA55F21F9449650042C4D9 /* GLFrustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLFrustum.h; sourceTree = "<group>"; };
+		8BDA55F31F9449650042C4D9 /* GLGeometryTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLGeometryTransform.h; sourceTree = "<group>"; };
+		8BDA55F41F9449650042C4D9 /* GLMatrixStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMatrixStack.h; sourceTree = "<group>"; };
+		8BDA55F51F9449650042C4D9 /* GLShaderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLShaderManager.h; sourceTree = "<group>"; };
+		8BDA55F61F9449650042C4D9 /* GLTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLTools.h; sourceTree = "<group>"; };
+		8BDA55F71F9449650042C4D9 /* GLTriangleBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLTriangleBatch.h; sourceTree = "<group>"; };
+		8BDA55F81F9449650042C4D9 /* math3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = math3d.h; sourceTree = "<group>"; };
+		8BDA55F91F9449650042C4D9 /* StopWatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StopWatch.h; sourceTree = "<group>"; };
+		8BDA55FB1F9449650042C4D9 /* GLBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLBatch.cpp; sourceTree = "<group>"; };
+		8BDA55FC1F9449650042C4D9 /* glew.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glew.c; sourceTree = "<group>"; };
+		8BDA55FD1F9449650042C4D9 /* GLShaderManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLShaderManager.cpp; sourceTree = "<group>"; };
+		8BDA55FE1F9449650042C4D9 /* GLTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLTools.cpp; sourceTree = "<group>"; };
+		8BDA55FF1F9449650042C4D9 /* GLTriangleBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLTriangleBatch.cpp; sourceTree = "<group>"; };
+		8BDA56001F9449650042C4D9 /* math3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = math3d.cpp; sourceTree = "<group>"; };
 		8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglProgram.cpp; sourceTree = "<group>"; };
 		8BEA39DE1F297A6D00CAF2C8 /* PfCOglProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglProgram.h; sourceTree = "<group>"; };
+		8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglTool.cpp; sourceTree = "<group>"; };
+		8BF5EB2F1F9CD98700D021C2 /* PfCOglTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PfCOglTool.h; sourceTree = "<group>"; };
+		8BF5EB311F9CE0B100D021C2 /* PfCOglStockShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PfCOglStockShader.h; sourceTree = "<group>"; };
 		8BF76E211F70B98E009DCE87 /* tessellation_control.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tessellation_control.txt; sourceTree = "<group>"; };
 		8BF76E231F70BB39009DCE87 /* tessellation_evaluation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tessellation_evaluation.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,12 +202,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BDA556D1F7E1B760042C4D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA556E1F7E1B760042C4D9 /* IOKit.framework in Frameworks */,
+				8BDA556F1F7E1B760042C4D9 /* libglfw3.a in Frameworks */,
+				8BDA55701F7E1B760042C4D9 /* Cocoa.framework in Frameworks */,
+				8BDA55711F7E1B760042C4D9 /* OpenGL.framework in Frameworks */,
+				8BDA55721F7E1B760042C4D9 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA55CB1F8A60120042C4D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA55CC1F8A60120042C4D9 /* IOKit.framework in Frameworks */,
+				8BDA55CD1F8A60120042C4D9 /* libglfw3.a in Frameworks */,
+				8BDA55CE1F8A60120042C4D9 /* Cocoa.framework in Frameworks */,
+				8BDA55CF1F8A60120042C4D9 /* OpenGL.framework in Frameworks */,
+				8BDA55D01F8A60120042C4D9 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		8B2DE69F1F25A042005E6D6C = {
 			isa = PBXGroup;
 			children = (
+				8BDA55DB1F8A60960042C4D9 /* primitives */,
+				8BDA557D1F7E1BEC0042C4D9 /* PfcOgl4.x */,
 				8B2DEA101F25C33C005E6D6C /* common */,
 				8B2DE6AA1F25A042005E6D6C /* PfcOgl */,
 				8B2DE6A91F25A042005E6D6C /* Products */,
@@ -135,6 +247,8 @@
 				8B2DE6A81F25A042005E6D6C /* PfcOgl.app */,
 				8B2DE6C11F25A042005E6D6C /* PfcOglTests.xctest */,
 				8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */,
+				8BDA557C1F7E1B760042C4D9 /* PfcOgl4.x.app */,
+				8BDA55DA1F8A60120042C4D9 /* primitives.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +297,7 @@
 		8B2DEA101F25C33C005E6D6C /* common */ = {
 			isa = PBXGroup;
 			children = (
+				8BDA55ED1F9449650042C4D9 /* GLTools */,
 				8B2DED1C1F25C410005E6D6C /* glew.c */,
 				8B2DEA111F25C33C005E6D6C /* platform.hpp */,
 				8B2DEA121F25C33C005E6D6C /* platforms */,
@@ -210,6 +325,7 @@
 		8B2DED231F27297E005E6D6C /* PfCOgl */ = {
 			isa = PBXGroup;
 			children = (
+				8B53D6B71F7A42D300E0960B /* vmath.h */,
 				8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */,
 				8BEA39DE1F297A6D00CAF2C8 /* PfCOglProgram.h */,
 				8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */,
@@ -230,8 +346,116 @@
 				8BCC5B991F298ADE00361EE5 /* PfCOglLight.h */,
 				8B2108001F78D8500067A4A7 /* PfCOglExt.cpp */,
 				8B2108011F78D8500067A4A7 /* PfCOglExt.h */,
+				8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */,
+				8BF5EB2F1F9CD98700D021C2 /* PfCOglTool.h */,
+				8BF5EB311F9CE0B100D021C2 /* PfCOglStockShader.h */,
 			);
 			path = PfCOgl;
+			sourceTree = "<group>";
+		};
+		8BDA557D1F7E1BEC0042C4D9 /* PfcOgl4.x */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA557E1F7E1BEC0042C4D9 /* resources */,
+				8BDA55891F7E1BEC0042C4D9 /* source */,
+			);
+			path = PfcOgl4.x;
+			sourceTree = "<group>";
+		};
+		8BDA557E1F7E1BEC0042C4D9 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA557F1F7E1BEC0042C4D9 /* fragment-shader.txt */,
+				8BDA55801F7E1BEC0042C4D9 /* fragment-shader1.txt */,
+				8BDA55811F7E1BEC0042C4D9 /* geometry-shader.txt */,
+				8BDA55821F7E1BEC0042C4D9 /* tessellation_control.txt */,
+				8BDA55831F7E1BEC0042C4D9 /* tessellation_evaluation.txt */,
+				8BDA55841F7E1BEC0042C4D9 /* tessllation_evaluation.txt */,
+				8BDA55851F7E1BEC0042C4D9 /* vertex-shader.txt */,
+				8BDA55861F7E1BEC0042C4D9 /* vertex-shader1.txt */,
+				8BDA55871F7E1BEC0042C4D9 /* vertex-shader2.txt */,
+				8BDA55881F7E1BEC0042C4D9 /* vertex-shader3.txt */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BDA55891F7E1BEC0042C4D9 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA558A1F7E1BEC0042C4D9 /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8BDA55DB1F8A60960042C4D9 /* primitives */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55DC1F8A60960042C4D9 /* resources */,
+				8BDA55E31F8A60960042C4D9 /* source */,
+			);
+			path = primitives;
+			sourceTree = "<group>";
+		};
+		8BDA55DC1F8A60960042C4D9 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55DD1F8A60960042C4D9 /* fragment-shader.txt */,
+				8BDA55DE1F8A60960042C4D9 /* geometry-shader.txt */,
+				8BDA55DF1F8A60960042C4D9 /* tessellation_control.txt */,
+				8BDA55E01F8A60960042C4D9 /* tessellation_evaluation.txt */,
+				8BDA55E11F8A60960042C4D9 /* tessllation_evaluation.txt */,
+				8BDA55E21F8A60960042C4D9 /* vertex-shader.txt */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BDA55E31F8A60960042C4D9 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55E41F8A60960042C4D9 /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8BDA55ED1F9449650042C4D9 /* GLTools */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55EE1F9449650042C4D9 /* include */,
+				8BDA55FA1F9449650042C4D9 /* src */,
+			);
+			name = GLTools;
+			path = thirdparty/GLTools;
+			sourceTree = "<group>";
+		};
+		8BDA55EE1F9449650042C4D9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55EF1F9449650042C4D9 /* GLBatch.h */,
+				8BDA55F01F9449650042C4D9 /* GLBatchBase.h */,
+				8BDA55F11F9449650042C4D9 /* GLFrame.h */,
+				8BDA55F21F9449650042C4D9 /* GLFrustum.h */,
+				8BDA55F31F9449650042C4D9 /* GLGeometryTransform.h */,
+				8BDA55F41F9449650042C4D9 /* GLMatrixStack.h */,
+				8BDA55F51F9449650042C4D9 /* GLShaderManager.h */,
+				8BDA55F61F9449650042C4D9 /* GLTools.h */,
+				8BDA55F71F9449650042C4D9 /* GLTriangleBatch.h */,
+				8BDA55F81F9449650042C4D9 /* math3d.h */,
+				8BDA55F91F9449650042C4D9 /* StopWatch.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8BDA55FA1F9449650042C4D9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA55FB1F9449650042C4D9 /* GLBatch.cpp */,
+				8BDA55FC1F9449650042C4D9 /* glew.c */,
+				8BDA55FD1F9449650042C4D9 /* GLShaderManager.cpp */,
+				8BDA55FE1F9449650042C4D9 /* GLTools.cpp */,
+				8BDA55FF1F9449650042C4D9 /* GLTriangleBatch.cpp */,
+				8BDA56001F9449650042C4D9 /* math3d.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +514,40 @@
 			productReference = 8B2DE6CC1F25A042005E6D6C /* PfcOglUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8BDA555E1F7E1B760042C4D9 /* PfcOgl4.x */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BDA55791F7E1B760042C4D9 /* Build configuration list for PBXNativeTarget "PfcOgl4.x" */;
+			buildPhases = (
+				8BDA555F1F7E1B760042C4D9 /* Sources */,
+				8BDA556D1F7E1B760042C4D9 /* Frameworks */,
+				8BDA55731F7E1B760042C4D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PfcOgl4.x;
+			productName = PfcOgl;
+			productReference = 8BDA557C1F7E1B760042C4D9 /* PfcOgl4.x.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8BDA55BD1F8A60120042C4D9 /* primitives */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BDA55D71F8A60120042C4D9 /* Build configuration list for PBXNativeTarget "primitives" */;
+			buildPhases = (
+				8BDA55BE1F8A60120042C4D9 /* Sources */,
+				8BDA55CB1F8A60120042C4D9 /* Frameworks */,
+				8BDA55D11F8A60120042C4D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = primitives;
+			productName = PfcOgl;
+			productReference = 8BDA55DA1F8A60120042C4D9 /* primitives.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,6 +574,12 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8B2DE6A71F25A042005E6D6C;
 					};
+					8BDA555E1F7E1B760042C4D9 = {
+						DevelopmentTeam = 89VKD6974F;
+					};
+					8BDA55BD1F8A60120042C4D9 = {
+						DevelopmentTeam = 89VKD6974F;
+					};
 				};
 			};
 			buildConfigurationList = 8B2DE6A31F25A042005E6D6C /* Build configuration list for PBXProject "PfcOgl" */;
@@ -334,6 +598,8 @@
 				8B2DE6A71F25A042005E6D6C /* PfcOgl */,
 				8B2DE6C01F25A042005E6D6C /* PfcOglTests */,
 				8B2DE6CB1F25A042005E6D6C /* PfcOglUITests */,
+				8BDA555E1F7E1B760042C4D9 /* PfcOgl4.x */,
+				8BDA55BD1F8A60120042C4D9 /* primitives */,
 			);
 		};
 /* End PBXProject section */
@@ -365,6 +631,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BDA55731F7E1B760042C4D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA55B61F7E1C910042C4D9 /* fragment-shader.txt in Resources */,
+				8BDA55B71F7E1C910042C4D9 /* geometry-shader.txt in Resources */,
+				8BDA55B81F7E1C910042C4D9 /* tessellation_control.txt in Resources */,
+				8BDA55B91F7E1C910042C4D9 /* tessellation_evaluation.txt in Resources */,
+				8BDA55BA1F7E1C910042C4D9 /* vertex-shader.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA55D11F8A60120042C4D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA55E61F8A60C10042C4D9 /* fragment-shader.txt in Resources */,
+				8BDA55E71F8A60C10042C4D9 /* geometry-shader.txt in Resources */,
+				8BDA55E81F8A60C10042C4D9 /* tessellation_control.txt in Resources */,
+				8BDA55E91F8A60C10042C4D9 /* tessellation_evaluation.txt in Resources */,
+				8BDA55EA1F8A60C10042C4D9 /* tessllation_evaluation.txt in Resources */,
+				8BDA55EB1F8A60C10042C4D9 /* vertex-shader.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -377,6 +668,7 @@
 				8BCC5B881F297E4200361EE5 /* PfCOglShader.cpp in Sources */,
 				8BCC5B9A1F298ADE00361EE5 /* PfCOglLight.cpp in Sources */,
 				8BCC5B941F29896600361EE5 /* PfCOglModelAsset.cpp in Sources */,
+				8BF5EB301F9CD98700D021C2 /* PfCOglTool.cpp in Sources */,
 				8BEA39E31F297A6D00CAF2C8 /* PfCOglProgram.cpp in Sources */,
 				8B2DEC851F25C33C005E6D6C /* platform_osx.mm in Sources */,
 				8B2DED291F272A07005E6D6C /* PfCOglObject.cpp in Sources */,
@@ -384,7 +676,6 @@
 				8BCC5B911F297F4400361EE5 /* PfCOglCamera.cpp in Sources */,
 				8B2DED1F1F25CC31005E6D6C /* main.cpp in Sources */,
 				8BCC5B971F29897800361EE5 /* PfCOglModelInstance.cpp in Sources */,
-				8B2108021F78D8500067A4A7 /* PfCOglExt.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +690,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA555F1F7E1B760042C4D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA55BC1F7E23BF0042C4D9 /* main.cpp in Sources */,
+				8BDA55A21F7E1C720042C4D9 /* PfCOglProgram.cpp in Sources */,
+				8BDA55A41F7E1C720042C4D9 /* PfCOglObject.cpp in Sources */,
+				8BDA55A61F7E1C720042C4D9 /* PfCOglShader.cpp in Sources */,
+				8BDA55A81F7E1C720042C4D9 /* PfCOglBitmap.cpp in Sources */,
+				8BDA55AA1F7E1C720042C4D9 /* PfCOglTexture.cpp in Sources */,
+				8BDA55AC1F7E1C720042C4D9 /* PfCOglCamera.cpp in Sources */,
+				8BDA55AE1F7E1C720042C4D9 /* PfCOglModelAsset.cpp in Sources */,
+				8BDA55B01F7E1C720042C4D9 /* PfCOglModelInstance.cpp in Sources */,
+				8BDA55B21F7E1C720042C4D9 /* PfCOglLight.cpp in Sources */,
+				8BDA55611F7E1B760042C4D9 /* glew.c in Sources */,
+				8BDA55661F7E1B760042C4D9 /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA55BE1F8A60120042C4D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BDA55E51F8A60B40042C4D9 /* main.cpp in Sources */,
+				8BDA55C01F8A60120042C4D9 /* PfCOglProgram.cpp in Sources */,
+				8BDA55C11F8A60120042C4D9 /* PfCOglObject.cpp in Sources */,
+				8BDA55C21F8A60120042C4D9 /* PfCOglShader.cpp in Sources */,
+				8BDA55C31F8A60120042C4D9 /* PfCOglBitmap.cpp in Sources */,
+				8BDA55C41F8A60120042C4D9 /* PfCOglTexture.cpp in Sources */,
+				8BDA55C51F8A60120042C4D9 /* PfCOglCamera.cpp in Sources */,
+				8BDA55C61F8A60120042C4D9 /* PfCOglModelAsset.cpp in Sources */,
+				8BDA55C71F8A60120042C4D9 /* PfCOglModelInstance.cpp in Sources */,
+				8BDA55C81F8A60120042C4D9 /* PfCOglLight.cpp in Sources */,
+				8BDA55C91F8A60120042C4D9 /* glew.c in Sources */,
+				8BDA55CA1F8A60120042C4D9 /* platform_osx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +934,86 @@
 			};
 			name = Release;
 		};
+		8BDA557A1F7E1B760042C4D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BDA557B1F7E1B760042C4D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8BDA55D81F8A60120042C4D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BDA55D91F8A60120042C4D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -640,6 +1049,24 @@
 			buildConfigurations = (
 				8B2DE6DC1F25A042005E6D6C /* Debug */,
 				8B2DE6DD1F25A042005E6D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BDA55791F7E1B760042C4D9 /* Build configuration list for PBXNativeTarget "PfcOgl4.x" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BDA557A1F7E1B760042C4D9 /* Debug */,
+				8BDA557B1F7E1B760042C4D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BDA55D71F8A60120042C4D9 /* Build configuration list for PBXNativeTarget "primitives" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BDA55D81F8A60120042C4D9 /* Debug */,
+				8BDA55D91F8A60120042C4D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

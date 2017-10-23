@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglTexture_h_
-#define _PfCOglTexture_h_
+#ifndef PfCOglTexture_h_
+#define PfCOglTexture_h_
 
 #include <GL/glew.h>
 #include "PfCOglBitmap.h"
@@ -68,4 +68,4 @@ namespace PfCOgl {
 }
 
 
-#endif /* _PfCOglTexture_h_ */
+#endif /* PfCOglTexture_h_ */

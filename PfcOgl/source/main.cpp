@@ -112,62 +112,63 @@ Program *loadShaders(){
 
 void createVBOAndVAO(){
     //生成buffer name(unique id)   param1:生成的数量
-//    glGenBuffers(1,&mModelAsset->vbo);
-//    //绑定name  param1：绑定的buffer类型
-//    /**
-//     GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TEXTURE_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER, or GL_UNIFORM_BUFFER.
-//     直白来说，影响的是绘图时所使用的绘图函数，具体参考文档
-//     比如本行代码，需要使用drawArray
-//     
-//     */
-//    glBindBuffer(GL_ARRAY_BUFFER,mModelAsset->vbo);
-//    //创建定点值  范围是-1~1
-//    GLfloat vertex_data[] = {
-//        0.0f,0.8f,0.0f,
-//        -0.8f,-0.8f,0.0f,
-//        0.8f,-0.8f,0.0f,
-//    };
-//    //填充数据了  填充到之前绑定的VBO中
-//    //param1:跟之前绑定的buffer要一致
-//    //param2:绑定数据的大小    param3:要绑定的数据
-//    //param4:绑定的数据如何使用
-//    /**
-//     GL_STREAM_DRAW, GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW, GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
-//     STREAM:修改一次，使用几次
-//     STATIC:修改一次，使用很多次
-//     DYNAMIC:修改多次，使用多次
-//     DRAW:被application修改，并且作为GL绘图和图像的source
-//     READ:被GL修改，当application查询时可以返回
-//     COPY:被GL修改，并且作为GL绘图和图像的source
-//     */
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
+    glGenBuffers(1,&mModelAsset->vbo);
+    //绑定name  param1：绑定的buffer类型
+    /**
+     GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TEXTURE_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER, or GL_UNIFORM_BUFFER.
+     直白来说，影响的是绘图时所使用的绘图函数，具体参考文档
+     比如本行代码，需要使用drawArray
+
+     */
+    glBindBuffer(GL_ARRAY_BUFFER,mModelAsset->vbo);
+    //创建定点值  范围是-1~1
+    GLfloat vertex_data[] = {
+        0.0f,0.8f,0.0f,
+        -0.8f,-0.8f,0.0f,
+        0.8f,-0.8f,0.0f,
+    };
+    //填充数据了  填充到之前绑定的VBO中
+    //param1:跟之前绑定的buffer要一致
+    //param2:绑定数据的大小    param3:要绑定的数据
+    //param4:绑定的数据如何使用
+    /**
+     GL_STREAM_DRAW, GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW, GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
+     STREAM:修改一次，使用几次
+     STATIC:修改一次，使用很多次
+     DYNAMIC:修改多次，使用多次
+     DRAW:被application修改，并且作为GL绘图和图像的source
+     READ:被GL修改，当application查询时可以返回
+     COPY:被GL修改，并且作为GL绘图和图像的source
+     */
+    
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
+    
     
     glGenVertexArrays(1,&mModelAsset->vao);
-//    glBindVertexArray(mModelAsset->vao);
-//    
-//    //启用GL中的某个属性，传入属性对应的index
-//    glEnableVertexAttribArray(mModelAsset->shaders->attrib("vert"));
-//    //对属性赋值
-//    /**
-//     param1:属性索引
-//     param2:每次读取几个数据  或者可以理解成传入的是几维向量
-//     param3:数据类型
-//     param4:是否单位化
-//     param5:读取的步长，默认0
-//     param6:从哪开始读，默认0
-//     */
-//    glVertexAttribPointer(mModelAsset->shaders->attrib("vert"), 3, GL_FLOAT, GL_FALSE, 0, 0);
-////
-////    
-////    //解绑
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-//    glBindVertexArray(0);
+    glBindVertexArray(mModelAsset->vao);
+
+    //启用GL中的某个属性，传入属性对应的index
+    glEnableVertexAttribArray(mModelAsset->shaders->attrib("vert"));
+    //对属性赋值
+    /**
+     param1:属性索引
+     param2:每次读取几个数据  或者可以理解成传入的是几维向量
+     param3:数据类型
+     param4:是否单位化
+     param5:读取的步长，默认0
+     param6:从哪开始读，默认0
+     */
+    glVertexAttribPointer(mModelAsset->shaders->attrib("vert"), 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+//    解绑
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
     
-    //设置细分曲面控制点数目 默认是3
+//    设置细分曲面控制点数目 默认是3
 //    glPatchParameteri(GL_PATCH_VERTICES, 3);
-    //设置绘画模式  使用线  无颜色
+////    设置绘画模式  使用线  无颜色
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    //设置点大小
+////    设置点大小
 //    glPointSize(5.0);
 }
 
@@ -200,8 +201,8 @@ void renderInstance(const ModelInstance& inst, float currentTime) {
     glBindVertexArray(asset->vao);
     
     //set attributs
-    GLfloat attrib[] = { (float)sin(currentTime) * 0.5f, (float)cos(currentTime) * 0.6f, 0.0f };
-    shaders->setAttrib("offset", attrib[0], attrib[1], attrib[2]);
+//    GLfloat attrib[] = { (float)sin(currentTime) * 0.5f, (float)cos(currentTime) * 0.6f, 0.0f };
+//    shaders->setAttrib("offset", attrib[0], attrib[1], attrib[2]);
 //    shaders->setAttrib("color", 0.5f, 0.2f, 0.8f, 1.0f);
     //set the shader uniforms
 //    shaders->setUniform("camera", gCamera.matrix());
@@ -226,7 +227,7 @@ void renderInstance(const ModelInstance& inst, float currentTime) {
 
 void render(float currentTime){
     //清空画布为黑色rgba
-//    glClearColor(0.5, 0.5, 0.5, 1);
+    glClearColor(0.5, 0.5, 0.5, 1);
     const GLfloat color[] = { (float)sin(currentTime) * 0.5f + 0.5f, (float)cos(currentTime) * 0.5f + 0.5f, 0.0f, 1.0f };
     glClearBufferfv(GL_COLOR, 0, color);
     //glClear sets the bitplane area of the window to values previously selected by glClearColor, glClearDepth, and glClearStencil

@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglBitmap_h_
-#define _PfCOglBitmap_h_
+#ifndef PfCOglBitmap_h_
+#define PfCOglBitmap_h_
 
 #include "PfCOglObject.h"
 #include <string>
@@ -133,4 +133,4 @@ namespace PfCOgl {
     
 }
 
-#endif /* _PfCOglBitmap_h_ */
+#endif /* PfCOglBitmap_h_ */

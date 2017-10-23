@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglLight_h_
-#define _PfCOglLight_h_
+#ifndef PfCOglLight_h_
+#define PfCOglLight_h_
 
 #include "PfCOglObject.h"
 #include <glm/glm.hpp>
@@ -26,4 +26,4 @@ namespace PfCOgl {
     };
 }
 
-#endif /* _PfCOglLight_h_ */
+#endif /* PfCOglLight_h_ */

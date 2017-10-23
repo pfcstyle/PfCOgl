@@ -6,8 +6,8 @@
 //  Copyright © 2017 developer. All rights reserved.
 //
 
-#ifndef _PfCOglObject_h_
-#define _PfCOglObject_h_
+#ifndef PfCOglObject_h_
+#define PfCOglObject_h_
 
 #include <stdio.h>
 #include <iostream>

@@ -7,32 +7,69 @@
 //
 
 #include "PfCOglProgram.h"
+#include "PfCOglStockShader.h"
 #include <stdexcept>
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace PfCOgl;
 
+Program::Program(void):_object(0){
+    // Set stock shader handles to 0... uninitialized
+    for(unsigned int i = 0; i < GLT_SHADER_LAST; i++)
+        uiStockShaders[i] = 0;
+}
+
+
+
 Program::Program(const std::vector<Shader>& shaders) :
     _object(0)
 {
-    if(shaders.size() <= 0)
+    _object = getProgramByShaders(shaders);
+}
+
+Program::~Program() {
+    //might be 0 if ctor fails by throwing exception
+    if(_object != 0) glDeleteProgram(_object);
+    if(uiStockShaders[0] != 0) {
+        unsigned int i;
+        for(i = 0; i < GLT_SHADER_LAST; i++)
+            glDeleteProgram(uiStockShaders[i]);
+    }
+}
+
+bool Program::initializeStockShaders(){
+    
+    if(uiStockShaders[0] != 0)
+        return true;
+    
+    return false;
+//    uiStockShaders[GLT_SHADER_IDENTITY] = Program()
+}
+
+GLuint Program::getProgramByShaders(const std::vector<Shader> &shaders){
+    GLuint hReturn = 0;
+    if(shaders.size() <= 0){
         throw std::runtime_error("No shaders were provided to create the program");
+        return hReturn;
+    }
     
     //create the program object
-    _object = glCreateProgram();
-    if(_object == 0)
+    hReturn = glCreateProgram();
+    if(hReturn == 0){
         throw std::runtime_error("glCreateProgram failed");
+        return hReturn;
+    }
     
     //attach all the shaders
     for(unsigned i = 0; i < shaders.size(); ++i)
-        glAttachShader(_object, shaders[i].object());
+        glAttachShader(hReturn, shaders[i].object());
     
     //link the shaders together
-    glLinkProgram(_object);
+    glLinkProgram(hReturn);
     
     //detach all the shaders
     for(unsigned i = 0; i < shaders.size(); ++i)
-        glDetachShader(_object, shaders[i].object());
+        glDetachShader(hReturn, shaders[i].object());
     
     //throw exception if linking failed
     //获取program的link状态信息
@@ -46,25 +83,85 @@ Program::Program(const std::vector<Shader>& shaders) :
      */
     //param3:存储对应的信息
     GLint status;
-    glGetProgramiv(_object, GL_LINK_STATUS, &status);
+    glGetProgramiv(hReturn, GL_LINK_STATUS, &status);
     if (status == GL_FALSE) {
         std::string msg("Program linking failure: ");
         
         GLint infoLogLength;
-        glGetProgramiv(_object, GL_INFO_LOG_LENGTH, &infoLogLength);
+        glGetProgramiv(hReturn, GL_INFO_LOG_LENGTH, &infoLogLength);
         char* strInfoLog = new char[infoLogLength + 1];
-        glGetProgramInfoLog(_object, infoLogLength, NULL, strInfoLog);
+        glGetProgramInfoLog(hReturn, infoLogLength, NULL, strInfoLog);
         msg += strInfoLog;
         delete[] strInfoLog;
         
-        glDeleteProgram(_object); _object = 0;
+        glDeleteProgram(hReturn); hReturn = 0;
         throw std::runtime_error(msg);
     }
+    return hReturn;
 }
 
-Program::~Program() {
-    //might be 0 if ctor fails by throwing exception
-    if(_object != 0) glDeleteProgram(_object);
+GLuint Program::getProgramByShaderSrcWithAttributes(const char *szVertexSrc, const char *szFragmentSrc, ...){
+    GLuint hReturn = 0;
+    Shader vertexShader(szVertexSrc, GL_VERTEX_SHADER);
+    Shader fragShader(szFragmentSrc, GL_FRAGMENT_SHADER);
+    //create the program object
+    hReturn = glCreateProgram();
+    if(hReturn == 0)
+        throw std::runtime_error("glCreateProgram failed");
+    
+    //attach all the shaders
+    glAttachShader(hReturn, vertexShader.object());
+    glAttachShader(hReturn, fragShader.object());
+    
+    //bind attributes
+    va_list attributeList;
+    va_start(attributeList, szFragmentSrc);
+    char* szNextArg;
+    int iArgCount = va_arg(attributeList, int);    // Number of attributes
+    for (int i=0; i<iArgCount; i++) {
+        int index = va_arg(attributeList, int);
+        szNextArg = va_arg(attributeList, char*);
+        glBindAttribLocation(hReturn, index, szNextArg);
+    }
+    va_end(attributeList);
+    //link the shaders together
+    glLinkProgram(hReturn);
+    
+    //detach all the shaders
+    glDetachShader(hReturn, vertexShader.object());
+    glDetachShader(hReturn, fragShader.object());
+    
+    //throw exception if linking failed
+    //获取program的link状态信息
+    //param1:handler
+    /**
+     param2:
+     GL_DELETE_STATUS, GL_LINK_STATUS, GL_VALIDATE_STATUS, GL_INFO_LOG_LENGTH, GL_ATTACHED_SHADERS, GL_ACTIVE_ATTRIBUTES, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, GL_ACTIVE_UNIFORMS, GL_ACTIVE_UNIFORM_BLOCKS, GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH, GL_ACTIVE_UNIFORM_MAX_LENGTH, GL_TRANSFORM_FEEDBACK_BUFFER_MODE, GL_TRANSFORM_FEEDBACK_VARYINGS, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH, GL_GEOMETRY_VERTICES_OUT, GL_GEOMETRY_INPUT_TYPE, and GL_GEOMETRY_OUTPUT_TYPE.
+     
+     这里各种信息，获取的都是对应的数量或者长度或者true or false这种简略信息，需要调用
+     具体的信息函数获取详细信息
+     */
+    //param3:存储对应的信息
+    GLint status;
+    glGetProgramiv(hReturn, GL_LINK_STATUS, &status);
+    if (status == GL_FALSE) {
+        std::string msg("Program linking failure: ");
+        
+        GLint infoLogLength;
+        glGetProgramiv(hReturn, GL_INFO_LOG_LENGTH, &infoLogLength);
+        char* strInfoLog = new char[infoLogLength + 1];
+        glGetProgramInfoLog(hReturn, infoLogLength, NULL, strInfoLog);
+        msg += strInfoLog;
+        delete[] strInfoLog;
+        
+        glDeleteProgram(hReturn); hReturn = 0;
+        throw std::runtime_error(msg);
+    }
+    return hReturn;
+}
+
+GLint Program::useStockShader(PfCOgl::GLT_STOCK_SHADER shaderId){
+    return 0;
 }
 
 GLuint Program::object() const {
@@ -188,5 +285,6 @@ void Program::setUniform(const GLchar* uniformName, const glm::vec3& v) {
 void Program::setUniform(const GLchar* uniformName, const glm::vec4& v) {
     setUniform4v(uniformName, glm::value_ptr(v));
 }
+
 
 
