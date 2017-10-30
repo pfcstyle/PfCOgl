@@ -12,6 +12,7 @@
 #include "PfCOglObject.h"
 #include "PfCOglProgram.h"
 #include "PfCOglTexture.h"
+#include "math3d.h"
 
 namespace PfCOgl {
     class ModelAsset:PfCObject{
@@ -26,6 +27,7 @@ namespace PfCOgl {
         GLfloat shininess;
         glm::vec3 specularColor;
         
+        void bindData(GLfloat *vertexData);
         ModelAsset() :
         shaders(NULL),
         texture(NULL),
@@ -37,7 +39,7 @@ namespace PfCOgl {
         shininess(0.0f),
         specularColor(1.0f, 1.0f, 1.0f)
         {}
-        ~ModelAsset();
+        ~ModelAsset(){};
     };
 }
 

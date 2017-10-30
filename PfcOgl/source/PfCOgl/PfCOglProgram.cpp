@@ -8,6 +8,7 @@
 
 #include "PfCOglProgram.h"
 #include "PfCOglStockShader.h"
+#include "math3d.h"
 #include <stdexcept>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -22,28 +23,53 @@ Program::Program(void):_object(0){
 
 
 Program::Program(const std::vector<Shader>& shaders) :
-    _object(0)
+_object(0)
 {
     _object = getProgramByShaders(shaders);
 }
 
 Program::~Program() {
     //might be 0 if ctor fails by throwing exception
-    if(_object != 0) glDeleteProgram(_object);
+    
     if(uiStockShaders[0] != 0) {
         unsigned int i;
         for(i = 0; i < GLT_SHADER_LAST; i++)
             glDeleteProgram(uiStockShaders[i]);
+    }else{
+        if(_object != 0) glDeleteProgram(_object);
     }
 }
 
 bool Program::initializeStockShaders(){
+    uiStockShaders[GLT_SHADER_IDENTITY] = getProgramByShaderSrcWithAttributes(szIdentityShaderVP, szIdentityShaderFP, 1, GLT_ATTRIBUTE_VERTEX, "vVertex");
+    uiStockShaders[GLT_SHADER_FLAT]=getProgramByShaderSrcWithAttributes(szFlatShaderVP, szFlatShaderFP, 1, GLT_ATTRIBUTE_VERTEX, "vVertex");
+    uiStockShaders[GLT_SHADER_SHADED] = getProgramByShaderSrcWithAttributes(szShadedVP, szShadedFP, 2,
+                                                                                       GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_COLOR, "vColor");
     
+    
+    uiStockShaders[GLT_SHADER_DEFAULT_LIGHT] = getProgramByShaderSrcWithAttributes(szDefaultLightVP, szDefaultLightFP, 2,
+                                                                                      GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_NORMAL, "vNormal");
+    
+    uiStockShaders[GLT_SHADER_POINT_LIGHT_DIFF] = getProgramByShaderSrcWithAttributes(szPointLightDiffVP, szPointLightDiffFP, 2,
+                                                                                      GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_NORMAL, "vNormal");
+    
+    uiStockShaders[GLT_SHADER_TEXTURE_REPLACE]  = getProgramByShaderSrcWithAttributes(szTextureReplaceVP, szTextureReplaceFP, 2,
+                                                                                      GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord0");
+    
+    uiStockShaders[GLT_SHADER_TEXTURE_MODULATE] = getProgramByShaderSrcWithAttributes(szTextureModulateVP, szTextureModulateFP, 2,
+                                                                                      GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord0");
+    
+    uiStockShaders[GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF] = getProgramByShaderSrcWithAttributes(szTexturePointLightDiffVP, szTexturePointLightDiffFP, 3,
+                                                                                              GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_NORMAL, "vNormal", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord0");
+    
+    
+    uiStockShaders[GLT_SHADER_TEXTURE_RECT_REPLACE] = getProgramByShaderSrcWithAttributes(szTextureRectReplaceVP, szTextureRectReplaceFP, 2,
+                                                                                          GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord0");
     if(uiStockShaders[0] != 0)
         return true;
     
     return false;
-//    uiStockShaders[GLT_SHADER_IDENTITY] = Program()
+    //    uiStockShaders[GLT_SHADER_IDENTITY] = Program()
 }
 
 GLuint Program::getProgramByShaders(const std::vector<Shader> &shaders){
@@ -98,6 +124,116 @@ GLuint Program::getProgramByShaders(const std::vector<Shader> &shaders){
         throw std::runtime_error(msg);
     }
     return hReturn;
+}
+
+GLint Program::useStockShader(PfCOgl::GLT_STOCK_SHADER shaderId, ...){
+    if(shaderId >= GLT_SHADER_LAST)
+        return -1;
+    
+    // List of uniforms
+    va_list uniformList;
+    va_start(uniformList, shaderId);
+    
+    // Bind to the correct shader
+    _object = uiStockShaders[shaderId];
+    glUseProgram(_object);
+    
+    // Set up the uniforms
+    int                iInteger;
+    M3DMatrix44f* mvpMatrix;
+    M3DMatrix44f*  pMatrix;
+    M3DMatrix44f*  mvMatrix;
+    M3DVector4f*  vColor;
+    M3DVector3f*  vLightPos;
+    
+    switch(shaderId)
+    {
+        case GLT_SHADER_FLAT:            // Just the modelview projection matrix and the color
+            mvpMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvpMatrix", *mvpMatrix);
+            
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+            break;
+            
+        case GLT_SHADER_TEXTURE_RECT_REPLACE:
+        case GLT_SHADER_TEXTURE_REPLACE:    // Just the texture place
+            mvpMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvpMatrix", *mvpMatrix);
+            
+            iInteger = va_arg(uniformList, int);
+            setUniform("textureUnit0", iInteger);
+            break;
+            
+        case GLT_SHADER_TEXTURE_MODULATE: // Multiply the texture by the geometry color
+            mvpMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvpMatrix", *mvpMatrix);
+            
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+            
+            iInteger = va_arg(uniformList, int);
+            setUniform("textureUnit0", iInteger);
+            break;
+            
+            
+        case GLT_SHADER_DEFAULT_LIGHT:
+            mvMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvMatrix", *mvMatrix);
+            
+            pMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("pMatrix", *pMatrix);
+            
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+            break;
+            
+        case GLT_SHADER_POINT_LIGHT_DIFF:
+            mvMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvMatrix", *mvMatrix);
+            
+            pMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("pMatrix", *pMatrix);
+            
+            vLightPos = va_arg(uniformList, M3DVector3f*);
+            setUniform("vLightPos", *vLightPos);
+            
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+            break;
+            
+        case GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF:
+            mvMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvMatrix", *mvMatrix);
+            
+            pMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("pMatrix", *pMatrix);
+            
+            vLightPos = va_arg(uniformList, M3DVector3f*);
+            setUniform("vLightPos", *vLightPos);
+            
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+            
+            iInteger = va_arg(uniformList, int);
+            setUniform("textureUnit0", iInteger);
+            break;
+            
+            
+        case GLT_SHADER_SHADED:        // Just the modelview projection matrix. Color is an attribute
+            mvpMatrix = va_arg(uniformList, M3DMatrix44f*);
+            setUniform("mvpMatrix", *mvpMatrix);
+            break;
+            
+        case GLT_SHADER_IDENTITY:    // Just the Color
+            vColor = va_arg(uniformList, M3DVector4f*);
+            setUniform("vColor", *vColor);
+        default:
+            break;
+    }
+    va_end(uniformList);
+    
+    return _object;
 }
 
 GLuint Program::getProgramByShaderSrcWithAttributes(const char *szVertexSrc, const char *szFragmentSrc, ...){
@@ -160,10 +296,6 @@ GLuint Program::getProgramByShaderSrcWithAttributes(const char *szVertexSrc, con
     return hReturn;
 }
 
-GLint Program::useStockShader(PfCOgl::GLT_STOCK_SHADER shaderId){
-    return 0;
-}
-
 GLuint Program::object() const {
     return _object;
 }
@@ -207,41 +339,41 @@ GLint Program::uniform(const GLchar* uniformName) const {
 
 #define ATTRIB_N_UNIFORM_SETTERS(OGL_TYPE, TYPE_PREFIX, TYPE_SUFFIX) \
 \
-    void Program::setAttrib(const GLchar* name, OGL_TYPE v0) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 1 ## TYPE_SUFFIX (attrib(name), v0); } \
-    void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 2 ## TYPE_SUFFIX (attrib(name), v0, v1); } \
-    void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 3 ## TYPE_SUFFIX (attrib(name), v0, v1, v2); } \
-    void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2, OGL_TYPE v3) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 4 ## TYPE_SUFFIX (attrib(name), v0, v1, v2, v3); } \
+void Program::setAttrib(const GLchar* name, OGL_TYPE v0) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 1 ## TYPE_SUFFIX (attrib(name), v0); } \
+void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 2 ## TYPE_SUFFIX (attrib(name), v0, v1); } \
+void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 3 ## TYPE_SUFFIX (attrib(name), v0, v1, v2); } \
+void Program::setAttrib(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2, OGL_TYPE v3) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 4 ## TYPE_SUFFIX (attrib(name), v0, v1, v2, v3); } \
 \
-    void Program::setAttrib1v(const GLchar* name, const OGL_TYPE* v) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 1 ## TYPE_SUFFIX ## v (attrib(name), v); } \
-    void Program::setAttrib2v(const GLchar* name, const OGL_TYPE* v) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 2 ## TYPE_SUFFIX ## v (attrib(name), v); } \
-    void Program::setAttrib3v(const GLchar* name, const OGL_TYPE* v) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 3 ## TYPE_SUFFIX ## v (attrib(name), v); } \
-    void Program::setAttrib4v(const GLchar* name, const OGL_TYPE* v) \
-        { assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 4 ## TYPE_SUFFIX ## v (attrib(name), v); } \
+void Program::setAttrib1v(const GLchar* name, const OGL_TYPE* v) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 1 ## TYPE_SUFFIX ## v (attrib(name), v); } \
+void Program::setAttrib2v(const GLchar* name, const OGL_TYPE* v) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 2 ## TYPE_SUFFIX ## v (attrib(name), v); } \
+void Program::setAttrib3v(const GLchar* name, const OGL_TYPE* v) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 3 ## TYPE_SUFFIX ## v (attrib(name), v); } \
+void Program::setAttrib4v(const GLchar* name, const OGL_TYPE* v) \
+{ assert(isInUse()); glVertexAttrib ## TYPE_PREFIX ## 4 ## TYPE_SUFFIX ## v (attrib(name), v); } \
 \
-    void Program::setUniform(const GLchar* name, OGL_TYPE v0) \
-        { assert(isInUse()); glUniform1 ## TYPE_SUFFIX (uniform(name), v0); } \
-    void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1) \
-        { assert(isInUse()); glUniform2 ## TYPE_SUFFIX (uniform(name), v0, v1); } \
-    void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2) \
-        { assert(isInUse()); glUniform3 ## TYPE_SUFFIX (uniform(name), v0, v1, v2); } \
-    void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2, OGL_TYPE v3) \
-        { assert(isInUse()); glUniform4 ## TYPE_SUFFIX (uniform(name), v0, v1, v2, v3); } \
+void Program::setUniform(const GLchar* name, OGL_TYPE v0) \
+{ assert(isInUse()); glUniform1 ## TYPE_SUFFIX (uniform(name), v0); } \
+void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1) \
+{ assert(isInUse()); glUniform2 ## TYPE_SUFFIX (uniform(name), v0, v1); } \
+void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2) \
+{ assert(isInUse()); glUniform3 ## TYPE_SUFFIX (uniform(name), v0, v1, v2); } \
+void Program::setUniform(const GLchar* name, OGL_TYPE v0, OGL_TYPE v1, OGL_TYPE v2, OGL_TYPE v3) \
+{ assert(isInUse()); glUniform4 ## TYPE_SUFFIX (uniform(name), v0, v1, v2, v3); } \
 \
-    void Program::setUniform1v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
-        { assert(isInUse()); glUniform1 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
-    void Program::setUniform2v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
-        { assert(isInUse()); glUniform2 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
-    void Program::setUniform3v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
-        { assert(isInUse()); glUniform3 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
-    void Program::setUniform4v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
-        { assert(isInUse()); glUniform4 ## TYPE_SUFFIX ## v (uniform(name), count, v); }
+void Program::setUniform1v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
+{ assert(isInUse()); glUniform1 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
+void Program::setUniform2v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
+{ assert(isInUse()); glUniform2 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
+void Program::setUniform3v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
+{ assert(isInUse()); glUniform3 ## TYPE_SUFFIX ## v (uniform(name), count, v); } \
+void Program::setUniform4v(const GLchar* name, const OGL_TYPE* v, GLsizei count) \
+{ assert(isInUse()); glUniform4 ## TYPE_SUFFIX ## v (uniform(name), count, v); }
 
 ATTRIB_N_UNIFORM_SETTERS(GLfloat, , f);
 ATTRIB_N_UNIFORM_SETTERS(GLdouble, , d);

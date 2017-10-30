@@ -50,7 +50,7 @@ _refCount(NULL)
     glGetShaderiv(_object, GL_COMPILE_STATUS, &status);
     if (status == GL_FALSE) {//编译失败
         
-        std::string msg("Compile failure in shader:\n");
+        std::string msg("Compile failure in shader:\n" + shaderCode + "\n");
         
         GLint infoLogLength;
         //获取错误日志的长度

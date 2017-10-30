@@ -7,3 +7,19 @@
 //
 
 #include "PfCOglModelAsset.h"
+using namespace PfCOgl;
+
+void ModelAsset::bindData(GLfloat *vertexData){
+    // First time, create the buffer object, allocate the space
+    if(vbo == 0) {
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_DYNAMIC_DRAW);
+    }
+    else    { // Just bind to existing object
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        
+        // Copy the data in
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexData), vertexData);
+    }
+}

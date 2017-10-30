@@ -24,6 +24,7 @@
 #include "PfCOglModelInstance.h"
 #include "PfCOglProgram.h"
 #include "PfCOglShader.h"
+#include "math3d.h"
 
 using namespace std;
 using namespace PfCOgl;

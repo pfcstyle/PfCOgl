@@ -1,0 +1,14 @@
+#version 410 core
+
+in vec3 offset;
+
+
+void main(){
+    const vec4 verts[3] = vec4[3](
+    	vec4(0.25, -0.25, 0.5, 1.0),
+    	vec4(-0.25, -0.25, 0.5, 1.0),
+    	vec4(0.25, 0.25, 0.5, 1.0)
+    	);
+    gl_Position = verts[gl_VertexID] + vec4(offset, 0.0f);
+
+}

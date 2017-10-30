@@ -57,7 +57,7 @@ namespace PfCOgl {
          init stock shaders
          */
         bool initializeStockShaders(void);
-        GLint useStockShader(GLT_STOCK_SHADER shaderId);
+        GLint useStockShader(GLT_STOCK_SHADER shaderId, ...);
 
         GLuint getProgramByShaders(const std::vector<Shader>& shaders);
         GLuint getProgramByShaderSrcWithAttributes(const char *szVertexSrc, const char *szFragmentSrc, ...);
