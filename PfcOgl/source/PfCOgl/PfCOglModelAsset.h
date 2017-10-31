@@ -27,7 +27,7 @@ namespace PfCOgl {
         GLfloat shininess;
         glm::vec3 specularColor;
         
-        void bindData(GLfloat *vertexData);
+        void bindData(GLfloat vertexData[], int length);
         ModelAsset() :
         shaders(NULL),
         texture(NULL),

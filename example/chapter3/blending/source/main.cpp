@@ -35,7 +35,6 @@ list<ModelInstance> mModelInstances;
 Program mPgrogram;
 Camera gCamera;
 int nStep = 0;
-ModelAsset *mModelAsset;
 
 const M3DVector2f SCREEN_SIZE(800, 600);
 
@@ -97,85 +96,107 @@ void initGlew(){
 }
 GLfloat blockSize = 0.2f;
 void loadAssetAndInstances() {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
+    glClearColor(1, 1, 1, 1); // white
+    
     ModelInstance square;
-    mModelAsset = new ModelAsset();
-    mModelAsset->drawCount = 4;
-    mModelAsset->drawType = GL_TRIANGLE_FAN;
-    mModelAsset->drawStart = 0;
-    mModelAsset->shaders = new Program();
-    mModelAsset->shaders->initializeStockShaders();
+    square.asset = new ModelAsset();
+    square.asset->drawCount = 4;
+    square.asset->drawType = GL_TRIANGLE_FAN;
+    square.asset->drawStart = 0;
+    square.asset->shaders = new Program();
+    square.asset->shaders->initializeStockShaders();
     GLfloat vVerts[] = {
-        -blockSize, -blockSize,//square
-        0.0f,0.25f, 0.25f,//green
-        0.0f,-0.75f, 0.25f,//red
-        -0.75f, -0.75f, 0.0f,//blue
-        0.25f, -0.75f, 0.0f,//black
-        
+        -blockSize, -blockSize, 0.0f,
         blockSize, -blockSize, 0.0f,
-        0.75f, 0.25f, 0.0f,
-        -0.25f, 0.25f, 0.0f,
-        -0.25f, -0.75f, 0.0f,
-        0.75f, -0.75f, 0.0f,
-        
         blockSize,  blockSize, 0.0f,
-        0.75f, 0.75f, 0.0f,
-        -0.25f, 0.75f, 0.0f,
-        -0.25f, -0.25f, 0.0f,
-        0.75f, -0.25f, 0.0f,
-        
-        -blockSize,  blockSize, 0.0f,
-        //green
-        0.25f, 0.75f, 0.0f,
-        //red
-        -0.75f, 0.75f, 0.0f,
-        //blue
-        -0.75f, -0.25f, 0.0f,
-        //black
-        0.25f, -0.25f, 0.0f,
+        -blockSize,  blockSize, 0.0f
     };
-    mModelAsset->bindData(vVerts);
-    square.asset = mModelAsset;
+    square.asset->bindData(vVerts, 3 * 4);
     square.begin();
-    square.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 15, NULL);
+    square.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     square.end();
     
     ModelInstance green;
-    green.asset = mModelAsset;
+    green.asset = new ModelAsset();
+    green.asset->drawCount = 4;
+    green.asset->drawType = GL_TRIANGLE_FAN;
+    green.asset->drawStart = 0;
+    green.asset->shaders = new Program();
+    green.asset->shaders->initializeStockShaders();
+    GLfloat vBlock[] = {
+        0.25f, 0.25f, 0.0f,
+        0.75f, 0.25f, 0.0f,
+        0.75f, 0.75f, 0.0f,
+        0.25f, 0.75f, 0.0f
+    };
+    green.asset->bindData(vBlock, 3 * 4);
     green.begin();
-    green.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 15, (const GLvoid*)(sizeof(GLfloat) * 3));
+    green.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     green.end();
 
     ModelInstance red;
-    red.asset = mModelAsset;
+    red.asset = new ModelAsset();
+    red.asset->drawCount = 4;
+    red.asset->drawType = GL_TRIANGLE_FAN;
+    red.asset->drawStart = 0;
+    red.asset->shaders = new Program();
+    red.asset->shaders->initializeStockShaders();
+    GLfloat vBlock2[] = {
+        -0.75f, 0.25f, 0.0f,
+        -0.25f, 0.25f, 0.0f,
+        -0.25f, 0.75f, 0.0f,
+        -0.75f, 0.75f, 0.0f
+    };
+    red.asset->bindData(vBlock2, 3 * 4);
     red.begin();
-    red.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 15, (const GLvoid*)(sizeof(GLfloat) * 3 * 2));
+    red.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     red.end();
 
     ModelInstance blue;
-    blue.asset = mModelAsset;
+    blue.asset = new ModelAsset();
+    blue.asset->drawCount = 4;
+    blue.asset->drawType = GL_TRIANGLE_FAN;
+    blue.asset->drawStart = 0;
+    blue.asset->shaders = new Program();
+    blue.asset->shaders->initializeStockShaders();
+    GLfloat vBlock3[] = {
+        -0.75f, -0.75f, 0.0f,
+        -0.25f, -0.75f, 0.0f,
+        -0.25f, -0.25f, 0.0f,
+        -0.75f, -0.25f, 0.0f
+    };
+    blue.asset->bindData(vBlock3, 12);
     blue.begin();
-    blue.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 15, (const GLvoid*)(sizeof(GLfloat) * 3 * 3));
+    blue.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     blue.end();
 
     ModelInstance black;
-    black.asset = mModelAsset;
+    black.asset = new ModelAsset();
+    black.asset->drawCount = 4;
+    black.asset->drawType = GL_TRIANGLE_FAN;
+    black.asset->drawStart = 0;
+    black.asset->shaders = new Program();
+    black.asset->shaders->initializeStockShaders();
+    GLfloat vBlock4[] = {
+        0.25f, -0.75f, 0.0f,
+        0.75f, -0.75f, 0.0f,
+        0.75f, -0.25f, 0.0f,
+        0.25f, -0.25f, 0.0f
+    };
+    black.asset->bindData(vBlock4, 12);
     black.begin();
-    black.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 15, (const GLvoid*)(sizeof(GLfloat) * 3 * 4));
+    black.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     black.end();
-    
+//
     mModelInstances.push_back(green);
     mModelInstances.push_back(red);
     mModelInstances.push_back(blue);
     mModelInstances.push_back(black);
     mModelInstances.push_back(square);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void RenderScene(void)
 {
-    // Clear the window with current clearing color
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
     GLfloat vRed[] = { 1.0f, 0.0f, 0.0f, 0.5f };
@@ -189,34 +210,32 @@ void RenderScene(void)
         const ModelInstance instance = *it;
         switch (index) {
             case 0:
-//                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vGreen);
-//                instance.draw();
-////                instance.asset->shaders->stopUsing();
-//                break;
-//            case 1:
-//                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vRed);
-//                instance.draw();
-//                break;
-//            case 2:
-//                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vBlue);
-//                instance.draw();
-//                break;
-//            case 3:
-//                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vBlack);
-//                instance.draw();
-//                break;
+                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vGreen);
+                instance.draw();
+                break;
+            case 1:
+                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vRed);
+                instance.draw();
+                break;
+            case 2:
+                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vBlue);
+                instance.draw();
+                break;
+            case 3:
+                instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vBlack);
+                instance.draw();
+                break;
             case 4:
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vRed);
                 instance.draw();
-                instance.asset->shaders->stopUsing();
                 glDisable(GL_BLEND);
                 break;
             default:
                 break;
         }
-//        instance.asset->shaders->stopUsing();
+        instance.asset->shaders->stopUsing();
         index ++;
     }
     
@@ -270,7 +289,7 @@ void AppMain(){
         
         // update the scene based on the time elapsed since last update
         float thisTime = (float)glfwGetTime();
-        Update(thisTime - lastTime);
+//        Update(thisTime - lastTime);
         lastTime = thisTime;
         
         RenderScene();

@@ -29,6 +29,7 @@ void ModelInstance::end(void)
 
 #ifndef OPENGL_ES
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 #endif
 }
 

@@ -145,5 +145,11 @@ namespace PfCOgl{
     
     bool gltCheckErrors(GLuint progName = 0);
     void gltGenerateOrtho2DMat(GLuint width, GLuint height, M3DMatrix44f &orthoMatrix, Batch &screenQuad);
+    
+    template <class T>
+    int getArrayLen(T& array) //使用模板定义一个函数getArrayLen,该函数将返回数组array的长度
+    {
+        return (sizeof(array) / sizeof(array[0]));
+    }
 }
 #endif /* PfCOglTool_h_ */

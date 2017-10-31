@@ -65,6 +65,7 @@ bool Program::initializeStockShaders(){
     
     uiStockShaders[GLT_SHADER_TEXTURE_RECT_REPLACE] = getProgramByShaderSrcWithAttributes(szTextureRectReplaceVP, szTextureRectReplaceFP, 2,
                                                                                           GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord0");
+//    _object = uiStockShaders[0];
     if(uiStockShaders[0] != 0)
         return true;
     
