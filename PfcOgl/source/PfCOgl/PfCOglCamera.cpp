@@ -112,6 +112,7 @@ glm::mat4 Camera::matrix() const {
 }
 
 glm::mat4 Camera::projection() const {
+    
     return glm::perspective(glm::radians(_fieldOfView), _viewportAspectRatio, _nearPlane, _farPlane);
 }
 

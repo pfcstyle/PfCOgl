@@ -375,6 +375,8 @@ void drawWireFramedBatch(Batch* pBatch)
     pBatch->draw();
     
     // draw black outline
+    //glPolygonOffset(factor, units) 调节片段的深度值 offset = (dz * factor) + (r * units)  dz是z值相对于多边形屏幕的变化量  r是使深度缓冲区值产生变化的最小值
+    //负值会使z距我们更近   正值则相反
     glPolygonOffset(-1.0f, -1.0f);      // Shift depth values
     glEnable(GL_POLYGON_OFFSET_LINE);
     

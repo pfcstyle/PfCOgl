@@ -28,10 +28,11 @@ namespace PfCOgl {
         
         ~ModelInstance(){}
         
-        
+        inline void bindData(GLfloat *vertexData, int length);
+        inline void bindData(M3DVector3f vecData[], int length);
+        inline void bindData(M3DVector4f vecData[], int length);
         void begin(void);
         void end(void);
-        inline void bindData(GLfloat *vertexData);
         void CopyData(char *varName, GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos);
         void CopyData(GLT_SHADER_ATTRIBUTE varName, GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos);
         inline void CopyVertexData3f(GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos ){

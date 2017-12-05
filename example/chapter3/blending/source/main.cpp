@@ -32,6 +32,7 @@ using namespace PfCOgl;
 
 GLFWwindow *gWindow;
 list<ModelInstance> mModelInstances;
+ModelInstance square;
 Program mPgrogram;
 Camera gCamera;
 int nStep = 0;
@@ -95,22 +96,21 @@ void initGlew(){
     
 }
 GLfloat blockSize = 0.2f;
+GLfloat vVerts[] = {
+    -blockSize, -blockSize, 0.0f,
+    blockSize, -blockSize, 0.0f,
+    blockSize,  blockSize, 0.0f,
+    -blockSize,  blockSize, 0.0f
+};
 void loadAssetAndInstances() {
     glClearColor(1, 1, 1, 1); // white
-    
-    ModelInstance square;
+
     square.asset = new ModelAsset();
     square.asset->drawCount = 4;
     square.asset->drawType = GL_TRIANGLE_FAN;
     square.asset->drawStart = 0;
     square.asset->shaders = new Program();
     square.asset->shaders->initializeStockShaders();
-    GLfloat vVerts[] = {
-        -blockSize, -blockSize, 0.0f,
-        blockSize, -blockSize, 0.0f,
-        blockSize,  blockSize, 0.0f,
-        -blockSize,  blockSize, 0.0f
-    };
     square.asset->bindData(vVerts, 3 * 4);
     square.begin();
     square.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
@@ -187,7 +187,7 @@ void loadAssetAndInstances() {
     black.begin();
     black.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
     black.end();
-//
+    
     mModelInstances.push_back(green);
     mModelInstances.push_back(red);
     mModelInstances.push_back(blue);
@@ -204,7 +204,7 @@ void RenderScene(void)
     GLfloat vBlue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
     GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     
-    std::list<ModelInstance>::const_iterator it;
+    std::list<ModelInstance>::iterator it;
     int index = 0;
     for (it = mModelInstances.begin(); it != mModelInstances.end(); it++) {
         const ModelInstance instance = *it;
@@ -226,6 +226,9 @@ void RenderScene(void)
                 instance.draw();
                 break;
             case 4:
+                //开启混合 Cf = (Cs*S) + (Cd * D)  还可以设置其他种类的方程式
+                //其中S和D使用glBlendFunc()设置
+                //或者使用glBlendFuncSeparate()更灵活的设置
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 instance.asset->shaders->useStockShader(GLT_SHADER_IDENTITY, vRed);
@@ -248,16 +251,43 @@ void RenderScene(void)
 void Update(float secondsElapsed) {
     //rotate the first instance in `gInstances`
 //    const float moveSpeed = 4.0; //units per second
+    GLfloat stepSize = 0.025f;
+    
+    GLfloat blockX = vVerts[0];   // Upper left X
+    GLfloat blockY = vVerts[7];  // Upper left Y
+    
     if(glfwGetKey(gWindow, 'S')){
-        
+        blockY -= stepSize;
     } else if(glfwGetKey(gWindow, 'W')){
-        
+        blockY += stepSize;
     }
     if(glfwGetKey(gWindow, 'A')){
-        
+        blockX -= stepSize;
     } else if(glfwGetKey(gWindow, 'D')){
-        
+        blockX += stepSize;
     }
+    
+    // Collision detection
+    if(blockX < -1.0f) blockX = -1.0f;
+    if(blockX > (1.0f - blockSize * 2)) blockX = 1.0f - blockSize * 2;;
+    if(blockY < -1.0f + blockSize * 2)  blockY = -1.0f + blockSize * 2;
+    if(blockY > 1.0f) blockY = 1.0f;
+    
+    // Recalculate vertex positions
+    vVerts[0] = blockX;
+    vVerts[1] = blockY - blockSize*2;
+    
+    vVerts[3] = blockX + blockSize*2;
+    vVerts[4] = blockY - blockSize*2;
+    
+    vVerts[6] = blockX + blockSize*2;
+    vVerts[7] = blockY;
+    
+    vVerts[9] = blockX;
+    vVerts[10] = blockY;
+    
+    square.asset->bindData(vVerts, 12);
+    
     if(glfwGetKey(gWindow, 'Z')){
         
     } else if(glfwGetKey(gWindow, 'X')){
@@ -289,7 +319,7 @@ void AppMain(){
         
         // update the scene based on the time elapsed since last update
         float thisTime = (float)glfwGetTime();
-//        Update(thisTime - lastTime);
+        Update(thisTime - lastTime);
         lastTime = thisTime;
         
         RenderScene();

@@ -7,6 +7,7 @@
 //
 
 #include "PfCOglModelInstance.h"
+#include "PfCOglTool.h"
 using namespace PfCOgl;
 
 
@@ -33,7 +34,52 @@ void ModelInstance::end(void)
 #endif
 }
 
-void ModelInstance::bindData(GLfloat *vertexData){
+void ModelInstance::bindData(GLfloat *vertexData, int length){
+    // First time, create the buffer object, allocate the space
+    if(asset->vbo == 0) {
+        glGenBuffers(1, &asset->vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, asset->vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * length, vertexData, GL_DYNAMIC_DRAW);
+    }
+    else    { // Just bind to existing object
+        glBindBuffer(GL_ARRAY_BUFFER, asset->vbo);
+        
+        // Copy the data in
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * length, vertexData);
+    }
+}
+
+void ModelInstance::bindData(M3DVector3f vecData[], int length){
+    int arrSize = 3 * length;
+    float vertexData[arrSize];
+    for (int i = 0; i < length; i++) {
+        vertexData[i * 3] = vecData[i][0];
+        vertexData[i * 3 + 1] = vecData[i][1];
+        vertexData[i * 3 + 2] = vecData[i][2];
+    }
+    // First time, create the buffer object, allocate the space
+    if(asset->vbo == 0) {
+        glGenBuffers(1, &asset->vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, asset->vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_DYNAMIC_DRAW);
+    }
+    else    { // Just bind to existing object
+        glBindBuffer(GL_ARRAY_BUFFER, asset->vbo);
+        
+        // Copy the data in
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexData), vertexData);
+    }
+}
+
+void ModelInstance::bindData(M3DVector4f vecData[], int length){
+    int arrSize = 4 * length;
+    float vertexData[arrSize];
+    for (int i = 0; i < length; i++) {
+        vertexData[i * 4] = vecData[i][0];
+        vertexData[i * 4 + 1] = vecData[i][1];
+        vertexData[i * 4 + 2] = vecData[i][2];
+        vertexData[i * 4 + 3] = vecData[i][3];
+    }
     // First time, create the buffer object, allocate the space
     if(asset->vbo == 0) {
         glGenBuffers(1, &asset->vbo);
@@ -62,8 +108,6 @@ void ModelInstance::CopyData(GLT_SHADER_ATTRIBUTE varName, GLuint vecNum, GLenum
 
 void ModelInstance::draw(void) const
 {
-    glBindVertexArray(asset->vao);
-    glDrawArrays(asset->drawType, asset->drawStart, asset->drawCount);
-    glBindVertexArray(0);
+    asset->draw();
     
 }

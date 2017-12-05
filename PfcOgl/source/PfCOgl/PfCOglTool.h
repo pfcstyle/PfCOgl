@@ -50,9 +50,11 @@
 // Universal includes
 #include <stdio.h>
 #include <math.h>
+#include <glm/gtc/matrix_transform.hpp>
 #include "math3d.h"
 #include "PfCOglBatch.h"
 #include "PfCOglTriangleBatch.h"
+#include "PfCOglModelAsset.h"
 namespace PfCOgl{
     ///////////////////////////////////////////////////////
     // Macros for big/little endian happiness
@@ -128,6 +130,8 @@ namespace PfCOgl{
     
     // Make Objects
     void gltMakeTorus(TriangleBatch& torusBatch, GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLint numMinor);
+    void gltMakeTorus(ModelAsset& modelAsset, GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLint numMinor);
+    
     void gltMakeSphere(TriangleBatch& sphereBatch, GLfloat fRadius, GLint iSlices, GLint iStacks);
     void gltMakeDisk(TriangleBatch& diskBatch, GLfloat innerRadius, GLfloat outerRadius, GLint nSlices, GLint nStacks);
     void gltMakeCylinder(TriangleBatch& cylinderBatch, GLfloat baseRadius, GLfloat topRadius, GLfloat fLength, GLint numSlices, GLint numStacks);
@@ -146,10 +150,18 @@ namespace PfCOgl{
     bool gltCheckErrors(GLuint progName = 0);
     void gltGenerateOrtho2DMat(GLuint width, GLuint height, M3DMatrix44f &orthoMatrix, Batch &screenQuad);
     
+    M3DMatrix44f gltOrthoMatrix(GLfloat xMin, GLfloat xMax, GLfloat yMin, GLfloat yMax, GLfloat zMin, GLfloat zMax);
+    
     template <class T>
     int getArrayLen(T& array) //使用模板定义一个函数getArrayLen,该函数将返回数组array的长度
     {
         return (sizeof(array) / sizeof(array[0]));
     }
+    
+    template <size_t _Size> inline int getArrLen(int(& array)[_Size])
+    {
+        //return sizeof(array) / sizeof(int);
+        return _Size;
+    };
 }
 #endif /* PfCOglTool_h_ */
