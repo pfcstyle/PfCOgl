@@ -59,6 +59,11 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>chapter5-Anisotropic.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
 		<key>chapter5-Pyramid.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -68,6 +73,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>12</integer>
+		</dict>
+		<key>chapter5-Tunnel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
 		</dict>
 		<key>primitives.xcscheme</key>
 		<dict>
