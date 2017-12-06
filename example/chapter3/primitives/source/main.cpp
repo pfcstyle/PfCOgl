@@ -41,7 +41,7 @@ Batch                lineLoopBatch;
 Batch                triangleBatch;
 Batch             triangleStripBatch;
 Batch             triangleFanBatch;
-Program mPgrogram;
+Program mProgram;
 Camera gCamera;
 int nStep = 0;
 GLfloat vGreen[] = { 0.0f, 1.0f, 0.0f, 1.0f };
@@ -244,7 +244,7 @@ void createVBOAndVAO(){
 void SetupRC(){
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f );
     
-    mPgrogram.initializeStockShaders();
+    mProgram.initializeStockShaders();
     
     glEnable(GL_DEPTH_TEST);
     
@@ -371,7 +371,7 @@ void drawWireFramedBatch(Batch* pBatch)
 {
     // draw the batch solid green
     geoTrans = gCamera.matrix() * M3DMatrix44f();
-    mPgrogram.useStockShader(GLT_SHADER_FLAT, &geoTrans , vGreen);
+    mProgram.useStockShader(GLT_SHADER_FLAT, &geoTrans , vGreen);
     pBatch->draw();
     
     // draw black outline
@@ -388,7 +388,7 @@ void drawWireFramedBatch(Batch* pBatch)
     // draw black wireframe version of geometry
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glLineWidth(2.5f);
-    mPgrogram.useStockShader(GLT_SHADER_FLAT, &geoTrans, vBlack);
+    mProgram.useStockShader(GLT_SHADER_FLAT, &geoTrans, vBlack);
     pBatch->draw();
     
     // Put everything back the way we found it
@@ -406,7 +406,7 @@ void RenderScene(void)
     
     GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     geoTrans = gCamera.matrix() * M3DMatrix44f();
-    mPgrogram.useStockShader(GLT_SHADER_FLAT, &geoTrans, vBlack);
+    mProgram.useStockShader(GLT_SHADER_FLAT, &geoTrans, vBlack);
     
     switch(nStep) {
         case 0:

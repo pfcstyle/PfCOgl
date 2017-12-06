@@ -34,7 +34,7 @@ GLFWwindow *gWindow;
 GLuint mVAO;
 list<ModelInstance> mModelInstances;
 Batch mTriangleBatch;
-Program mPgrogram;
+Program mProgram;
 
 void AppMain();
 void onError(int errorCode, const char *errorMsg);
@@ -228,7 +228,7 @@ void createVBOAndVAO(){
 void SetupRC(){
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f );
     
-    mPgrogram.initializeStockShaders();
+    mProgram.initializeStockShaders();
     GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f,
         0.5f, 0.0f, 0.0f,
         0.0f, 0.5f, 0.0f };
@@ -244,7 +244,7 @@ void RenderScene(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
     GLfloat vRed[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-    mPgrogram.useStockShader(GLT_SHADER_IDENTITY, vRed);
+    mProgram.useStockShader(GLT_SHADER_IDENTITY, vRed);
     mTriangleBatch.draw();
     
     // Perform the buffer swap to display back buffer

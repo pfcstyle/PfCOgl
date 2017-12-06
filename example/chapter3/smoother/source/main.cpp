@@ -34,7 +34,7 @@ using namespace PfCOgl;
 GLFWwindow *gWindow;
 list<ModelInstance> mModelInstances;
 ModelInstance square;
-Program mPgrogram;
+Program mProgram;
 Camera gCamera;
 ModelInstance smallStarBatch;
 ModelInstance mediumStarBatch;

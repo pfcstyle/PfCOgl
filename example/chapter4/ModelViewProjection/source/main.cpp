@@ -35,7 +35,7 @@ using namespace PfCOgl;
 float gDegreesRotated = 0;
 double gScrollY = 0;
 GLFWwindow *gWindow;
-Program mPgrogram;
+Program mProgram;
 Camera gCamera;
 // The torus
 TriangleBatch     torusBatch;
@@ -156,7 +156,7 @@ void loadAssetAndInstances() {
     
     glEnable(GL_DEPTH_TEST);
     
-    mPgrogram.initializeStockShaders();
+    mProgram.initializeStockShaders();
     gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
     
     gltMakeTorus(torusBatch, 0.4f, 0.15f, 30, 30);
@@ -175,7 +175,7 @@ void RenderScene(void)
     // Pass this completed matrix to the shader, and render the torus
     GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     proM = gCamera.matrix() * geoTrans;
-    mPgrogram.useStockShader(GLT_SHADER_FLAT, &proM, vBlack);
+    mProgram.useStockShader(GLT_SHADER_FLAT, &proM, vBlack);
     torusBatch.draw();
     glfwSwapBuffers(gWindow);
 }

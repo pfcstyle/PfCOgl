@@ -33,7 +33,7 @@ using namespace PfCOgl;
 GLFWwindow *gWindow;
 list<ModelInstance> mModelInstances;
 ModelInstance square;
-Program mPgrogram;
+Program mProgram;
 Camera gCamera;
 int nStep = 0;
 

@@ -45,7 +45,7 @@ ModelInstance floorIns;
 ModelInstance torusIns;
 ModelInstance sphereIns;
 
-Program mPgrogram;
+Program mProgram;
 Camera gCamera;
 Camera sphereCameras[NUM_SPHERES];
 // The torus
@@ -192,7 +192,7 @@ void loadAssetAndInstances() {
     gltMakeTorus(torusAsset, 0.4f, 0.15f, 30, 30);
     torusIns.asset = &torusAsset;
     
-    mPgrogram.initializeStockShaders();
+    mProgram.initializeStockShaders();
     gltMakeSphere(sphereBatch, 0.1f, 26, 13);
     
     //floor
@@ -255,10 +255,10 @@ void RenderScene(void)
     for(int i = 0; i < NUM_SPHERES; i++) {
         M3DMatrix44f geoTransTemp = M3DMatrix44f(geoTrans);
         geoTransTemp = geoTransTemp * sphereCameras[i].matrix();
-        mPgrogram.useStockShader(GLT_SHADER_POINT_LIGHT_DIFF, &geoTransTemp,
+        mProgram.useStockShader(GLT_SHADER_POINT_LIGHT_DIFF, &geoTransTemp,
                                      &proM, &vLightEyePos3f, &vSphereColor);
         sphereBatch.draw();
-        mPgrogram.stopUsing();
+        mProgram.stopUsing();
     }
 
     const GLfloat degreesPerSecond = 180.0f;
@@ -271,10 +271,10 @@ void RenderScene(void)
     torusAsset.shaders->stopUsing();
 
     geoTrans = translate(0.0f, 0.0f, -2.5f) * rotate(gDegreesRotated * -2,0.0f, 1.0f, 0.0f);
-    mPgrogram.useStockShader(GLT_SHADER_POINT_LIGHT_DIFF, &geoTrans,
+    mProgram.useStockShader(GLT_SHADER_POINT_LIGHT_DIFF, &geoTrans,
                                  &proM, &vLightEyePos3f, &vSphereColor);
     sphereBatch.draw();
-    mPgrogram.stopUsing();
+    mProgram.stopUsing();
     
     glfwSwapBuffers(gWindow);
 }

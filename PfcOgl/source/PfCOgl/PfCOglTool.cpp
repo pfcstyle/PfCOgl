@@ -315,7 +315,7 @@ namespace PfCOgl{
         modelAsset.drawCount = 8 * 4 * numMinor * numMinor / 3;
         modelAsset.bindData(datas, 8 * 4 * numMinor * numMinor);
         modelAsset.begin();
-        modelAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), 0);
+        modelAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), NULL);
         modelAsset.CopyTexCoordData2f(2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (const GLvoid*)(3 * sizeof(GLfloat)));
         modelAsset.CopyNormalDataf(3, GL_FLOAT, true, 8 * sizeof(GL_FLOAT), (const GLvoid*)(5 * sizeof(GLfloat)));
         modelAsset.end();

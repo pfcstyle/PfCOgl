@@ -54,15 +54,15 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
-		<key>chapter4-SphereWorld copy.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>12</integer>
-		</dict>
 		<key>chapter4-SphereWorld.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>11</integer>
+		</dict>
+		<key>chapter5-SphereWorld.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 		<key>primitives.xcscheme</key>
 		<dict>
