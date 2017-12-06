@@ -59,6 +59,11 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>chapter5-Pyramid.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>chapter5-SphereWorld.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

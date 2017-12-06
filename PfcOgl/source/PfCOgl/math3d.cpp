@@ -632,8 +632,7 @@ void m3dProjectXYZ(M3DVector3f &vPointOut, const M3DMatrix44f &mModelView, const
 // Calculates the normal of a triangle specified by the three points
 // p1, p2, and p3. Each pointer points to an array of three floats. The
 // triangle is assumed to be wound counter clockwise.
-void m3dFindNormal(M3DVector3f &result, const M3DVector3f &point1, const M3DVector3f &point2,
-                   const M3DVector3f point3)
+void m3dFindNormal(M3DVector3f &result, const M3DVector3f &point1, const M3DVector3f &point2,const M3DVector3f &point3)
 {
     M3DVector3f v1,v2;        // Temporary vectors
     
@@ -655,8 +654,7 @@ void m3dFindNormal(M3DVector3f &result, const M3DVector3f &point1, const M3DVect
 
 
 // Ditto above, but for doubles
-void m3dFindNormal(M3DVector3d &result, const M3DVector3d &point1, const M3DVector3d &point2,
-                   const M3DVector3d point3)
+void m3dFindNormal(M3DVector3d &result, const M3DVector3d &point1, const M3DVector3d &point2,const M3DVector3d &point3)
 {
     M3DVector3d v1,v2;        // Temporary vectors
     
