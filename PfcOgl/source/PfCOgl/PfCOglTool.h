@@ -137,6 +137,13 @@ namespace PfCOgl{
     void gltMakeCylinder(TriangleBatch& cylinderBatch, GLfloat baseRadius, GLfloat topRadius, GLfloat fLength, GLint numSlices, GLint numStacks);
     void gltMakeCube(Batch& cubeBatch, GLfloat fRadius);
     
+    
+    void gltMakeTorusAsset(ModelAsset& torusBatch, GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLint numMinor);
+    void gltMakeSphereAsset(ModelAsset& sphereBatch, GLfloat fRadius, GLint iSlices, GLint iStacks);
+    void gltMakeDiskAsset(ModelAsset& diskBatch, GLfloat innerRadius, GLfloat outerRadius, GLint nSlices, GLint nStacks);
+    void gltMakeCylinderAsset(ModelAsset& cylinderBatch, GLfloat baseRadius, GLfloat topRadius, GLfloat fLength, GLint numSlices, GLint numStacks);
+    void gltMakeCubeAsset(ModelAsset& cubeBatch, GLfloat fRadius);
+    
     // Shader loading support
     void    gltLoadShaderSrc(const char *szShaderSrc, GLuint shader);
     bool    gltLoadShaderFile(const char *szFile, GLuint shader);

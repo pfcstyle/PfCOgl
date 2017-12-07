@@ -8,6 +8,7 @@
 
 #include "PfCOglModelInstance.h"
 #include "PfCOglTool.h"
+#include "math3d.h"
 using namespace PfCOgl;
 
 
@@ -32,6 +33,18 @@ void ModelInstance::end(void)
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 #endif
+}
+
+glm::mat3 ModelInstance::getNormalMatrix(bool isNormaize){
+    m3dExtractRotationMatrix33(normalMatrix, transform);
+    
+    if(isNormaize) {
+        m3dNormalizeVector3(normalMatrix[0]);
+        m3dNormalizeVector3(normalMatrix[1]);
+        m3dNormalizeVector3(normalMatrix[2]);
+    }
+    
+    return normalMatrix;
 }
 
 void ModelInstance::bindData(GLfloat *vertexData, int length){

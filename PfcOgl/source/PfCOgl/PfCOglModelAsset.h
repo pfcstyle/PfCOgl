@@ -32,6 +32,7 @@ namespace PfCOgl {
         GLuint      uiNormalArray;
         GLuint      uiColorArray;
         GLuint      uiTextureCoordArray;
+        GLuint      uiIndexArray;
         GLenum drawType;
         GLint drawStart;
         GLint drawCount;
@@ -40,10 +41,17 @@ namespace PfCOgl {
         GLuint nVertsBuilding;            // Building up vertexes counter (immediate mode emulator)
         GLuint nNumVerts;                // Number of verticies in this batch
         GLuint nNumTextureUnits;        // Number of texture coordinate sets
+        
         M3DVector3f *pVerts;
         M3DVector3f *pNormals;
         M3DVector4f *pColors;
         M3DVector2f *pTexCoords;
+        
+        //meshs
+        GLushort  *pIndexes;        // Array of indexes
+        GLuint nMaxIndexes;         // Maximum workspace
+        GLuint nNumIndexes;         // Number of indexes currently used
+        bool isMesh;
         
         void bindData(GLfloat vertexData[], int length);
         void bindData(M3DVector3f vecData[], int length);
@@ -52,6 +60,9 @@ namespace PfCOgl {
         void end(void);
         void begin(GLenum primitive, GLuint nVerts);
         void endBatchs(void);
+        void beginMesh(GLuint nMaxVerts);
+        void addTriangle(M3DVector3f verts[3], M3DVector3f vNorms[3], M3DVector2f vTexCoords[3]);
+        void endMesh(void);
         void CopyData(char *varName, GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos);
         void CopyData(GLT_SHADER_ATTRIBUTE varName, GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos);
         inline void CopyVertexData3f(GLuint vecNum, GLenum dataType, GLboolean isNormlize, GLsizei stepNum, const GLvoid* startPos ){
@@ -87,6 +98,10 @@ namespace PfCOgl {
         pNormals(NULL),
         pColors(NULL),
         pTexCoords(NULL),
+        pIndexes(NULL),
+        nMaxIndexes(0),
+        nNumIndexes(0),
+        isMesh(false),
         vbo(0),
         vao(0),
         uiNormalArray(0),

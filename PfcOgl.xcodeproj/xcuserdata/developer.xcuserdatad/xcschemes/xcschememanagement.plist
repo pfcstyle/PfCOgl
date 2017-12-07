@@ -79,6 +79,11 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>chapter6-DiffuseLight.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>primitives.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

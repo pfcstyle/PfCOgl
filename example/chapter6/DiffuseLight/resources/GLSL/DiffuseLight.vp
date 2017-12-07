@@ -1,0 +1,33 @@
+#version 410
+in vec4 vVertex;
+in vec3 vNormal;
+
+uniform vec4 diffuseColor;
+uniform vec3 vLightPosition;
+uniform mat4 mvpMatrix;
+uniform mat4 mvMatrix;
+//read only
+uniform mat3 normalMatrix;
+
+//以透视校正的方式对两个着色器阶段之间进行插值   默认
+//对应的关键字为noperspective  非透视插值   flat为不插值
+smooth out vec4 vVaryingColor;
+void main(void)
+{
+	//获取表面法线的视觉坐标
+    // mat3 normalMatrix = transpose(inverse(mat3(mvMatrix)));
+	vec3 vEyeNormal = normalMatrix * vNormal;
+	//获取顶点位置的视觉坐标
+	vec4 vPosition4 = mvMatrix * vVertex;
+	vec3 vPosition3 = vPosition4.xyz / vPosition4.w;
+
+	//获取到光源的向量
+	vec3 vLightDir = normalize(vLightPosition - vPosition3);
+	//从点乘积得到漫反射强度
+	float diff = max(0.0, dot(vEyeNormal, vLightDir));
+	//使用强度乘以漫反射颜色，将alpha设为1.0
+	vVaryingColor.xyz = diff * diffuseColor.xyz;
+	vVaryingColor.w = 1.0f;
+	gl_Position = mvpMatrix * vVertex;
+
+}

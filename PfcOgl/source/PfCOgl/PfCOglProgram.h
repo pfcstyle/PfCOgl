@@ -51,6 +51,7 @@ namespace PfCOgl {
          use stock shaders
          */
         Program(void);
+        Program(const GLuint obj);
         ~Program();
         
         /**
@@ -58,9 +59,9 @@ namespace PfCOgl {
          */
         bool initializeStockShaders(void);
         GLint useStockShader(GLT_STOCK_SHADER shaderId, ...);
-
         GLuint getProgramByShaders(const std::vector<Shader>& shaders);
         GLuint getProgramByShaderSrcWithAttributes(const char *szVertexSrc, const char *szFragmentSrc, ...);
+        static Program *getProgramByShadersWithAttr(const std::vector<Shader> &shaders, ...);
         /**
          @result The program's object ID, as returned from glCreateProgram
          */
@@ -123,6 +124,7 @@ namespace PfCOgl {
         void setUniform(const GLchar* uniformName, const glm::vec3& v);
         void setUniform(const GLchar* uniformName, const glm::vec4& v);
 
+    protected:
         
     private:
         GLuint _object;

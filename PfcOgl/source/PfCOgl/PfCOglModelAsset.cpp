@@ -106,6 +106,145 @@ void ModelAsset::endBatchs(void)
 #endif
 }
 
+void ModelAsset::beginMesh(GLuint nMaxVerts)
+{
+    // Just in case this gets called more than once...
+    delete [] pIndexes;
+    delete [] pVerts;
+    delete [] pNormals;
+    delete [] pTexCoords;
+    isMesh = true;
+    
+    nMaxIndexes = nMaxVerts;
+    nNumIndexes = 0;
+    nNumVerts = 0;
+    
+    // Allocate new blocks. In reality, the other arrays will be
+    // much shorter than the index array
+    pIndexes = new GLushort[nMaxIndexes];
+    pVerts = new M3DVector3f[nMaxIndexes];
+    pNormals = new M3DVector3f[nMaxIndexes];
+    pTexCoords = new M3DVector2f[nMaxIndexes];
+}
+
+void ModelAsset::addTriangle(M3DVector3f verts[3], M3DVector3f vNorms[3], M3DVector2f vTexCoords[3])
+{
+    const  float e = 0.00001f; // How small a difference to equate
+    
+    // First thing we do is make sure the normals are unit length!
+    // It's almost always a good idea to work with pre-normalized normals
+    m3dNormalizeVector3(vNorms[0]);
+    m3dNormalizeVector3(vNorms[1]);
+    m3dNormalizeVector3(vNorms[2]);
+    
+    
+    // Search for match - triangle consists of three verts
+    for(GLuint iVertex = 0; iVertex < 3; iVertex++)
+    {
+        GLuint iMatch = 0;
+        for(iMatch = 0; iMatch < nNumVerts; iMatch++)
+        {
+            // If the vertex positions are the same
+            if(m3dCloseEnough(pVerts[iMatch][0], verts[iVertex][0], e) &&
+               m3dCloseEnough(pVerts[iMatch][1], verts[iVertex][1], e) &&
+               m3dCloseEnough(pVerts[iMatch][2], verts[iVertex][2], e) &&
+               
+               // AND the Normal is the same...
+               m3dCloseEnough(pNormals[iMatch][0], vNorms[iVertex][0], e) &&
+               m3dCloseEnough(pNormals[iMatch][1], vNorms[iVertex][1], e) &&
+               m3dCloseEnough(pNormals[iMatch][2], vNorms[iVertex][2], e) &&
+               
+               // And Texture is the same...
+               m3dCloseEnough(pTexCoords[iMatch][0], vTexCoords[iVertex][0], e) &&
+               m3dCloseEnough(pTexCoords[iMatch][1], vTexCoords[iVertex][1], e))
+            {
+                // Then add the index only
+                pIndexes[nNumIndexes] = iMatch;
+                nNumIndexes++;
+                break;
+            }
+        }
+        
+        // No match for this vertex, add to end of list
+        if(iMatch == nNumVerts && nNumVerts < nMaxIndexes && nNumIndexes < nMaxIndexes)
+        {
+            pVerts[nNumVerts] = verts[iVertex];
+            pNormals[nNumVerts] = pNormals[iVertex];
+            pTexCoords[nNumVerts] = vTexCoords[iVertex];
+            pIndexes[nNumIndexes] = nNumVerts;
+            nNumIndexes++;
+            nNumVerts++;
+        }
+    }
+}
+
+
+
+//////////////////////////////////////////////////////////////////
+// Compact the data. This is a nice utility, but you should really
+// save the results of the indexing for future use if the model data
+// is static (doesn't change).
+void ModelAsset::endMesh(void)
+{
+#ifndef OPENGL_ES
+    // Create the master vertex array object
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+#endif
+    
+    // Create the buffer objects
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &uiNormalArray);
+    glGenBuffers(1, &uiTextureCoordArray);
+    glGenBuffers(1, &uiIndexArray);
+    // Copy data to video memory
+    // Vertex data
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glEnableVertexAttribArray(GLT_ATTRIBUTE_VERTEX);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*3, pVerts, GL_STATIC_DRAW);
+    glVertexAttribPointer(GLT_ATTRIBUTE_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    
+    // Normal data
+    glBindBuffer(GL_ARRAY_BUFFER, uiNormalArray);
+    glEnableVertexAttribArray(GLT_ATTRIBUTE_NORMAL);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*3, pNormals, GL_STATIC_DRAW);
+    glVertexAttribPointer(GLT_ATTRIBUTE_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    // Texture coordinates
+    glBindBuffer(GL_ARRAY_BUFFER, uiTextureCoordArray);
+    glEnableVertexAttribArray(GLT_ATTRIBUTE_TEXTURE0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*2, pTexCoords, GL_STATIC_DRAW);
+    glVertexAttribPointer(GLT_ATTRIBUTE_TEXTURE0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    // Indexes
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, uiIndexArray);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort)*nNumIndexes, pIndexes, GL_STATIC_DRAW);
+    
+    
+    // Done
+#ifndef OPENGL_ES
+    glBindVertexArray(0);
+#endif
+    
+    // Free older, larger arrays
+    delete [] pIndexes;
+    delete [] pVerts;
+    delete [] pNormals;
+    delete [] pTexCoords;
+    
+    // Reasign pointers so they are marked as unused
+    pIndexes = NULL;
+    pVerts = NULL;
+    pNormals = NULL;
+    pTexCoords = NULL;
+    
+    // Unbind to anybody
+#ifndef OPENGL_ES
+    glBindVertexArray(0);
+#endif
+}
+
 void ModelAsset::bindData(GLfloat vertexData[], int length){
     // First time, create the buffer object, allocate the space
     if(vbo == 0) {
@@ -389,7 +528,12 @@ void ModelAsset::MultiTexCoord2fv(GLuint texture, M3DVector2f vTexCoord)
 void ModelAsset::draw(void) const
 {
     glBindVertexArray(vao);
-    glDrawArrays(drawType, drawStart, drawCount);
+    if (isMesh) {
+        glDrawElements(GL_TRIANGLES, nNumIndexes, GL_UNSIGNED_SHORT, 0);
+    }else{
+        glDrawArrays(drawType, drawStart, drawCount);
+    }
+    
     glBindVertexArray(0);
     
 }

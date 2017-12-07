@@ -96,6 +96,35 @@
 		8B53F4121FD7EE6D000BD7C1 /* floor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F40D1FD7EE6C000BD7C1 /* floor.tga */; };
 		8B53F4131FD7EE6D000BD7C1 /* brick.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F40E1FD7EE6C000BD7C1 /* brick.tga */; };
 		8B53F4141FD7EE6D000BD7C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F4101FD7EE6C000BD7C1 /* main.cpp */; };
+		8B53F4171FD8E2DB000BD7C1 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8B53F4181FD8E2DB000BD7C1 /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8B53F4191FD8E2DB000BD7C1 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8B53F41A1FD8E2DB000BD7C1 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8B53F41B1FD8E2DB000BD7C1 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8B53F41D1FD8E2DB000BD7C1 /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8B53F41E1FD8E2DB000BD7C1 /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8B53F41F1FD8E2DB000BD7C1 /* PfCOglBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E521F9D99A300BB2AA0 /* PfCOglBatch.cpp */; };
+		8B53F4201FD8E2DB000BD7C1 /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8B53F4211FD8E2DB000BD7C1 /* PfCOglTriangleBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E551F9DC3A300BB2AA0 /* PfCOglTriangleBatch.cpp */; };
+		8B53F4221FD8E2DB000BD7C1 /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8B53F4231FD8E2DB000BD7C1 /* math3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E581F9DCB9600BB2AA0 /* math3d.cpp */; };
+		8B53F4241FD8E2DB000BD7C1 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8B53F4251FD8E2DB000BD7C1 /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
+		8B53F4261FD8E2DB000BD7C1 /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8B53F4281FD8E2DB000BD7C1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8B53F4291FD8E2DB000BD7C1 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8B53F42A1FD8E2DB000BD7C1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8B53F42B1FD8E2DB000BD7C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8B53F42C1FD8E2DB000BD7C1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8B53F4441FD8E366000BD7C1 /* MoonLike.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F43C1FD8E366000BD7C1 /* MoonLike.tga */; };
+		8B53F4451FD8E366000BD7C1 /* stone.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F43D1FD8E366000BD7C1 /* stone.tga */; };
+		8B53F4461FD8E366000BD7C1 /* wooden-crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F43E1FD8E366000BD7C1 /* wooden-crate.jpg */; };
+		8B53F4471FD8E366000BD7C1 /* Marble.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F43F1FD8E366000BD7C1 /* Marble.tga */; };
+		8B53F4481FD8E366000BD7C1 /* Marslike.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F4401FD8E366000BD7C1 /* Marslike.tga */; };
+		8B53F4491FD8E366000BD7C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F4431FD8E366000BD7C1 /* main.cpp */; };
+		8B53F44B1FD8E43D000BD7C1 /* DiffuseLight.vp in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F44A1FD8E43D000BD7C1 /* DiffuseLight.vp */; };
+		8B53F44F1FD9415A000BD7C1 /* DiffuseLight.fp in Resources */ = {isa = PBXBuildFile; fileRef = 8B53F44E1FD94159000BD7C1 /* DiffuseLight.fp */; };
+		8B53F4501FD9449A000BD7C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F4431FD8E366000BD7C1 /* main.cpp */; };
 		8B7B58061FCCF4E4007B7272 /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
 		8B7B58071FCCF4E4007B7272 /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
 		8B7B58081FCCF4E4007B7272 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
@@ -427,6 +456,15 @@
 		8B53F40D1FD7EE6C000BD7C1 /* floor.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = floor.tga; sourceTree = "<group>"; };
 		8B53F40E1FD7EE6C000BD7C1 /* brick.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = brick.tga; sourceTree = "<group>"; };
 		8B53F4101FD7EE6C000BD7C1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8B53F4371FD8E2DB000BD7C1 /* chapter6-DiffuseLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter6-DiffuseLight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B53F43C1FD8E366000BD7C1 /* MoonLike.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = MoonLike.tga; sourceTree = "<group>"; };
+		8B53F43D1FD8E366000BD7C1 /* stone.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = stone.tga; sourceTree = "<group>"; };
+		8B53F43E1FD8E366000BD7C1 /* wooden-crate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wooden-crate.jpg"; sourceTree = "<group>"; };
+		8B53F43F1FD8E366000BD7C1 /* Marble.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marble.tga; sourceTree = "<group>"; };
+		8B53F4401FD8E366000BD7C1 /* Marslike.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marslike.tga; sourceTree = "<group>"; };
+		8B53F4431FD8E366000BD7C1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8B53F44A1FD8E43D000BD7C1 /* DiffuseLight.vp */ = {isa = PBXFileReference; lastKnownFileType = text; path = DiffuseLight.vp; sourceTree = "<group>"; };
+		8B53F44E1FD94159000BD7C1 /* DiffuseLight.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DiffuseLight.fp; sourceTree = "<group>"; };
 		8B7B58201FCCF4E4007B7272 /* chapter4-ModelViewProjection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter4-ModelViewProjection.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B7B58251FCCF5ED007B7272 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8B88D6D31FCFAEAF00A32FC2 /* chapter4-SphereWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter4-SphereWorld.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -561,6 +599,18 @@
 				8B53F3FF1FD7EE0F000BD7C1 /* Cocoa.framework in Frameworks */,
 				8B53F4001FD7EE0F000BD7C1 /* OpenGL.framework in Frameworks */,
 				8B53F4011FD7EE0F000BD7C1 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B53F4271FD8E2DB000BD7C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B53F4281FD8E2DB000BD7C1 /* IOKit.framework in Frameworks */,
+				8B53F4291FD8E2DB000BD7C1 /* libglfw3.a in Frameworks */,
+				8B53F42A1FD8E2DB000BD7C1 /* Cocoa.framework in Frameworks */,
+				8B53F42B1FD8E2DB000BD7C1 /* OpenGL.framework in Frameworks */,
+				8B53F42C1FD8E2DB000BD7C1 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +795,7 @@
 				8B53F3A91FD7BBBF000BD7C1 /* chapter5-Pyramid.app */,
 				8B53F3DE1FD7E1E6000BD7C1 /* chapter5-Tunnel.app */,
 				8B53F4091FD7EE0F000BD7C1 /* chapter5-Anisotropic.app */,
+				8B53F4371FD8E2DB000BD7C1 /* chapter6-DiffuseLight.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -935,6 +986,61 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		8B53F4381FD8E366000BD7C1 /* chapter6 */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F4391FD8E366000BD7C1 /* DiffuseLight */,
+			);
+			path = chapter6;
+			sourceTree = "<group>";
+		};
+		8B53F4391FD8E366000BD7C1 /* DiffuseLight */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F43A1FD8E366000BD7C1 /* resources */,
+				8B53F4421FD8E366000BD7C1 /* source */,
+			);
+			path = DiffuseLight;
+			sourceTree = "<group>";
+		};
+		8B53F43A1FD8E366000BD7C1 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F43B1FD8E366000BD7C1 /* images */,
+				8B53F4411FD8E366000BD7C1 /* GLSL */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8B53F43B1FD8E366000BD7C1 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F43C1FD8E366000BD7C1 /* MoonLike.tga */,
+				8B53F43D1FD8E366000BD7C1 /* stone.tga */,
+				8B53F43E1FD8E366000BD7C1 /* wooden-crate.jpg */,
+				8B53F43F1FD8E366000BD7C1 /* Marble.tga */,
+				8B53F4401FD8E366000BD7C1 /* Marslike.tga */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8B53F4411FD8E366000BD7C1 /* GLSL */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F44E1FD94159000BD7C1 /* DiffuseLight.fp */,
+				8B53F44A1FD8E43D000BD7C1 /* DiffuseLight.vp */,
+			);
+			path = GLSL;
+			sourceTree = "<group>";
+		};
+		8B53F4421FD8E366000BD7C1 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8B53F4431FD8E366000BD7C1 /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
 		8B7B58211FCCF5ED007B7272 /* chapter4 */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +1101,7 @@
 		8B978E941F9DD6BB00BB2AA0 /* example */ = {
 			isa = PBXGroup;
 			children = (
+				8B53F4381FD8E366000BD7C1 /* chapter6 */,
 				8BC03CD81FD684F500B59B24 /* chapter5 */,
 				8B7B58211FCCF5ED007B7272 /* chapter4 */,
 				8B978EE81F9F3B3500BB2AA0 /* chapter3 */,
@@ -1402,6 +1509,23 @@
 			productReference = 8B53F4091FD7EE0F000BD7C1 /* chapter5-Anisotropic.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8B53F4151FD8E2DB000BD7C1 /* chapter6-DiffuseLight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B53F4341FD8E2DB000BD7C1 /* Build configuration list for PBXNativeTarget "chapter6-DiffuseLight" */;
+			buildPhases = (
+				8B53F4161FD8E2DB000BD7C1 /* Sources */,
+				8B53F4271FD8E2DB000BD7C1 /* Frameworks */,
+				8B53F42D1FD8E2DB000BD7C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chapter6-DiffuseLight";
+			productName = PfcOgl;
+			productReference = 8B53F4371FD8E2DB000BD7C1 /* chapter6-DiffuseLight.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8B7B58041FCCF4E4007B7272 /* chapter4-ModelViewProjection */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B7B581D1FCCF4E4007B7272 /* Build configuration list for PBXNativeTarget "chapter4-ModelViewProjection" */;
@@ -1641,6 +1765,9 @@
 					8B53F3EA1FD7EE0F000BD7C1 = {
 						DevelopmentTeam = 89VKD6974F;
 					};
+					8B53F4151FD8E2DB000BD7C1 = {
+						DevelopmentTeam = 89VKD6974F;
+					};
 					8B7B58041FCCF4E4007B7272 = {
 						DevelopmentTeam = 89VKD6974F;
 					};
@@ -1710,6 +1837,7 @@
 				8B53F3891FD7BBBF000BD7C1 /* chapter5-Pyramid */,
 				8B53F3B91FD7E1E6000BD7C1 /* chapter5-Tunnel */,
 				8B53F3EA1FD7EE0F000BD7C1 /* chapter5-Anisotropic */,
+				8B53F4151FD8E2DB000BD7C1 /* chapter6-DiffuseLight */,
 			);
 		};
 /* End PBXProject section */
@@ -1773,6 +1901,20 @@
 				8B53F4031FD7EE0F000BD7C1 /* brick.tga in Resources */,
 				8B53F4041FD7EE0F000BD7C1 /* ceiling.tga in Resources */,
 				8B53F4051FD7EE0F000BD7C1 /* floor.tga in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B53F42D1FD8E2DB000BD7C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B53F4441FD8E366000BD7C1 /* MoonLike.tga in Resources */,
+				8B53F44F1FD9415A000BD7C1 /* DiffuseLight.fp in Resources */,
+				8B53F4461FD8E366000BD7C1 /* wooden-crate.jpg in Resources */,
+				8B53F4451FD8E366000BD7C1 /* stone.tga in Resources */,
+				8B53F44B1FD8E43D000BD7C1 /* DiffuseLight.vp in Resources */,
+				8B53F4481FD8E366000BD7C1 /* Marslike.tga in Resources */,
+				8B53F4471FD8E366000BD7C1 /* Marble.tga in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1984,6 +2126,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B53F4161FD8E2DB000BD7C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B53F4171FD8E2DB000BD7C1 /* PfCOglProgram.cpp in Sources */,
+				8B53F4181FD8E2DB000BD7C1 /* PfCOglObject.cpp in Sources */,
+				8B53F4191FD8E2DB000BD7C1 /* PfCOglShader.cpp in Sources */,
+				8B53F41A1FD8E2DB000BD7C1 /* PfCOglBitmap.cpp in Sources */,
+				8B53F41B1FD8E2DB000BD7C1 /* PfCOglTexture.cpp in Sources */,
+				8B53F4491FD8E366000BD7C1 /* main.cpp in Sources */,
+				8B53F41D1FD8E2DB000BD7C1 /* PfCOglCamera.cpp in Sources */,
+				8B53F41E1FD8E2DB000BD7C1 /* PfCOglModelAsset.cpp in Sources */,
+				8B53F41F1FD8E2DB000BD7C1 /* PfCOglBatch.cpp in Sources */,
+				8B53F4201FD8E2DB000BD7C1 /* PfCOglModelInstance.cpp in Sources */,
+				8B53F4211FD8E2DB000BD7C1 /* PfCOglTriangleBatch.cpp in Sources */,
+				8B53F4221FD8E2DB000BD7C1 /* PfCOglLight.cpp in Sources */,
+				8B53F4231FD8E2DB000BD7C1 /* math3d.cpp in Sources */,
+				8B53F4241FD8E2DB000BD7C1 /* glew.c in Sources */,
+				8B53F4251FD8E2DB000BD7C1 /* PfCOglTool.cpp in Sources */,
+				8B53F4261FD8E2DB000BD7C1 /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B7B58051FCCF4E4007B7272 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2062,6 +2227,7 @@
 				8B978EAB1F9ED65B00BB2AA0 /* PfCOglShader.cpp in Sources */,
 				8B978EAC1F9ED65B00BB2AA0 /* PfCOglBitmap.cpp in Sources */,
 				8B978EAD1F9ED65B00BB2AA0 /* PfCOglTexture.cpp in Sources */,
+				8B53F4501FD9449A000BD7C1 /* main.cpp in Sources */,
 				8B978EAE1F9ED65B00BB2AA0 /* PfCOglCamera.cpp in Sources */,
 				8B978EAF1F9ED65B00BB2AA0 /* PfCOglModelAsset.cpp in Sources */,
 				8B978EB01F9ED65B00BB2AA0 /* PfCOglBatch.cpp in Sources */,
@@ -2560,6 +2726,46 @@
 			name = Debug;
 		};
 		8B53F4081FD7EE0F000BD7C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8B53F4351FD8E2DB000BD7C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B53F4361FD8E2DB000BD7C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -3121,6 +3327,15 @@
 			buildConfigurations = (
 				8B53F4071FD7EE0F000BD7C1 /* Debug */,
 				8B53F4081FD7EE0F000BD7C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B53F4341FD8E2DB000BD7C1 /* Build configuration list for PBXNativeTarget "chapter6-DiffuseLight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B53F4351FD8E2DB000BD7C1 /* Debug */,
+				8B53F4361FD8E2DB000BD7C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

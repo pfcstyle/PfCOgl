@@ -22,6 +22,7 @@ namespace PfCOgl {
         
         ModelInstance() :
         asset(NULL),
+        normalMatrix(),
         transform()
         {}
         
@@ -48,8 +49,13 @@ namespace PfCOgl {
             CopyData(PfCOgl::GLT_ATTRIBUTE_TEXTURE0, vecNum, dataType, isNormlize, stepNum, startPos);
         }
         
+        glm::mat3 getNormalMatrix(bool isNormaize = false);
+        
         void draw(void) const;
+    protected:
+        glm::mat3 normalMatrix;
     };
+
 }
 
 #endif /* PfCOglModelInstance_h_ */
