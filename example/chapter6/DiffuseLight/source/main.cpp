@@ -232,11 +232,10 @@ void RenderScene(void)
 
 
 void Update(float secondsElapsed) {
-//    const GLfloat degreesPerSecond = 180.0f;
-//    gDegreesRotated += secondsElapsed * degreesPerSecond;
-//    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-//    geoTrans = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
-    const float moveSpeed = 4.0; //units per second
+    const GLfloat degreesPerSecond = 180.0f;
+    gDegreesRotated += secondsElapsed * degreesPerSecond;
+    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
+    sphereIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));    const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * -gCamera.forward());
     } else if(glfwGetKey(gWindow, 'W')){

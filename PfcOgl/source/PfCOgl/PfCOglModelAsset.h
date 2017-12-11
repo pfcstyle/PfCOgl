@@ -42,15 +42,16 @@ namespace PfCOgl {
         GLuint nNumVerts;                // Number of verticies in this batch
         GLuint nNumTextureUnits;        // Number of texture coordinate sets
         
-        M3DVector3f *pVerts;
-        M3DVector3f *pNormals;
-        M3DVector4f *pColors;
-        M3DVector2f *pTexCoords;
+        Vector3f *pVerts;
+        Vector3f *pNormals;
+        Vector4f *pColors;
+        Vector2f *pTexCoords;
         
         //meshs
         GLushort  *pIndexes;        // Array of indexes
         GLuint nMaxIndexes;         // Maximum workspace
         GLuint nNumIndexes;         // Number of indexes currently used
+        GLuint bufferObjects[4];
         bool isMesh;
         
         void bindData(GLfloat vertexData[], int length);
@@ -116,7 +117,7 @@ namespace PfCOgl {
         nNumTextureUnits(0),
         specularColor(1.0f, 1.0f, 1.0f)
         {}
-        ~ModelAsset(){};
+        ~ModelAsset(void);
     };
 }
 

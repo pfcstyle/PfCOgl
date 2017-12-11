@@ -307,7 +307,7 @@ namespace PfCOgl{
                 torusBatch.addTriangle(vVertex, vNormal, vTexture);
             }
         }
-        torusBatch.end();
+        torusBatch.endMesh();
     }
     
     void gltMakeTorus(ModelAsset& modelAsset, GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLint numMinor)

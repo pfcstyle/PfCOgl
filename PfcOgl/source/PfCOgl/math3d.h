@@ -390,8 +390,8 @@ inline void m3dSetMatrixColumn44(M3DMatrix44d &dst, const M3DVector4d &src, cons
 inline void m3dExtractRotationMatrix33(M3DMatrix33f &dst, const M3DMatrix44f &src)
 	{
         memcpy(glm::value_ptr(dst), glm::value_ptr(src), sizeof(float) * 3); // X column
-        memcpy(glm::value_ptr(dst) + 3, &src + 4, sizeof(float) * 3); // Y column
-        memcpy(glm::value_ptr(dst) + 6, &src + 8, sizeof(float) * 3); // Z column
+        memcpy(glm::value_ptr(dst) + 3, glm::value_ptr(src) + 4, sizeof(float) * 3); // Y column
+        memcpy(glm::value_ptr(dst) + 6, glm::value_ptr(src) + 8, sizeof(float) * 3); // Z column
 	}
 
 // Ditto above, but for doubles

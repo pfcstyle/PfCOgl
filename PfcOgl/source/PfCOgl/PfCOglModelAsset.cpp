@@ -10,6 +10,27 @@
 #include "PfCOglTool.h"
 using namespace PfCOgl;
 
+ModelAsset::~ModelAsset()
+{
+    // Just in case these still are allocated when the object is destroyed
+    delete [] pIndexes;
+    delete [] pVerts;
+    delete [] pNormals;
+    delete [] pTexCoords;
+    
+    // Delete buffer objects
+    glDeleteBuffers(1, &vbo);
+    glDeleteBuffers(1, &uiTextureCoordArray);
+    glDeleteBuffers(1, &uiNormalArray);
+    glDeleteBuffers(1, &uiIndexArray);
+    
+    glDeleteBuffers(4, bufferObjects);
+    
+#ifndef OPENGL_ES
+    glDeleteVertexArrays(1, &vao);
+#endif
+}
+
 void ModelAsset::begin()
 {
     
@@ -122,9 +143,9 @@ void ModelAsset::beginMesh(GLuint nMaxVerts)
     // Allocate new blocks. In reality, the other arrays will be
     // much shorter than the index array
     pIndexes = new GLushort[nMaxIndexes];
-    pVerts = new M3DVector3f[nMaxIndexes];
-    pNormals = new M3DVector3f[nMaxIndexes];
-    pTexCoords = new M3DVector2f[nMaxIndexes];
+    pVerts = new Vector3f[nMaxIndexes];
+    pNormals = new Vector3f[nMaxIndexes];
+    pTexCoords = new Vector2f[nMaxIndexes];
 }
 
 void ModelAsset::addTriangle(M3DVector3f verts[3], M3DVector3f vNorms[3], M3DVector2f vTexCoords[3])
@@ -168,9 +189,12 @@ void ModelAsset::addTriangle(M3DVector3f verts[3], M3DVector3f vNorms[3], M3DVec
         // No match for this vertex, add to end of list
         if(iMatch == nNumVerts && nNumVerts < nMaxIndexes && nNumIndexes < nMaxIndexes)
         {
-            pVerts[nNumVerts] = verts[iVertex];
-            pNormals[nNumVerts] = pNormals[iVertex];
-            pTexCoords[nNumVerts] = vTexCoords[iVertex];
+//            pVerts[nNumVerts] = verts[iVertex];
+//            pNormals[nNumVerts] = pNormals[iVertex];
+//            pTexCoords[nNumVerts] = vTexCoords[iVertex];
+            memcpy(pVerts[nNumVerts], glm::value_ptr(verts[iVertex]), sizeof(M3DVector3f));
+            memcpy(pNormals[nNumVerts], glm::value_ptr(vNorms[iVertex]), sizeof(M3DVector3f));
+            memcpy(pTexCoords[nNumVerts], glm::value_ptr(vTexCoords[iVertex]), sizeof(M3DVector2f));
             pIndexes[nNumIndexes] = nNumVerts;
             nNumIndexes++;
             nNumVerts++;
@@ -193,32 +217,30 @@ void ModelAsset::endMesh(void)
 #endif
     
     // Create the buffer objects
-    glGenBuffers(1, &vbo);
-    glGenBuffers(1, &uiNormalArray);
-    glGenBuffers(1, &uiTextureCoordArray);
-    glGenBuffers(1, &uiIndexArray);
+    glGenBuffers(4, bufferObjects);
     // Copy data to video memory
     // Vertex data
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferObjects[0]);
     glEnableVertexAttribArray(GLT_ATTRIBUTE_VERTEX);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*3, pVerts, GL_STATIC_DRAW);
+    
     glVertexAttribPointer(GLT_ATTRIBUTE_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
     
     
     // Normal data
-    glBindBuffer(GL_ARRAY_BUFFER, uiNormalArray);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferObjects[1]);
     glEnableVertexAttribArray(GLT_ATTRIBUTE_NORMAL);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*3, pNormals, GL_STATIC_DRAW);
     glVertexAttribPointer(GLT_ATTRIBUTE_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, 0);
     
     // Texture coordinates
-    glBindBuffer(GL_ARRAY_BUFFER, uiTextureCoordArray);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferObjects[2]);
     glEnableVertexAttribArray(GLT_ATTRIBUTE_TEXTURE0);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*nNumVerts*2, pTexCoords, GL_STATIC_DRAW);
     glVertexAttribPointer(GLT_ATTRIBUTE_TEXTURE0, 2, GL_FLOAT, GL_FALSE, 0, 0);
     
     // Indexes
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, uiIndexArray);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferObjects[3]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort)*nNumIndexes, pIndexes, GL_STATIC_DRAW);
     
     
@@ -332,7 +354,7 @@ void ModelAsset::Vertex3f(GLfloat x, GLfloat y, GLfloat z)
     // Now see if it's already mapped, if not, map it
     if(pVerts == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        pVerts = (M3DVector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pVerts = (Vector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -358,7 +380,7 @@ void ModelAsset::Vertex3fv(M3DVector3f vVertex)
     // Now see if it's already mapped, if not, map it
     if(pVerts == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        pVerts = (M3DVector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pVerts = (Vector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -366,8 +388,8 @@ void ModelAsset::Vertex3fv(M3DVector3f vVertex)
         return;
     
     // Copy it in...
-    pVerts[nVertsBuilding] = M3DVector3f(vVertex);
-//    memcpy(pVerts[nVertsBuilding], glm::value_ptr(vVertex), sizeof(M3DVector3f));
+//    pVerts[nVertsBuilding] = M3DVector3f(vVertex);
+    memcpy(pVerts[nVertsBuilding], glm::value_ptr(vVertex), sizeof(M3DVector3f));
     nVertsBuilding++;
 }
 
@@ -385,7 +407,7 @@ void ModelAsset::Normal3f(GLfloat x, GLfloat y, GLfloat z)
     // Now see if it's already mapped, if not, map it
     if(pNormals == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiNormalArray);
-        pNormals = (M3DVector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pNormals = (Vector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -411,7 +433,7 @@ void ModelAsset::Normal3fv(M3DVector3f vNormal)
     // Now see if it's already mapped, if not, map it
     if(pNormals == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiNormalArray);
-        pNormals = (M3DVector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pNormals = (Vector3f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -419,8 +441,8 @@ void ModelAsset::Normal3fv(M3DVector3f vNormal)
         return;
     
     // Copy it in...
-    pNormals[nVertsBuilding] = M3DVector3f(vNormal);
-//    memcpy(pNormals[nVertsBuilding], glm::value_ptr(vNormal), sizeof(M3DVector3f));
+//    pNormals[nVertsBuilding] = M3DVector3f(vNormal);
+    memcpy(pNormals[nVertsBuilding], glm::value_ptr(vNormal), sizeof(M3DVector3f));
 }
 
 
@@ -436,7 +458,7 @@ void ModelAsset::Color4f(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
     // Now see if it's already mapped, if not, map it
     if(pColors == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiColorArray);
-        pColors = (M3DVector4f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pColors = (Vector4f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -462,7 +484,7 @@ void ModelAsset::Color4fv(M3DVector4f vColor)
     // Now see if it's already mapped, if not, map it
     if(pColors == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiColorArray);
-        pColors = (M3DVector4f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pColors = (Vector4f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -470,8 +492,8 @@ void ModelAsset::Color4fv(M3DVector4f vColor)
         return;
     
     // Copy it in...
-    pColors[nVertsBuilding] = M3DVector4f(vColor);
-//    memcpy(pColors[nVertsBuilding], glm::value_ptr(vColor), sizeof(M3DVector4f));
+//    pColors[nVertsBuilding] = M3DVector4f(vColor);
+    memcpy(pColors[nVertsBuilding], glm::value_ptr(vColor), sizeof(M3DVector4f));
 }
 
 // Unlike normal OpenGL immediate mode, you must specify a texture coord
@@ -488,7 +510,7 @@ void ModelAsset::MultiTexCoord2f(GLuint texture, GLclampf s, GLclampf t)
     // Now see if it's already mapped, if not, map it
     if(pTexCoords == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiTextureCoordArray);
-        pTexCoords = (M3DVector2f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pTexCoords = (Vector2f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -513,7 +535,7 @@ void ModelAsset::MultiTexCoord2fv(GLuint texture, M3DVector2f vTexCoord)
     // Now see if it's already mapped, if not, map it
     if(pTexCoords == NULL) {
         glBindBuffer(GL_ARRAY_BUFFER, uiTextureCoordArray);
-        pTexCoords = (M3DVector2f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        pTexCoords = (Vector2f *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
     
     // Ignore if we go past the end, keeps things from blowing up
@@ -521,8 +543,8 @@ void ModelAsset::MultiTexCoord2fv(GLuint texture, M3DVector2f vTexCoord)
         return;
     
     // Copy it in...
-    pTexCoords[nVertsBuilding] = M3DVector2f(vTexCoord);
-//    memcpy(pTexCoords, glm::value_ptr(vTexCoord), sizeof(M3DVector2f));
+//    pTexCoords[nVertsBuilding] = M3DVector2f(vTexCoord);
+    memcpy(pTexCoords, glm::value_ptr(vTexCoord), sizeof(M3DVector2f));
 }
 
 void ModelAsset::draw(void) const
@@ -534,6 +556,6 @@ void ModelAsset::draw(void) const
         glDrawArrays(drawType, drawStart, drawCount);
     }
     
-    glBindVertexArray(0);
+    glBindVertexArray(vao);
     
 }

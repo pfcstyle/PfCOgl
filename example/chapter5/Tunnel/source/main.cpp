@@ -193,14 +193,14 @@ PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minMagFilter, GLint 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, wrap_mode);
+    return new PfCOgl::Texture(bmp, minMagFilter,GL_LINEAR, wrap_mode);
 }
 
 PfCOgl::Texture* LoadTexture(const char* filename, GLint minMagFilter, GLint wrap_mode) {
 //    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, wrap_mode);
+    return new PfCOgl::Texture(bmp, minMagFilter,GL_LINEAR, wrap_mode);
 }
 
 void loadAssetAndInstances() {

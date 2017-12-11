@@ -22,16 +22,16 @@ static GLenum TextureFormatForBitmapFormat(Bitmap::Format format, bool srgb)
     }
 }
 
-Texture::Texture(const Bitmap& bitmap, GLint minMagFiler, GLint wrapMode) :
+Texture::Texture(const Bitmap& bitmap, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType) :
 _originalWidth((GLfloat)bitmap.width()),
 _originalHeight((GLfloat)bitmap.height())
 {
     glGenTextures(1, &_object);
-    glBindTexture(GL_TEXTURE_2D, _object);
+    glBindTexture(texType, _object);
     //缩小过滤器  比如GL_LINEAR 线性
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minMagFiler);
-    //放大过滤器
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, minMagFiler);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+    //放大过滤器  两个可以不同
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
     //设置伸缩方式  比如 repeat  toedge
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
@@ -56,10 +56,10 @@ _originalHeight((GLfloat)bitmap.height())
                  GL_UNSIGNED_BYTE,
                  bitmap.pixelBuffer());
     glBindTexture(GL_TEXTURE_2D, 0);
-//    if(minMagFiler == GL_LINEAR_MIPMAP_LINEAR ||
-//       minMagFiler == GL_LINEAR_MIPMAP_NEAREST ||
-//       minMagFiler == GL_NEAREST_MIPMAP_LINEAR ||
-//       minMagFiler == GL_NEAREST_MIPMAP_NEAREST)
+    if(minFilter == GL_LINEAR_MIPMAP_LINEAR ||
+       minFilter == GL_LINEAR_MIPMAP_NEAREST ||
+       minFilter == GL_NEAREST_MIPMAP_LINEAR ||
+       minFilter == GL_NEAREST_MIPMAP_NEAREST)
         //生成Mip层
         glGenerateMipmap(GL_TEXTURE_2D);
 }

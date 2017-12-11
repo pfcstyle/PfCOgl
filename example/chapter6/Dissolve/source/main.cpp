@@ -36,16 +36,14 @@ using namespace PfCOgl;
 float gDegreesRotated = 0;
 double gScrollY = 0;
 GLFWwindow *gWindow;
-ModelAsset pyramidAsset;
-ModelInstance pyramidIns;
-
-Program mProgram;
-Texture *mSphereTex;
+ModelAsset torusAsset;
+ModelInstance torusIns;
 
 Camera gCamera;
 float secondsElapsed;
 
 //用于全局的model变换   一般update中使用
+Program mProgram;
 M3DMatrix44f geoTrans;
 M3DMatrix44f proM;
 const M3DVector2f SCREEN_SIZE(800, 600);
@@ -53,6 +51,13 @@ const M3DVector2f SCREEN_SIZE(800, 600);
 
 void AppMain();
 void onError(int errorCode, const char *errorMsg);
+
+static PfCOgl::Program* LoadShaders(const char* vertFilename, const char* fragFilename) {
+    std::vector<PfCOgl::Shader> shaders;
+    shaders.push_back(PfCOgl::Shader::shaderFromFile(ResourcePath(vertFilename), GL_VERTEX_SHADER));
+    shaders.push_back(PfCOgl::Shader::shaderFromFile(ResourcePath(fragFilename), GL_FRAGMENT_SHADER));
+    return PfCOgl::Program::getProgramByShadersWithAttr(shaders,3,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal", GLT_ATTRIBUTE_TEXTURE0, "vTexture0");
+}
 
 int main(int argc, char **argv){
     try {
@@ -72,18 +77,23 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
     
     if (key == GLFW_KEY_1 && action == GLFW_RELEASE){
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glEnable(GL_POINT_SMOOTH);
-        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_LINE_SMOOTH);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_POLYGON_SMOOTH);
-        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        //最邻近过滤
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }else if (key == GLFW_KEY_2 && action == GLFW_RELEASE){
-        glDisable(GL_BLEND);
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_POINT_SMOOTH);
+        //线性过滤
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    }else if (key == GLFW_KEY_3 && action == GLFW_RELEASE){
+        //最邻近过滤 最邻近选择
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+    }else if (key == GLFW_KEY_4 && action == GLFW_RELEASE){
+        //最邻近过滤  线性选择
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+    }else if (key == GLFW_KEY_5 && action == GLFW_RELEASE){
+        //线性过滤  最邻近选择   游戏加速
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    }else if (key == GLFW_KEY_6 && action == GLFW_RELEASE){
+        //三线性  精度最高   性能最差
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     }
     
 //    const float moveSpeed = 4.0; //units per second
@@ -172,147 +182,71 @@ glm::mat4 rotate(float rotDegrees, GLfloat x, GLfloat y, GLfloat z) {
     return glm::rotate(glm::mat4(),glm::radians(rotDegrees), glm::vec3(x,y,z));
 }
 
-PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minMagFilter, GLint wrap_mode) {
+PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minFilter,GLint magFilter, GLint wrap_mode) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, GL_LINEAR, wrap_mode);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_1D);
 }
 
-PfCOgl::Texture* LoadTexture(const char* filename, GLint minMagFilter, GLint wrap_mode) {
+PfCOgl::Texture* LoadTexture(const char* filename, GLint minFilter,GLint magFilter, GLint wrap_mode) {
 //    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, GL_LINEAR, wrap_mode);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_1D);
 }
 
 void loadAssetAndInstances() {
-    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     //init asset and instances
     
 //    gltMakeTorus(torusBatch, 0.4f, 0.15f, 30, 30);
-    pyramidAsset.shaders = new Program();
-    pyramidAsset.shaders->initializeStockShaders();
-    pyramidAsset.texture = LoadTGATexture("stone.tga", GL_LINEAR, GL_CLAMP_TO_EDGE);
-    pyramidAsset.begin(GL_TRIANGLES, 18);
+    //先加载shader  然后绑定变量
     
-    // Bottom of pyramid
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3f(-1.0f, -1.0f, -1.0f);
-    
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
-    pyramidAsset.Vertex3f(1.0f, -1.0f, -1.0f);
-    
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 1.0f);
-    pyramidAsset.Vertex3f(1.0f, -1.0f, 1.0f);
-    
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 1.0f);
-    pyramidAsset.Vertex3f(-1.0f, -1.0f, 1.0f);
-    
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3f(-1.0f, -1.0f, -1.0f);
-    
-    pyramidAsset.Normal3f(0.0f, -1.0f, 0.0f);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 1.0f);
-    pyramidAsset.Vertex3f(1.0f, -1.0f, 1.0f);
-    
-    
-    M3DVector3f vApex = { 0.0f, 1.0f, 0.0f };
-    M3DVector3f vFrontLeft = { -1.0f, -1.0f, 1.0f };
-    M3DVector3f vFrontRight = { 1.0f, -1.0f, 1.0f };
-    M3DVector3f vBackLeft = { -1.0f, -1.0f, -1.0f };
-    M3DVector3f vBackRight = { 1.0f, -1.0f, -1.0f };
-    M3DVector3f n;
-    
-    // Front of Pyramid
-    m3dFindNormal(n, vApex, vFrontLeft, vFrontRight);
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.5f, 1.0f);
-    pyramidAsset.Vertex3fv(vApex);        // Apex
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vFrontLeft);        // Front left corner
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vFrontRight);        // Front right corner
-    
-    
-    m3dFindNormal(n, vApex, vBackLeft, vFrontLeft);
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.5f, 1.0f);
-    pyramidAsset.Vertex3fv(vApex);        // Apex
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vBackLeft);        // Back left corner
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vFrontLeft);        // Front left corner
-    
-    m3dFindNormal(n, vApex, vFrontRight, vBackRight);
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.5f, 1.0f);
-    pyramidAsset.Vertex3fv(vApex);                // Apex
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vFrontRight);        // Front right corner
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vBackRight);            // Back right cornder
-    
-    
-    m3dFindNormal(n, vApex, vBackRight, vBackLeft);
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.5f, 1.0f);
-    pyramidAsset.Vertex3fv(vApex);        // Apex
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vBackRight);       // Back right cornder
-    
-    pyramidAsset.Normal3fv(n);
-    pyramidAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
-    pyramidAsset.Vertex3fv(vBackLeft);        // Back left corner
-    
-    pyramidAsset.endBatchs();
-    pyramidIns.asset = &pyramidAsset;
+    //加载顶点  法向量  纹理 数据   同时绑定shader的in变量
+    gltMakeTorusAsset(torusAsset, .80f, 0.25f, 52, 26);
+    torusAsset.shaders = LoadShaders("vp.glsl", "fp.glsl");
+//    gltMakeSphere(sphereBatch, 1.0f, 26, 13);
+    torusAsset.texture = LoadTGATexture("Clouds.tga", GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    //填充数据
+    torusIns.asset = &torusAsset;
     //init mode
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     
     // init cameras
     gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
-    gCamera.offsetPosition(7.f * -gCamera.forward());
+    gCamera.offsetPosition(2.f * -gCamera.forward());
 }
 
 //M3DMatrix44f proj;
 void RenderScene(void)
 {
-    M3DVector3f vLightPos = { 1.0f, 1.0f, 0.0f };
-    M3DVector4f vWhite = { 1.0f, 1.0f, 1.0f, 1.0f };
+    M3DVector3f vEyeLight = { -100.0f, 100.0f, 100.0f };
+    M3DVector4f vAmbientColor = { 0.1f, 0.1f, 0.1f, 1.0f };
+    M3DVector4f vDiffuseColor = { 0.1f, 1.0f, 0.1f, 1.0f };
+    M3DVector4f vSpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     
     // Clear the window and the depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Pass this completed matrix to the shader, and render the torus
-    // render floor
-    proM = gCamera.matrix();
-    glBindTexture(GL_TEXTURE_2D, pyramidAsset.texture->object());
-    pyramidAsset.shaders->useStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF,
-                                       &pyramidIns.transform,
-                                         &proM,
-                                         &vLightPos, &vWhite, 0);
-    pyramidIns.draw();
+    PfCOgl::Program* shaders = torusAsset.shaders;
+    shaders->use();
+    glBindTexture(GL_TEXTURE_1D, torusAsset.texture->object());
+    shaders->setUniform("diffuseColor", vDiffuseColor);
+    shaders->setUniform("ambientColor", vAmbientColor);
+    shaders->setUniform("specularColor", vSpecularColor);
+    shaders->setUniform("vLightPosition", vEyeLight);
+    shaders->setUniform("mvpMatrix", gCamera.matrix() * torusIns.transform);
+    shaders->setUniform("mvMatrix", torusIns.transform);
+    shaders->setUniform("normalMatrix", torusIns.getNormalMatrix());
+    shaders->setUniform("cloudTexture", 1);
+    float fFactor = fmod(secondsElapsed, 10.0f);
+    fFactor /= 10.0f;
+    shaders->setUniform("dissolveFactor", 0.5f);
+    torusIns.draw();
+    glBindTexture(GL_TEXTURE_1D, 0);
     glfwSwapBuffers(gWindow);
 }
 
@@ -321,7 +255,7 @@ void Update(float secondsElapsed) {
 //    const GLfloat degreesPerSecond = 180.0f;
 //    gDegreesRotated += secondsElapsed * degreesPerSecond;
 //    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-//    geoTrans = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
+//    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
     const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * -gCamera.forward());

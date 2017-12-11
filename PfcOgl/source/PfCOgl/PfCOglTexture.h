@@ -28,12 +28,16 @@ namespace PfCOgl {
          be from the bottom row up.
          
          @param bitmap  The bitmap to load the texture from
-         @param minMagFiler  GL_NEAREST or GL_LINEAR
+         @param minFilter  GL_NEAREST or GL_LINEAR
+         @param magFilter  GL_NEAREST or GL_LINEAR
          @param wrapMode GL_REPEAT, GL_MIRRORED_REPEAT, GL_CLAMP_TO_EDGE, or GL_CLAMP_TO_BORDER
+         @param texType  GL_TEXTURE_1D  GL_TEXTURE_2D
          */
         Texture(const Bitmap& bitmap,
-                GLint minMagFiler = GL_LINEAR,
-                GLint wrapMode = GL_CLAMP_TO_EDGE);
+                GLint minFilter = GL_LINEAR,
+                GLint magFilter = GL_LINEAR,
+                GLint wrapMode = GL_CLAMP_TO_EDGE,
+                GLint texType = GL_TEXTURE_2D);
         
         /**
          Deletes the texture object with glDeleteTextures
