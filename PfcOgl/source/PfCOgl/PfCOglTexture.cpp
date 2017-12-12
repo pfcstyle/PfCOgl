@@ -22,6 +22,30 @@ static GLenum TextureFormatForBitmapFormat(Bitmap::Format format, bool srgb)
     }
 }
 
+Texture::Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType)
+{
+    glGenTextures(1, &_object);
+    glBindTexture(texType, _object);
+    //缩小过滤器  比如GL_LINEAR 线性
+    glTexParameteri(texType, GL_TEXTURE_MIN_FILTER, minFilter);
+    //放大过滤器  两个可以不同
+    glTexParameteri(texType, GL_TEXTURE_MAG_FILTER, magFilter);
+    //设置伸缩方式  比如 repeat  toedge
+    glTexParameteri(texType, GL_TEXTURE_WRAP_S, wrapMode);
+    glTexParameteri(texType, GL_TEXTURE_WRAP_T, wrapMode);
+    
+    glTexImage1D(texType,
+                 0,
+                 GL_RGB,
+                 4,
+                 0,
+                 GL_RGB,
+                 GL_UNSIGNED_BYTE,
+                 textureData);
+    
+    glBindTexture(texType, 0);
+}
+
 Texture::Texture(const Bitmap& bitmap, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType) :
 _originalWidth((GLfloat)bitmap.width()),
 _originalHeight((GLfloat)bitmap.height())
@@ -29,12 +53,12 @@ _originalHeight((GLfloat)bitmap.height())
     glGenTextures(1, &_object);
     glBindTexture(texType, _object);
     //缩小过滤器  比如GL_LINEAR 线性
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+    glTexParameteri(texType, GL_TEXTURE_MIN_FILTER, minFilter);
     //放大过滤器  两个可以不同
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+    glTexParameteri(texType, GL_TEXTURE_MAG_FILTER, magFilter);
     //设置伸缩方式  比如 repeat  toedge
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+    glTexParameteri(texType, GL_TEXTURE_WRAP_S, wrapMode);
+    glTexParameteri(texType, GL_TEXTURE_WRAP_T, wrapMode);
     //更改像素存储方式  默认4字节对齐  下面是从数据缓冲区中如何解包
     // 如tga格式的图片  其排列方式为1字节
 //    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -55,13 +79,15 @@ _originalHeight((GLfloat)bitmap.height())
                  TextureFormatForBitmapFormat(bitmap.format(), false),
                  GL_UNSIGNED_BYTE,
                  bitmap.pixelBuffer());
-    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glBindTexture(texType, 0);
     if(minFilter == GL_LINEAR_MIPMAP_LINEAR ||
        minFilter == GL_LINEAR_MIPMAP_NEAREST ||
        minFilter == GL_NEAREST_MIPMAP_LINEAR ||
-       minFilter == GL_NEAREST_MIPMAP_NEAREST)
+       minFilter == GL_NEAREST_MIPMAP_NEAREST){
         //生成Mip层
         glGenerateMipmap(GL_TEXTURE_2D);
+    }
 }
 
 Texture::~Texture()

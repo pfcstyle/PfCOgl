@@ -443,6 +443,29 @@
 		8BC03CE21FD6853600B59B24 /* Marble.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC03CDF1FD6853600B59B24 /* Marble.tga */; };
 		8BC03CE31FD6853600B59B24 /* Marslike.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC03CE01FD6853600B59B24 /* Marslike.tga */; };
 		8BC03CE51FD695EB00B59B24 /* wooden-crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BC03CE41FD695EB00B59B24 /* wooden-crate.jpg */; };
+		8BC2610E1FDFBA1E00EEE23B /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BC2610F1FDFBA1E00EEE23B /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BC261101FDFBA1E00EEE23B /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BC261111FDFBA1E00EEE23B /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BC261121FDFBA1E00EEE23B /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BC261141FDFBA1E00EEE23B /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BC261151FDFBA1E00EEE23B /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BC261161FDFBA1E00EEE23B /* PfCOglBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E521F9D99A300BB2AA0 /* PfCOglBatch.cpp */; };
+		8BC261171FDFBA1E00EEE23B /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BC261181FDFBA1E00EEE23B /* PfCOglTriangleBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E551F9DC3A300BB2AA0 /* PfCOglTriangleBatch.cpp */; };
+		8BC261191FDFBA1E00EEE23B /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BC2611A1FDFBA1E00EEE23B /* math3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E581F9DCB9600BB2AA0 /* math3d.cpp */; };
+		8BC2611B1FDFBA1E00EEE23B /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BC2611C1FDFBA1E00EEE23B /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
+		8BC2611D1FDFBA1E00EEE23B /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BC2611F1FDFBA1E00EEE23B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BC261201FDFBA1E00EEE23B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BC261211FDFBA1E00EEE23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BC261221FDFBA1E00EEE23B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BC261231FDFBA1E00EEE23B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BC261391FDFBA4D00EEE23B /* fp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261331FDFBA4D00EEE23B /* fp.glsl */; };
+		8BC2613A1FDFBA4D00EEE23B /* vp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261341FDFBA4D00EEE23B /* vp.glsl */; };
+		8BC2613B1FDFBA4D00EEE23B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC261361FDFBA4D00EEE23B /* main.cpp */; };
 		8BCC5B881F297E4200361EE5 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
 		8BCC5B8B1F297E8A00361EE5 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
 		8BCC5B8E1F297EF400361EE5 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
@@ -619,6 +642,12 @@
 		8BC03CDF1FD6853600B59B24 /* Marble.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marble.tga; sourceTree = "<group>"; };
 		8BC03CE01FD6853600B59B24 /* Marslike.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marslike.tga; sourceTree = "<group>"; };
 		8BC03CE41FD695EB00B59B24 /* wooden-crate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wooden-crate.jpg"; sourceTree = "<group>"; };
+		8BC2612C1FDFBA1E00EEE23B /* chapter6-ToonShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter6-ToonShader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC261301FDFBA4D00EEE23B /* Clouds.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Clouds.tga; sourceTree = "<group>"; };
+		8BC261311FDFBA4D00EEE23B /* CoolTexture.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoolTexture.tga; sourceTree = "<group>"; };
+		8BC261331FDFBA4D00EEE23B /* fp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp.glsl; sourceTree = "<group>"; };
+		8BC261341FDFBA4D00EEE23B /* vp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp.glsl; sourceTree = "<group>"; };
+		8BC261361FDFBA4D00EEE23B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglShader.cpp; sourceTree = "<group>"; };
 		8BCC5B871F297E4200361EE5 /* PfCOglShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglShader.h; sourceTree = "<group>"; };
 		8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglBitmap.cpp; sourceTree = "<group>"; };
@@ -905,6 +934,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BC2611E1FDFBA1E00EEE23B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC2611F1FDFBA1E00EEE23B /* IOKit.framework in Frameworks */,
+				8BC261201FDFBA1E00EEE23B /* libglfw3.a in Frameworks */,
+				8BC261211FDFBA1E00EEE23B /* Cocoa.framework in Frameworks */,
+				8BC261221FDFBA1E00EEE23B /* OpenGL.framework in Frameworks */,
+				8BC261231FDFBA1E00EEE23B /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BDA556D1F7E1B760042C4D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -971,6 +1012,7 @@
 				8B53F4A81FDA6100000BD7C1 /* chapter6-ADSPhong.app */,
 				8B53F4DC1FDA6830000BD7C1 /* chapter6-LitTexture.app */,
 				8B53F50F1FDA88B4000BD7C1 /* chapter6-Dissolve.app */,
+				8BC2612C1FDFBA1E00EEE23B /* chapter6-ToonShader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1164,6 +1206,7 @@
 		8B53F4381FD8E366000BD7C1 /* chapter6 */ = {
 			isa = PBXGroup;
 			children = (
+				8BC2612D1FDFBA4D00EEE23B /* ToonShader */,
 				8B53F5101FDA88FB000BD7C1 /* Dissolve */,
 				8B53F4DD1FDA6876000BD7C1 /* LitTexture */,
 				8B53F4A91FDA615A000BD7C1 /* ADSPhong */,
@@ -1695,6 +1738,50 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		8BC2612D1FDFBA4D00EEE23B /* ToonShader */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2612E1FDFBA4D00EEE23B /* resources */,
+				8BC261351FDFBA4D00EEE23B /* source */,
+			);
+			path = ToonShader;
+			sourceTree = "<group>";
+		};
+		8BC2612E1FDFBA4D00EEE23B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2612F1FDFBA4D00EEE23B /* images */,
+				8BC261321FDFBA4D00EEE23B /* GLSL */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BC2612F1FDFBA4D00EEE23B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261301FDFBA4D00EEE23B /* Clouds.tga */,
+				8BC261311FDFBA4D00EEE23B /* CoolTexture.tga */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8BC261321FDFBA4D00EEE23B /* GLSL */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261331FDFBA4D00EEE23B /* fp.glsl */,
+				8BC261341FDFBA4D00EEE23B /* vp.glsl */,
+			);
+			path = GLSL;
+			sourceTree = "<group>";
+		};
+		8BC261351FDFBA4D00EEE23B /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261361FDFBA4D00EEE23B /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
 		8BDA557D1F7E1BEC0042C4D9 /* PfcOgl4.x */ = {
 			isa = PBXGroup;
 			children = (
@@ -2121,6 +2208,23 @@
 			productReference = 8BC03CD71FD67C8200B59B24 /* chapter5-SphereWorld.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8BC2610C1FDFBA1E00EEE23B /* chapter6-ToonShader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC261291FDFBA1E00EEE23B /* Build configuration list for PBXNativeTarget "chapter6-ToonShader" */;
+			buildPhases = (
+				8BC2610D1FDFBA1E00EEE23B /* Sources */,
+				8BC2611E1FDFBA1E00EEE23B /* Frameworks */,
+				8BC261241FDFBA1E00EEE23B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chapter6-ToonShader";
+			productName = PfcOgl;
+			productReference = 8BC2612C1FDFBA1E00EEE23B /* chapter6-ToonShader.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8BDA555E1F7E1B760042C4D9 /* PfcOgl4.x */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BDA55791F7E1B760042C4D9 /* Build configuration list for PBXNativeTarget "PfcOgl4.x" */;
@@ -2235,6 +2339,9 @@
 					8BC03CBB1FD67C8200B59B24 = {
 						DevelopmentTeam = 89VKD6974F;
 					};
+					8BC2610C1FDFBA1E00EEE23B = {
+						DevelopmentTeam = 89VKD6974F;
+					};
 					8BDA555E1F7E1B760042C4D9 = {
 						DevelopmentTeam = 89VKD6974F;
 					};
@@ -2279,6 +2386,7 @@
 				8B53F48A1FDA6100000BD7C1 /* chapter6-ADSPhong */,
 				8B53F4BE1FDA6830000BD7C1 /* chapter6-LitTexture */,
 				8B53F4EE1FDA88B4000BD7C1 /* chapter6-Dissolve */,
+				8BC2610C1FDFBA1E00EEE23B /* chapter6-ToonShader */,
 			);
 		};
 /* End PBXProject section */
@@ -2471,6 +2579,15 @@
 				8BC03CE11FD6853600B59B24 /* MoonLike.tga in Resources */,
 				8BC03CE21FD6853600B59B24 /* Marble.tga in Resources */,
 				8BC03CE51FD695EB00B59B24 /* wooden-crate.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC261241FDFBA1E00EEE23B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC2613A1FDFBA4D00EEE23B /* vp.glsl in Resources */,
+				8BC261391FDFBA4D00EEE23B /* fp.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2951,6 +3068,29 @@
 				8BC03CC91FD67C8200B59B24 /* glew.c in Sources */,
 				8BC03CCA1FD67C8200B59B24 /* PfCOglTool.cpp in Sources */,
 				8BC03CCC1FD67C8200B59B24 /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC2610D1FDFBA1E00EEE23B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC2610E1FDFBA1E00EEE23B /* PfCOglProgram.cpp in Sources */,
+				8BC2610F1FDFBA1E00EEE23B /* PfCOglObject.cpp in Sources */,
+				8BC261101FDFBA1E00EEE23B /* PfCOglShader.cpp in Sources */,
+				8BC261111FDFBA1E00EEE23B /* PfCOglBitmap.cpp in Sources */,
+				8BC261121FDFBA1E00EEE23B /* PfCOglTexture.cpp in Sources */,
+				8BC2613B1FDFBA4D00EEE23B /* main.cpp in Sources */,
+				8BC261141FDFBA1E00EEE23B /* PfCOglCamera.cpp in Sources */,
+				8BC261151FDFBA1E00EEE23B /* PfCOglModelAsset.cpp in Sources */,
+				8BC261161FDFBA1E00EEE23B /* PfCOglBatch.cpp in Sources */,
+				8BC261171FDFBA1E00EEE23B /* PfCOglModelInstance.cpp in Sources */,
+				8BC261181FDFBA1E00EEE23B /* PfCOglTriangleBatch.cpp in Sources */,
+				8BC261191FDFBA1E00EEE23B /* PfCOglLight.cpp in Sources */,
+				8BC2611A1FDFBA1E00EEE23B /* math3d.cpp in Sources */,
+				8BC2611B1FDFBA1E00EEE23B /* glew.c in Sources */,
+				8BC2611C1FDFBA1E00EEE23B /* PfCOglTool.cpp in Sources */,
+				8BC2611D1FDFBA1E00EEE23B /* platform_osx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3919,6 +4059,46 @@
 			};
 			name = Release;
 		};
+		8BC2612A1FDFBA1E00EEE23B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BC2612B1FDFBA1E00EEE23B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8BDA557A1F7E1B760042C4D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4196,6 +4376,15 @@
 			buildConfigurations = (
 				8BC03CD51FD67C8200B59B24 /* Debug */,
 				8BC03CD61FD67C8200B59B24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC261291FDFBA1E00EEE23B /* Build configuration list for PBXNativeTarget "chapter6-ToonShader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC2612A1FDFBA1E00EEE23B /* Debug */,
+				8BC2612B1FDFBA1E00EEE23B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

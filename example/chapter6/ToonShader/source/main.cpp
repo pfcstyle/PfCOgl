@@ -36,13 +36,15 @@ using namespace PfCOgl;
 float gDegreesRotated = 0;
 double gScrollY = 0;
 GLFWwindow *gWindow;
-ModelAsset sphereAsset;
-ModelInstance sphereIns;
+ModelAsset torusAsset;
+ModelInstance torusIns;
 
 Camera gCamera;
 float secondsElapsed;
+float totalSeconds;
 
 //用于全局的model变换   一般update中使用
+Program mProgram;
 M3DMatrix44f geoTrans;
 M3DMatrix44f proM;
 const M3DVector2f SCREEN_SIZE(800, 600);
@@ -50,6 +52,17 @@ const M3DVector2f SCREEN_SIZE(800, 600);
 
 void AppMain();
 void onError(int errorCode, const char *errorMsg);
+
+void printError(){
+    //获取错误信息   获取之后  相当去取出错误
+    //再次获取 就没有了
+    GLenum err = glGetError();//THIS IS LIKE THIS BECAUSE OF AN EARLIER ERROR
+    if (err != GL_NO_ERROR)
+    {
+        cout<<"error:"<<glewGetErrorString(err)<<endl;
+    }
+}
+
 
 static PfCOgl::Program* LoadShaders(const char* vertFilename, const char* fragFilename) {
     std::vector<PfCOgl::Shader> shaders;
@@ -76,18 +89,23 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
     
     if (key == GLFW_KEY_1 && action == GLFW_RELEASE){
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glEnable(GL_POINT_SMOOTH);
-        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_LINE_SMOOTH);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_POLYGON_SMOOTH);
-        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        //最邻近过滤
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }else if (key == GLFW_KEY_2 && action == GLFW_RELEASE){
-        glDisable(GL_BLEND);
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_POINT_SMOOTH);
+        //线性过滤
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    }else if (key == GLFW_KEY_3 && action == GLFW_RELEASE){
+        //最邻近过滤 最邻近选择
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+    }else if (key == GLFW_KEY_4 && action == GLFW_RELEASE){
+        //最邻近过滤  线性选择
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+    }else if (key == GLFW_KEY_5 && action == GLFW_RELEASE){
+        //线性过滤  最邻近选择   游戏加速
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    }else if (key == GLFW_KEY_6 && action == GLFW_RELEASE){
+        //三线性  精度最高   性能最差
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     }
     
 //    const float moveSpeed = 4.0; //units per second
@@ -151,9 +169,12 @@ void initGlew(){
     //防止glew crash on macos
     glewExperimental = GL_TRUE;
     //init glew
+    
     if (glewInit() != GLEW_OK) {
         throw runtime_error("glew init error");
     }
+    printError();
+    printError();
     if (!GLEW_VERSION_3_2) {
         throw runtime_error("opengl version 3.2 is unavailable");
     }
@@ -176,33 +197,45 @@ glm::mat4 rotate(float rotDegrees, GLfloat x, GLfloat y, GLfloat z) {
     return glm::rotate(glm::mat4(),glm::radians(rotDegrees), glm::vec3(x,y,z));
 }
 
-PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minMagFilter, GLint wrap_mode) {
+PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minFilter,GLint magFilter, GLint wrap_mode) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, wrap_mode);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_2D);
 }
 
-PfCOgl::Texture* LoadTexture(const char* filename, GLint minMagFilter, GLint wrap_mode) {
+PfCOgl::Texture* LoadTexture(const char* filename, GLint minFilter,GLint magFilter, GLint wrap_mode) {
 //    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minMagFilter, wrap_mode);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_2D);
 }
 
 void loadAssetAndInstances() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     //init asset and instances
     
 //    gltMakeTorus(torusBatch, 0.4f, 0.15f, 30, 30);
+    //先加载shader  然后绑定变量
+    
     //加载顶点  法向量  纹理 数据   同时绑定shader的in变量
-    gltMakeSphereAsset(sphereAsset, 1, 26, 13);
-    sphereAsset.shaders = LoadShaders("vp.glsl", "fp.glsl");
+    gltMakeTorusAsset(torusAsset, .80f, 0.25f, 52, 26);
+    
+    torusAsset.shaders = LoadShaders("vp.glsl", "fp.glsl");
+    
+//    gltMakeSphereAsset(torusAsset, 1.0f, 26, 13);
     //填充数据
-    sphereIns.asset = &sphereAsset;
+    GLubyte textureData[4][3] = { 32,  0, 0,
+        64,  0, 0,
+        128, 0, 0,
+        255, 0, 0};
+    torusAsset.texture = new Texture(textureData, GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_TEXTURE_1D);
+    
+    torusIns.asset = &torusAsset;
     //init mode
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     
     // init cameras
     gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
@@ -213,34 +246,32 @@ void loadAssetAndInstances() {
 void RenderScene(void)
 {
     M3DVector3f vEyeLight = { -100.0f, 100.0f, 100.0f };
-    M3DVector4f vDiffuseColor = { 0.0f, 0.0f, 1.0f, 1.0f };
     M3DVector4f vAmbientColor = { 0.1f, 0.1f, 0.1f, 1.0f };
+    M3DVector4f vDiffuseColor = { 0.1f, 1.0f, 0.1f, 1.0f };
     M3DVector4f vSpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     
     // Clear the window and the depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    PfCOgl::Program* shaders = sphereAsset.shaders;
+    PfCOgl::Program* shaders = torusAsset.shaders;
     shaders->use();
-    shaders->setUniform("diffuseColor", vDiffuseColor);
-    shaders->setUniform("ambientColor", vAmbientColor);
-    shaders->setUniform("specularColor", vSpecularColor);
+    glBindTexture(GL_TEXTURE_1D, torusAsset.texture->object());
     shaders->setUniform("vLightPosition", vEyeLight);
-    shaders->setUniform("mvpMatrix", gCamera.matrix() * sphereIns.transform);
-    shaders->setUniform("mvMatrix", sphereIns.transform);
-    shaders->setUniform("normalMatrix", sphereIns.getNormalMatrix(false));
-    
-    sphereIns.draw();
-    
+    shaders->setUniform("mvpMatrix", gCamera.matrix() * torusIns.transform);
+    shaders->setUniform("mvMatrix", torusIns.transform);
+    shaders->setUniform("normalMatrix", torusIns.getNormalMatrix());
+    shaders->setUniform("colorTable", 0);
+    torusIns.draw();
+    glBindTexture(GL_TEXTURE_1D, 0);
     glfwSwapBuffers(gWindow);
 }
 
 
 void Update(float secondsElapsed) {
-    const GLfloat degreesPerSecond = 180.0f;
+    const GLfloat degreesPerSecond = 60.0f;
     gDegreesRotated += secondsElapsed * degreesPerSecond;
     while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-    sphereIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
+    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
     const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * -gCamera.forward());
@@ -281,7 +312,6 @@ void AppMain(){
     initGlew();
     // init shaders and program
     loadAssetAndInstances();
-    
     //render
     float lastTime = (float)glfwGetTime();
     while (!glfwWindowShouldClose(gWindow)) {

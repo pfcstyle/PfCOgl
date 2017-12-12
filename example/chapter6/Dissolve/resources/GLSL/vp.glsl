@@ -20,7 +20,7 @@ smooth out vec2 vVaryingTexCoord;
 void main(void) 
 {
     // Pass on the texture coordinates 
-    vVaryingTexCoord = vTexCoords0;
+    vVaryingTexCoord = vTexCoords0.st;
 
     // Get surface normal in eye coordinates
     vVaryingNormal = normalMatrix * vNormal;

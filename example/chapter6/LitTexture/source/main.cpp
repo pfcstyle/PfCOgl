@@ -207,7 +207,7 @@ void loadAssetAndInstances() {
     //加载顶点  法向量  纹理 数据   同时绑定shader的in变量
     gltMakeSphereAsset(sphereAsset, 1.0f, 26, 13);
 //    gltMakeSphere(sphereBatch, 1.0f, 26, 13);
-    sphereAsset.texture = LoadTGATexture("stone.tga", GL_LINEAR, GL_CLAMP_TO_EDGE);
+    sphereAsset.texture = LoadTGATexture("CoolTexture.tga", GL_LINEAR, GL_CLAMP_TO_EDGE);
     //填充数据
     sphereIns.asset = &sphereAsset;
     //init mode

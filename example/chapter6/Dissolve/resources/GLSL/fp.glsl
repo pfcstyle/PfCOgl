@@ -27,6 +27,8 @@ void main(void)
 
     // Add in ambient light
     vFragColor += ambientColor;
+    
+    vFragColor *= vCloudSample;
 
 
     // Specular Light

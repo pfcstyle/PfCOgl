@@ -39,6 +39,8 @@ namespace PfCOgl {
                 GLint wrapMode = GL_CLAMP_TO_EDGE,
                 GLint texType = GL_TEXTURE_2D);
         
+        Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType);
+        
         /**
          Deletes the texture object with glDeleteTextures
          */

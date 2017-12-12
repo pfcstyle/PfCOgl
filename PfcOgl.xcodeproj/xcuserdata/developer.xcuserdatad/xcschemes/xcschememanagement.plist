@@ -104,6 +104,11 @@
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
+		<key>chapter6-ToonShader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
 		<key>primitives.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

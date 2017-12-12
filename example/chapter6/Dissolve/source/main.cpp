@@ -41,6 +41,7 @@ ModelInstance torusIns;
 
 Camera gCamera;
 float secondsElapsed;
+float totalSeconds;
 
 //用于全局的model变换   一般update中使用
 Program mProgram;
@@ -52,11 +53,20 @@ const M3DVector2f SCREEN_SIZE(800, 600);
 void AppMain();
 void onError(int errorCode, const char *errorMsg);
 
+void printError(){
+    GLenum err = glGetError();//THIS IS LIKE THIS BECAUSE OF AN EARLIER ERROR
+    if (err != GL_NO_ERROR)
+    {
+        cout<<"error:"<<glewGetErrorString(err)<<endl;
+    }
+}
+
+
 static PfCOgl::Program* LoadShaders(const char* vertFilename, const char* fragFilename) {
     std::vector<PfCOgl::Shader> shaders;
     shaders.push_back(PfCOgl::Shader::shaderFromFile(ResourcePath(vertFilename), GL_VERTEX_SHADER));
     shaders.push_back(PfCOgl::Shader::shaderFromFile(ResourcePath(fragFilename), GL_FRAGMENT_SHADER));
-    return PfCOgl::Program::getProgramByShadersWithAttr(shaders,3,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal", GLT_ATTRIBUTE_TEXTURE0, "vTexture0");
+    return PfCOgl::Program::getProgramByShadersWithAttr(shaders,3,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal", GLT_ATTRIBUTE_TEXTURE0, "vTexCoords0");
 }
 
 int main(int argc, char **argv){
@@ -157,9 +167,11 @@ void initGlew(){
     //防止glew crash on macos
     glewExperimental = GL_TRUE;
     //init glew
+    
     if (glewInit() != GLEW_OK) {
         throw runtime_error("glew init error");
     }
+    printError();
     if (!GLEW_VERSION_3_2) {
         throw runtime_error("opengl version 3.2 is unavailable");
     }
@@ -186,14 +198,14 @@ PfCOgl::Texture* LoadTGATexture(const char* filename, GLint minFilter,GLint magF
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_1D);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_2D);
 }
 
 PfCOgl::Texture* LoadTexture(const char* filename, GLint minFilter,GLint magFilter, GLint wrap_mode) {
 //    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     PfCOgl::Bitmap bmp = PfCOgl::Bitmap::bitmapFromFile(ResourcePath(filename));
     bmp.flipVertically();
-    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_1D);
+    return new PfCOgl::Texture(bmp, minFilter, magFilter, wrap_mode, GL_TEXTURE_2D);
 }
 
 void loadAssetAndInstances() {
@@ -204,10 +216,12 @@ void loadAssetAndInstances() {
     //先加载shader  然后绑定变量
     
     //加载顶点  法向量  纹理 数据   同时绑定shader的in变量
-    gltMakeTorusAsset(torusAsset, .80f, 0.25f, 52, 26);
+//    gltMakeTorusAsset(torusAsset, .80f, 0.25f, 52, 26);
+    
     torusAsset.shaders = LoadShaders("vp.glsl", "fp.glsl");
-//    gltMakeSphere(sphereBatch, 1.0f, 26, 13);
-    torusAsset.texture = LoadTGATexture("Clouds.tga", GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    
+    gltMakeSphereAsset(torusAsset, 1.0f, 26, 13);
+    torusAsset.texture = LoadTGATexture("CoolTexture.tga", GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
     //填充数据
     torusIns.asset = &torusAsset;
     //init mode
@@ -233,7 +247,7 @@ void RenderScene(void)
 
     PfCOgl::Program* shaders = torusAsset.shaders;
     shaders->use();
-    glBindTexture(GL_TEXTURE_1D, torusAsset.texture->object());
+    glBindTexture(GL_TEXTURE_2D, torusAsset.texture->object());
     shaders->setUniform("diffuseColor", vDiffuseColor);
     shaders->setUniform("ambientColor", vAmbientColor);
     shaders->setUniform("specularColor", vSpecularColor);
@@ -241,21 +255,22 @@ void RenderScene(void)
     shaders->setUniform("mvpMatrix", gCamera.matrix() * torusIns.transform);
     shaders->setUniform("mvMatrix", torusIns.transform);
     shaders->setUniform("normalMatrix", torusIns.getNormalMatrix());
-    shaders->setUniform("cloudTexture", 1);
-    float fFactor = fmod(secondsElapsed, 10.0f);
+    shaders->setUniform("cloudTexture", 0);
+    float fFactor = fmod(glfwGetTime(), 10.0f);
     fFactor /= 10.0f;
-    shaders->setUniform("dissolveFactor", 0.5f);
+//    cout<<"fac:"<<fFactor<<endl;
+    shaders->setUniform("dissolveFactor", fFactor);
     torusIns.draw();
-    glBindTexture(GL_TEXTURE_1D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glfwSwapBuffers(gWindow);
 }
 
 
 void Update(float secondsElapsed) {
-//    const GLfloat degreesPerSecond = 180.0f;
-//    gDegreesRotated += secondsElapsed * degreesPerSecond;
-//    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-//    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
+    const GLfloat degreesPerSecond = 60.0f;
+    gDegreesRotated += secondsElapsed * degreesPerSecond;
+    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
+    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
     const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * -gCamera.forward());
