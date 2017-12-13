@@ -109,6 +109,16 @@
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
+		<key>chapter7-CubeMapped.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
+		<key>chapter7-TextureRect.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
 		<key>primitives.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

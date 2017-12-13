@@ -221,7 +221,7 @@ void loadAssetAndInstances() {
     torusAsset.shaders = LoadShaders("vp.glsl", "fp.glsl");
     
     gltMakeSphereAsset(torusAsset, 1.0f, 26, 13);
-    torusAsset.texture = LoadTGATexture("CoolTexture.tga", GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    torusAsset.texture = LoadTGATexture("CoolTexture.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
     //填充数据
     torusIns.asset = &torusAsset;
     //init mode

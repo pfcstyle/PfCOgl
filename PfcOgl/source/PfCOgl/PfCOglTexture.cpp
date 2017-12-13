@@ -22,8 +22,18 @@ static GLenum TextureFormatForBitmapFormat(Bitmap::Format format, bool srgb)
     }
 }
 
-Texture::Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType)
+static GLenum TextureInFormatForBitmapFormat(Bitmap::Format format, bool srgb)
 {
+    switch (format) {
+        case Bitmap::Format_Grayscale: return GL_LUMINANCE;
+        case Bitmap::Format_GrayscaleAlpha: return GL_LUMINANCE_ALPHA;
+        case Bitmap::Format_RGB: return (srgb ? GL_SRGB : GL_RGB);
+        case Bitmap::Format_RGBA: return (srgb ? GL_SRGB_ALPHA : GL_RGBA);
+        default: throw std::runtime_error("Unrecognised Bitmap::Format");
+    }
+}
+
+Texture::Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType, GLsizei width, GLsizei height, GLenum eFormat){
     glGenTextures(1, &_object);
     glBindTexture(texType, _object);
     //缩小过滤器  比如GL_LINEAR 线性
@@ -33,15 +43,43 @@ Texture::Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GL
     //设置伸缩方式  比如 repeat  toedge
     glTexParameteri(texType, GL_TEXTURE_WRAP_S, wrapMode);
     glTexParameteri(texType, GL_TEXTURE_WRAP_T, wrapMode);
+    switch (texType) {
+        case GL_TEXTURE_1D:
+            glTexImage1D(texType,
+                         0,
+                         GL_RGB,
+                         width,
+                         0,
+                         eFormat,
+                         GL_UNSIGNED_BYTE,
+                         textureData);
+            break;
+            case GL_TEXTURE_2D:
+            case GL_TEXTURE_RECTANGLE:
+                glTexImage2D(texType,
+                             0,
+                             GL_COMPRESSED_RGB,
+                             width,
+                             height,
+                             0,
+                             eFormat,
+                             GL_UNSIGNED_BYTE,
+                             textureData);
+                if (texType == GL_TEXTURE_2D) {
+                    if(minFilter == GL_LINEAR_MIPMAP_LINEAR ||
+                       minFilter == GL_LINEAR_MIPMAP_NEAREST ||
+                       minFilter == GL_NEAREST_MIPMAP_LINEAR ||
+                       minFilter == GL_NEAREST_MIPMAP_NEAREST){
+                        //生成Mip层
+                        glGenerateMipmap(GL_TEXTURE_2D);
+                    }
+                }
+            break;
+            
+        default:
+            break;
+    }
     
-    glTexImage1D(texType,
-                 0,
-                 GL_RGB,
-                 4,
-                 0,
-                 GL_RGB,
-                 GL_UNSIGNED_BYTE,
-                 textureData);
     
     glBindTexture(texType, 0);
 }
@@ -70,9 +108,9 @@ _originalHeight((GLfloat)bitmap.height())
 //    glGetCompressedTexImage2D 用于获取已经压缩好的图片并保存在本地
 //    glCompressedTexImage2D()类似glTexImage2D  可以加载本地的已经压缩的图片
     //相当于预压缩  可以提高效率
-    glTexImage2D(GL_TEXTURE_2D,
+    glTexImage2D(texType,
                  0,
-                 GL_COMPRESSED_RGB,
+                 TextureInFormatForBitmapFormat(bitmap.format(), false),
                  (GLsizei)bitmap.width(),
                  (GLsizei)bitmap.height(),
                  0,
@@ -81,13 +119,16 @@ _originalHeight((GLfloat)bitmap.height())
                  bitmap.pixelBuffer());
     
     glBindTexture(texType, 0);
-    if(minFilter == GL_LINEAR_MIPMAP_LINEAR ||
-       minFilter == GL_LINEAR_MIPMAP_NEAREST ||
-       minFilter == GL_NEAREST_MIPMAP_LINEAR ||
-       minFilter == GL_NEAREST_MIPMAP_NEAREST){
-        //生成Mip层
-        glGenerateMipmap(GL_TEXTURE_2D);
+    if (texType == GL_TEXTURE_2D) {
+        if(minFilter == GL_LINEAR_MIPMAP_LINEAR ||
+           minFilter == GL_LINEAR_MIPMAP_NEAREST ||
+           minFilter == GL_NEAREST_MIPMAP_LINEAR ||
+           minFilter == GL_NEAREST_MIPMAP_NEAREST){
+            //生成Mip层
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
     }
+    
 }
 
 Texture::~Texture()

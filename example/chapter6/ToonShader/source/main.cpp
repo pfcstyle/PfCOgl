@@ -229,7 +229,7 @@ void loadAssetAndInstances() {
         64,  0, 0,
         128, 0, 0,
         255, 0, 0};
-    torusAsset.texture = new Texture(textureData, GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_TEXTURE_1D);
+    torusAsset.texture = new Texture(textureData, GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_TEXTURE_1D, 4, 0, GL_RGB);
     
     torusIns.asset = &torusAsset;
     //init mode
@@ -268,10 +268,10 @@ void RenderScene(void)
 
 
 void Update(float secondsElapsed) {
-    const GLfloat degreesPerSecond = 60.0f;
-    gDegreesRotated += secondsElapsed * degreesPerSecond;
-    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
+//    const GLfloat degreesPerSecond = 60.0f;
+//    gDegreesRotated += secondsElapsed * degreesPerSecond;
+//    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
+//    torusIns.transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
     const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * -gCamera.forward());

@@ -412,7 +412,7 @@ namespace PfCOgl{
         modelAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), NULL);
         modelAsset.CopyTexCoordData2f(2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (const GLvoid*)(3 * sizeof(GLfloat)));
         modelAsset.CopyNormalDataf(3, GL_FLOAT, true, 8 * sizeof(GL_FLOAT), (const GLvoid*)(5 * sizeof(GLfloat)));
-        modelAsset.endMesh();
+        modelAsset.end();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
