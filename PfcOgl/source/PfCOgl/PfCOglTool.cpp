@@ -42,6 +42,25 @@ namespace PfCOgl{
         nMinor = atoi(strstr(szVersionString, ".")+1);
     #endif
     }
+    
+    int gltTextureIsSupport(GLenum texType, GLenum param, GLint value){
+        //1.查询纹理支持的最大大小
+        //如 返回2048  则2048 * 2048及以下一定是支持的，但是2048 * 4096 或者 4096 * 2048也可能支持， 4096 * 4096一定不支持
+//        GLint maxSize;
+//        glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxSize);
+        //2. 精确查询  创建纹理代理
+        switch (texType) {
+            case GL_TEXTURE_2D:
+                glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA, value, value, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
+                GLfloat height;
+                glGetTexLevelParameterfv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
+                return height;
+                
+            default:
+                break;
+        }
+        return 0;
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // This function determines if the named OpenGL Extension is supported

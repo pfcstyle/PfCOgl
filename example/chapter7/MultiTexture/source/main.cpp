@@ -1,7 +1,7 @@
 //
 //  main.cpp
 //  PfcOgl
-//
+//  多重纹理
 //  Created by developer on 24/07/2017.
 //  Copyright © 2017 developer. All rights reserved.
 //
@@ -43,6 +43,7 @@ ModelAsset cubeAsset;
 ModelInstance sphereIns;
 ModelInstance cubeIns;
 
+Texture * mTexture;
 
 Camera gCamera;
 Camera sphereCameras[NUM_SPHERES];
@@ -208,10 +209,12 @@ void loadAssetAndInstances() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     //init asset and instances
     
-    sphereAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_reflection.glsl", "fp_reflection.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
+    sphereAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_reflection.glsl", "fp_reflection.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal",GLT_ATTRIBUTE_TEXTURE0, "vTexCoords");
     sphereAsset.texture = new Texture(szCubeFaces, cube, 6, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, 1);
     gltMakeSphereAsset(sphereAsset, 1.0f, 52, 26);
     sphereIns.asset = &sphereAsset;
+    
+    mTexture = LoadTGATexture("tarnish.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_TEXTURE_2D);
     
     cubeAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_skybox.glsl", "fp_skybox.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
     gltMakeCubeAsset(cubeAsset, 20.f);
@@ -251,8 +254,12 @@ void RenderScene(void)
     sphereAsset.shaders->setUniform("normalMatrix", sphereIns.getNormalMatrix());
 //    sphereAsset.shaders->setUniform("mInverseCamera", mInverseCamera);
     sphereAsset.shaders->setUniform("cubeMap", 0);
+    sphereAsset.shaders->setUniform("tarnishMap", 1);
     glEnable(GL_CULL_FACE);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, sphereAsset.texture->object());
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, mTexture->object());
     sphereIns.draw();
     glDisable(GL_CULL_FACE);
     sphereAsset.shaders->stopUsing();

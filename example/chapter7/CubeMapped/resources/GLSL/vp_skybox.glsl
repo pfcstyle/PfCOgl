@@ -1,19 +1,18 @@
 #version 410
 
-// Incoming per vertex... position and texture coordinate
+// Incoming per vertex... just the position
 in vec4 vVertex;
-in vec2 vTexCoord;
 
-uniform mat4   mvpMatrix;
+uniform mat4   mvpMatrix;  // Transformation matrix
 
 // Texture Coordinate to fragment program
-smooth out vec2 vVaryingTexCoord;
+out vec3 vVaryingTexCoord;
 
 
 void main(void)
 {
     // Pass on the texture coordinates
-    vVaryingTexCoord = vTexCoord;
+    vVaryingTexCoord = normalize(vVertex.xyz);
     
     // Don't forget to transform the geometry!
     gl_Position = mvpMatrix * vVertex;

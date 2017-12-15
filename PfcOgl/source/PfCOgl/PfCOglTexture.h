@@ -40,6 +40,11 @@ namespace PfCOgl {
                 GLint texType = GL_TEXTURE_2D);
         
         Texture(const GLvoid *textureData, GLint minFilter, GLint magFilter, GLint wrapMode, GLint texType, GLsizei width, GLsizei height, GLenum eFormat);
+        Texture(const char **cubeFaces, const GLenum *cube, int length, GLint minFilter, GLint magFilter, GLint wrapMode, GLint unpackAlignment);
+        
+        Texture(const GLuint obj):_object(obj){};
+        
+        static Texture *generateTextureArray(char ** cFile, int length, GLsizei width, GLsizei height, GLint minFilter, GLint magFilter, GLint wrapMode, GLint unpackAlignment);
         
         /**
          Deletes the texture object with glDeleteTextures

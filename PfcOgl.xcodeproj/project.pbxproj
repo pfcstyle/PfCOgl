@@ -513,8 +513,8 @@
 		8BC261881FE12DE900EEE23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
 		8BC261891FE12DE900EEE23B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
 		8BC2618A1FE12DE900EEE23B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
-		8BC2619E1FE12E4B00EEE23B /* fp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2619A1FE12E4B00EEE23B /* fp.glsl */; };
-		8BC2619F1FE12E4B00EEE23B /* vp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2619B1FE12E4B00EEE23B /* vp.glsl */; };
+		8BC2619E1FE12E4B00EEE23B /* fp_reflection.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2619A1FE12E4B00EEE23B /* fp_reflection.glsl */; };
+		8BC2619F1FE12E4B00EEE23B /* vp_reflection.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2619B1FE12E4B00EEE23B /* vp_reflection.glsl */; };
 		8BC261A01FE12E4B00EEE23B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2619D1FE12E4B00EEE23B /* main.cpp */; };
 		8BC261A71FE12EAE00EEE23B /* neg_x.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261A11FE12EAD00EEE23B /* neg_x.tga */; };
 		8BC261A81FE12EAE00EEE23B /* pos_z.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261A21FE12EAD00EEE23B /* pos_z.tga */; };
@@ -522,6 +522,119 @@
 		8BC261AA1FE12EAE00EEE23B /* neg_y.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261A41FE12EAE00EEE23B /* neg_y.tga */; };
 		8BC261AB1FE12EAE00EEE23B /* neg_z.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261A51FE12EAE00EEE23B /* neg_z.tga */; };
 		8BC261AC1FE12EAE00EEE23B /* pos_y.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261A61FE12EAE00EEE23B /* pos_y.tga */; };
+		8BC261AE1FE208AF00EEE23B /* fp_skybox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261AD1FE208AF00EEE23B /* fp_skybox.glsl */; };
+		8BC261B01FE208C400EEE23B /* vp_skybox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261AF1FE208C400EEE23B /* vp_skybox.glsl */; };
+		8BC261B31FE2207100EEE23B /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BC261B41FE2207100EEE23B /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BC261B51FE2207100EEE23B /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BC261B61FE2207100EEE23B /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BC261B71FE2207100EEE23B /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BC261B81FE2207100EEE23B /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BC261B91FE2207100EEE23B /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BC261BA1FE2207100EEE23B /* PfCOglBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E521F9D99A300BB2AA0 /* PfCOglBatch.cpp */; };
+		8BC261BB1FE2207100EEE23B /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BC261BC1FE2207100EEE23B /* PfCOglTriangleBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E551F9DC3A300BB2AA0 /* PfCOglTriangleBatch.cpp */; };
+		8BC261BD1FE2207100EEE23B /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BC261BE1FE2207100EEE23B /* math3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E581F9DCB9600BB2AA0 /* math3d.cpp */; };
+		8BC261BF1FE2207100EEE23B /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BC261C01FE2207100EEE23B /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
+		8BC261C21FE2207100EEE23B /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BC261C41FE2207100EEE23B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BC261C51FE2207100EEE23B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BC261C61FE2207100EEE23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BC261C71FE2207100EEE23B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BC261C81FE2207100EEE23B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BC261E81FE220A700EEE23B /* neg_y.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261DB1FE220A700EEE23B /* neg_y.tga */; };
+		8BC261E91FE220A700EEE23B /* neg_x.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261DC1FE220A700EEE23B /* neg_x.tga */; };
+		8BC261EA1FE220A700EEE23B /* neg_z.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261DD1FE220A700EEE23B /* neg_z.tga */; };
+		8BC261EB1FE220A700EEE23B /* pos_z.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261DE1FE220A700EEE23B /* pos_z.tga */; };
+		8BC261EC1FE220A700EEE23B /* pos_x.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261DF1FE220A700EEE23B /* pos_x.tga */; };
+		8BC261ED1FE220A700EEE23B /* pos_y.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261E01FE220A700EEE23B /* pos_y.tga */; };
+		8BC261EE1FE220A700EEE23B /* fp_skybox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261E21FE220A700EEE23B /* fp_skybox.glsl */; };
+		8BC261EF1FE220A700EEE23B /* vp_reflection.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261E31FE220A700EEE23B /* vp_reflection.glsl */; };
+		8BC261F11FE220A700EEE23B /* vp_skybox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261E51FE220A700EEE23B /* vp_skybox.glsl */; };
+		8BC261F31FE220BA00EEE23B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC261E71FE220A700EEE23B /* main.cpp */; };
+		8BC261F51FE2215100EEE23B /* tarnish.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261F41FE2215100EEE23B /* tarnish.tga */; };
+		8BC261F61FE222ED00EEE23B /* fp_reflection.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC261E41FE220A700EEE23B /* fp_reflection.glsl */; };
+		8BC261FA1FE2248600EEE23B /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BC261FB1FE2248600EEE23B /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BC261FC1FE2248600EEE23B /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BC261FD1FE2248600EEE23B /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BC261FE1FE2248600EEE23B /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
+		8BC261FF1FE2248600EEE23B /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BC262001FE2248600EEE23B /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BC262011FE2248600EEE23B /* PfCOglBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E521F9D99A300BB2AA0 /* PfCOglBatch.cpp */; };
+		8BC262021FE2248600EEE23B /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BC262031FE2248600EEE23B /* PfCOglTriangleBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E551F9DC3A300BB2AA0 /* PfCOglTriangleBatch.cpp */; };
+		8BC262041FE2248600EEE23B /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BC262051FE2248600EEE23B /* math3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E581F9DCB9600BB2AA0 /* math3d.cpp */; };
+		8BC262061FE2248600EEE23B /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BC262071FE2248600EEE23B /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
+		8BC262081FE2248600EEE23B /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BC2620A1FE2248600EEE23B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BC2620B1FE2248600EEE23B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BC2620C1FE2248600EEE23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BC2620D1FE2248600EEE23B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BC2620E1FE2248600EEE23B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BC262381FE224BA00EEE23B /* vp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2622B1FE224BA00EEE23B /* vp.glsl */; };
+		8BC262391FE224BA00EEE23B /* fp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2622C1FE224BA00EEE23B /* fp.glsl */; };
+		8BC2623B1FE224BA00EEE23B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2622F1FE224BA00EEE23B /* main.cpp */; };
+		8BC2623D1FE22F7A00EEE23B /* star.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2623C1FE22F7A00EEE23B /* star.tga */; };
+		8BC262401FE2470C00EEE23B /* PfCOglProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BEA39DD1F297A6D00CAF2C8 /* PfCOglProgram.cpp */; };
+		8BC262411FE2470C00EEE23B /* PfCOglObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED271F272A07005E6D6C /* PfCOglObject.cpp */; };
+		8BC262421FE2470C00EEE23B /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
+		8BC262431FE2470C00EEE23B /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
+		8BC262451FE2470C00EEE23B /* PfCOglCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8F1F297F4400361EE5 /* PfCOglCamera.cpp */; };
+		8BC262461FE2470C00EEE23B /* PfCOglModelAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B921F29896600361EE5 /* PfCOglModelAsset.cpp */; };
+		8BC262471FE2470C00EEE23B /* PfCOglBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E521F9D99A300BB2AA0 /* PfCOglBatch.cpp */; };
+		8BC262481FE2470C00EEE23B /* PfCOglModelInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B951F29897800361EE5 /* PfCOglModelInstance.cpp */; };
+		8BC262491FE2470C00EEE23B /* PfCOglTriangleBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E551F9DC3A300BB2AA0 /* PfCOglTriangleBatch.cpp */; };
+		8BC2624A1FE2470C00EEE23B /* PfCOglLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B981F298ADE00361EE5 /* PfCOglLight.cpp */; };
+		8BC2624B1FE2470C00EEE23B /* math3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B978E581F9DCB9600BB2AA0 /* math3d.cpp */; };
+		8BC2624C1FE2470C00EEE23B /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DED1C1F25C410005E6D6C /* glew.c */; };
+		8BC2624D1FE2470C00EEE23B /* PfCOglTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5EB2E1F9CD98700D021C2 /* PfCOglTool.cpp */; };
+		8BC2624F1FE2470C00EEE23B /* platform_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DEAEF1F25C33C005E6D6C /* platform_osx.mm */; };
+		8BC262511FE2470C00EEE23B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F21F25A2C7005E6D6C /* IOKit.framework */; };
+		8BC262521FE2470C00EEE23B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DEAEE1F25C33C005E6D6C /* libglfw3.a */; };
+		8BC262531FE2470C00EEE23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6F01F25A2BA005E6D6C /* Cocoa.framework */; };
+		8BC262541FE2470C00EEE23B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EC1F25A2A1005E6D6C /* OpenGL.framework */; };
+		8BC262551FE2470C00EEE23B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2DE6EE1F25A2B3005E6D6C /* QuartzCore.framework */; };
+		8BC262671FE26B8900EEE23B /* star.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262611FE26B8900EEE23B /* star.tga */; };
+		8BC262681FE26B8900EEE23B /* fp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262631FE26B8900EEE23B /* fp.glsl */; };
+		8BC262691FE26B8900EEE23B /* vp.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262641FE26B8900EEE23B /* vp.glsl */; };
+		8BC2626A1FE26B8900EEE23B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC262661FE26B8900EEE23B /* main.cpp */; };
+		8BC262881FE26BBA00EEE23B /* moon19.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2626B1FE26BB700EEE23B /* moon19.tga */; };
+		8BC262891FE26BBA00EEE23B /* moon07.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2626C1FE26BB700EEE23B /* moon07.tga */; };
+		8BC2628A1FE26BBA00EEE23B /* moon18.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2626D1FE26BB700EEE23B /* moon18.tga */; };
+		8BC2628B1FE26BBA00EEE23B /* moon00.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2626E1FE26BB700EEE23B /* moon00.tga */; };
+		8BC2628C1FE26BBA00EEE23B /* moon12.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2626F1FE26BB700EEE23B /* moon12.tga */; };
+		8BC2628D1FE26BBA00EEE23B /* moon04.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262701FE26BB700EEE23B /* moon04.tga */; };
+		8BC2628E1FE26BBA00EEE23B /* moon22.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262711FE26BB800EEE23B /* moon22.tga */; };
+		8BC2628F1FE26BBA00EEE23B /* moon26.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262721FE26BB800EEE23B /* moon26.tga */; };
+		8BC262901FE26BBA00EEE23B /* moon17.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262731FE26BB800EEE23B /* moon17.tga */; };
+		8BC262911FE26BBA00EEE23B /* moon06.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262741FE26BB800EEE23B /* moon06.tga */; };
+		8BC262921FE26BBA00EEE23B /* moon25.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262751FE26BB800EEE23B /* moon25.tga */; };
+		8BC262931FE26BBA00EEE23B /* moon10.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262761FE26BB800EEE23B /* moon10.tga */; };
+		8BC262941FE26BBA00EEE23B /* moon03.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262771FE26BB800EEE23B /* moon03.tga */; };
+		8BC262951FE26BBA00EEE23B /* moon05.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262781FE26BB800EEE23B /* moon05.tga */; };
+		8BC262961FE26BBA00EEE23B /* moon02.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262791FE26BB900EEE23B /* moon02.tga */; };
+		8BC262971FE26BBA00EEE23B /* moon09.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627A1FE26BB900EEE23B /* moon09.tga */; };
+		8BC262981FE26BBA00EEE23B /* moon20.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627B1FE26BB900EEE23B /* moon20.tga */; };
+		8BC262991FE26BBA00EEE23B /* moon21.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627C1FE26BB900EEE23B /* moon21.tga */; };
+		8BC2629A1FE26BBA00EEE23B /* moon24.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627D1FE26BB900EEE23B /* moon24.tga */; };
+		8BC2629B1FE26BBA00EEE23B /* moon15.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627E1FE26BB900EEE23B /* moon15.tga */; };
+		8BC2629C1FE26BBA00EEE23B /* moon08.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2627F1FE26BB900EEE23B /* moon08.tga */; };
+		8BC2629D1FE26BBA00EEE23B /* moon11.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262801FE26BB900EEE23B /* moon11.tga */; };
+		8BC2629E1FE26BBA00EEE23B /* moon14.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262811FE26BBA00EEE23B /* moon14.tga */; };
+		8BC2629F1FE26BBA00EEE23B /* moon23.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262821FE26BBA00EEE23B /* moon23.tga */; };
+		8BC262A01FE26BBA00EEE23B /* moon28.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262831FE26BBA00EEE23B /* moon28.tga */; };
+		8BC262A11FE26BBA00EEE23B /* moon01.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262841FE26BBA00EEE23B /* moon01.tga */; };
+		8BC262A21FE26BBA00EEE23B /* moon27.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262851FE26BBA00EEE23B /* moon27.tga */; };
+		8BC262A31FE26BBA00EEE23B /* moon13.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262861FE26BBA00EEE23B /* moon13.tga */; };
+		8BC262A41FE26BBA00EEE23B /* moon16.tga in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262871FE26BBA00EEE23B /* moon16.tga */; };
+		8BC262A61FE26BE700EEE23B /* fp_moon.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262A51FE26BE700EEE23B /* fp_moon.glsl */; };
+		8BC262A81FE26BF500EEE23B /* vp_moon.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BC262A71FE26BF500EEE23B /* vp_moon.glsl */; };
+		8BC262A91FE363DA00EEE23B /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
 		8BCC5B881F297E4200361EE5 /* PfCOglShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */; };
 		8BCC5B8B1F297E8A00361EE5 /* PfCOglBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */; };
 		8BCC5B8E1F297EF400361EE5 /* PfCOglTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC5B8C1F297EF400361EE5 /* PfCOglTexture.cpp */; };
@@ -713,8 +826,8 @@
 		8BC2616D1FE0BD7900EEE23B /* Marslike.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marslike.tga; sourceTree = "<group>"; };
 		8BC2616E1FE0BD7A00EEE23B /* Marble.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marble.tga; sourceTree = "<group>"; };
 		8BC261951FE12DE900EEE23B /* chapter7-CubeMapped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter7-CubeMapped.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BC2619A1FE12E4B00EEE23B /* fp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp.glsl; sourceTree = "<group>"; };
-		8BC2619B1FE12E4B00EEE23B /* vp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp.glsl; sourceTree = "<group>"; };
+		8BC2619A1FE12E4B00EEE23B /* fp_reflection.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp_reflection.glsl; sourceTree = "<group>"; };
+		8BC2619B1FE12E4B00EEE23B /* vp_reflection.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp_reflection.glsl; sourceTree = "<group>"; };
 		8BC2619D1FE12E4B00EEE23B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8BC261A11FE12EAD00EEE23B /* neg_x.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_x.tga; sourceTree = "<group>"; };
 		8BC261A21FE12EAD00EEE23B /* pos_z.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pos_z.tga; sourceTree = "<group>"; };
@@ -722,6 +835,62 @@
 		8BC261A41FE12EAE00EEE23B /* neg_y.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_y.tga; sourceTree = "<group>"; };
 		8BC261A51FE12EAE00EEE23B /* neg_z.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_z.tga; sourceTree = "<group>"; };
 		8BC261A61FE12EAE00EEE23B /* pos_y.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pos_y.tga; sourceTree = "<group>"; };
+		8BC261AD1FE208AF00EEE23B /* fp_skybox.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fp_skybox.glsl; sourceTree = "<group>"; };
+		8BC261AF1FE208C400EEE23B /* vp_skybox.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vp_skybox.glsl; sourceTree = "<group>"; };
+		8BC261D71FE2207100EEE23B /* chapter7-MultiTexture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter7-MultiTexture.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC261DB1FE220A700EEE23B /* neg_y.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_y.tga; sourceTree = "<group>"; };
+		8BC261DC1FE220A700EEE23B /* neg_x.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_x.tga; sourceTree = "<group>"; };
+		8BC261DD1FE220A700EEE23B /* neg_z.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = neg_z.tga; sourceTree = "<group>"; };
+		8BC261DE1FE220A700EEE23B /* pos_z.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pos_z.tga; sourceTree = "<group>"; };
+		8BC261DF1FE220A700EEE23B /* pos_x.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pos_x.tga; sourceTree = "<group>"; };
+		8BC261E01FE220A700EEE23B /* pos_y.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pos_y.tga; sourceTree = "<group>"; };
+		8BC261E21FE220A700EEE23B /* fp_skybox.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp_skybox.glsl; sourceTree = "<group>"; };
+		8BC261E31FE220A700EEE23B /* vp_reflection.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp_reflection.glsl; sourceTree = "<group>"; };
+		8BC261E41FE220A700EEE23B /* fp_reflection.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp_reflection.glsl; sourceTree = "<group>"; };
+		8BC261E51FE220A700EEE23B /* vp_skybox.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp_skybox.glsl; sourceTree = "<group>"; };
+		8BC261E71FE220A700EEE23B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8BC261F41FE2215100EEE23B /* tarnish.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = tarnish.tga; sourceTree = "<group>"; };
+		8BC2621E1FE2248600EEE23B /* chapter7-PointSprites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter7-PointSprites.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC2622B1FE224BA00EEE23B /* vp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp.glsl; sourceTree = "<group>"; };
+		8BC2622C1FE224BA00EEE23B /* fp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp.glsl; sourceTree = "<group>"; };
+		8BC2622F1FE224BA00EEE23B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8BC2623C1FE22F7A00EEE23B /* star.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = star.tga; sourceTree = "<group>"; };
+		8BC2625D1FE2470C00EEE23B /* chapter7-TextureArray.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chapter7-TextureArray.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC262611FE26B8900EEE23B /* star.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = star.tga; sourceTree = "<group>"; };
+		8BC262631FE26B8900EEE23B /* fp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fp.glsl; sourceTree = "<group>"; };
+		8BC262641FE26B8900EEE23B /* vp.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vp.glsl; sourceTree = "<group>"; };
+		8BC262661FE26B8900EEE23B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8BC2626B1FE26BB700EEE23B /* moon19.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon19.tga; sourceTree = "<group>"; };
+		8BC2626C1FE26BB700EEE23B /* moon07.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon07.tga; sourceTree = "<group>"; };
+		8BC2626D1FE26BB700EEE23B /* moon18.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon18.tga; sourceTree = "<group>"; };
+		8BC2626E1FE26BB700EEE23B /* moon00.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon00.tga; sourceTree = "<group>"; };
+		8BC2626F1FE26BB700EEE23B /* moon12.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon12.tga; sourceTree = "<group>"; };
+		8BC262701FE26BB700EEE23B /* moon04.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon04.tga; sourceTree = "<group>"; };
+		8BC262711FE26BB800EEE23B /* moon22.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon22.tga; sourceTree = "<group>"; };
+		8BC262721FE26BB800EEE23B /* moon26.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon26.tga; sourceTree = "<group>"; };
+		8BC262731FE26BB800EEE23B /* moon17.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon17.tga; sourceTree = "<group>"; };
+		8BC262741FE26BB800EEE23B /* moon06.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon06.tga; sourceTree = "<group>"; };
+		8BC262751FE26BB800EEE23B /* moon25.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon25.tga; sourceTree = "<group>"; };
+		8BC262761FE26BB800EEE23B /* moon10.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon10.tga; sourceTree = "<group>"; };
+		8BC262771FE26BB800EEE23B /* moon03.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon03.tga; sourceTree = "<group>"; };
+		8BC262781FE26BB800EEE23B /* moon05.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon05.tga; sourceTree = "<group>"; };
+		8BC262791FE26BB900EEE23B /* moon02.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon02.tga; sourceTree = "<group>"; };
+		8BC2627A1FE26BB900EEE23B /* moon09.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon09.tga; sourceTree = "<group>"; };
+		8BC2627B1FE26BB900EEE23B /* moon20.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon20.tga; sourceTree = "<group>"; };
+		8BC2627C1FE26BB900EEE23B /* moon21.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon21.tga; sourceTree = "<group>"; };
+		8BC2627D1FE26BB900EEE23B /* moon24.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon24.tga; sourceTree = "<group>"; };
+		8BC2627E1FE26BB900EEE23B /* moon15.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon15.tga; sourceTree = "<group>"; };
+		8BC2627F1FE26BB900EEE23B /* moon08.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon08.tga; sourceTree = "<group>"; };
+		8BC262801FE26BB900EEE23B /* moon11.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon11.tga; sourceTree = "<group>"; };
+		8BC262811FE26BBA00EEE23B /* moon14.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon14.tga; sourceTree = "<group>"; };
+		8BC262821FE26BBA00EEE23B /* moon23.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon23.tga; sourceTree = "<group>"; };
+		8BC262831FE26BBA00EEE23B /* moon28.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon28.tga; sourceTree = "<group>"; };
+		8BC262841FE26BBA00EEE23B /* moon01.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon01.tga; sourceTree = "<group>"; };
+		8BC262851FE26BBA00EEE23B /* moon27.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon27.tga; sourceTree = "<group>"; };
+		8BC262861FE26BBA00EEE23B /* moon13.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon13.tga; sourceTree = "<group>"; };
+		8BC262871FE26BBA00EEE23B /* moon16.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = moon16.tga; sourceTree = "<group>"; };
+		8BC262A51FE26BE700EEE23B /* fp_moon.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fp_moon.glsl; sourceTree = "<group>"; };
+		8BC262A71FE26BF500EEE23B /* vp_moon.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vp_moon.glsl; sourceTree = "<group>"; };
 		8BCC5B861F297E4200361EE5 /* PfCOglShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglShader.cpp; sourceTree = "<group>"; };
 		8BCC5B871F297E4200361EE5 /* PfCOglShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfCOglShader.h; sourceTree = "<group>"; };
 		8BCC5B891F297E8A00361EE5 /* PfCOglBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PfCOglBitmap.cpp; sourceTree = "<group>"; };
@@ -1044,6 +1213,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BC261C31FE2207100EEE23B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC261C41FE2207100EEE23B /* IOKit.framework in Frameworks */,
+				8BC261C51FE2207100EEE23B /* libglfw3.a in Frameworks */,
+				8BC261C61FE2207100EEE23B /* Cocoa.framework in Frameworks */,
+				8BC261C71FE2207100EEE23B /* OpenGL.framework in Frameworks */,
+				8BC261C81FE2207100EEE23B /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC262091FE2248600EEE23B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC2620A1FE2248600EEE23B /* IOKit.framework in Frameworks */,
+				8BC2620B1FE2248600EEE23B /* libglfw3.a in Frameworks */,
+				8BC2620C1FE2248600EEE23B /* Cocoa.framework in Frameworks */,
+				8BC2620D1FE2248600EEE23B /* OpenGL.framework in Frameworks */,
+				8BC2620E1FE2248600EEE23B /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC262501FE2470C00EEE23B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC262511FE2470C00EEE23B /* IOKit.framework in Frameworks */,
+				8BC262521FE2470C00EEE23B /* libglfw3.a in Frameworks */,
+				8BC262531FE2470C00EEE23B /* Cocoa.framework in Frameworks */,
+				8BC262541FE2470C00EEE23B /* OpenGL.framework in Frameworks */,
+				8BC262551FE2470C00EEE23B /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BDA556D1F7E1B760042C4D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1113,6 +1318,9 @@
 				8BC2612C1FDFBA1E00EEE23B /* chapter6-ToonShader.app */,
 				8BC2615A1FE0B63B00EEE23B /* chapter7-TextureRect.app */,
 				8BC261951FE12DE900EEE23B /* chapter7-CubeMapped.app */,
+				8BC261D71FE2207100EEE23B /* chapter7-MultiTexture.app */,
+				8BC2621E1FE2248600EEE23B /* chapter7-PointSprites.app */,
+				8BC2625D1FE2470C00EEE23B /* chapter7-TextureArray.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1886,6 +2094,9 @@
 		8BC2615B1FE0BD2500EEE23B /* chapter7 */ = {
 			isa = PBXGroup;
 			children = (
+				8BC2625E1FE26B8900EEE23B /* TextureArray */,
+				8BC2621F1FE224BA00EEE23B /* PointSprites */,
+				8BC261D81FE220A700EEE23B /* MultiTexture */,
 				8BC261961FE12E4B00EEE23B /* CubeMapped */,
 				8BC2615C1FE0BD2500EEE23B /* TextureRect */,
 			);
@@ -1972,8 +2183,10 @@
 		8BC261991FE12E4B00EEE23B /* GLSL */ = {
 			isa = PBXGroup;
 			children = (
-				8BC2619A1FE12E4B00EEE23B /* fp.glsl */,
-				8BC2619B1FE12E4B00EEE23B /* vp.glsl */,
+				8BC2619A1FE12E4B00EEE23B /* fp_reflection.glsl */,
+				8BC2619B1FE12E4B00EEE23B /* vp_reflection.glsl */,
+				8BC261AD1FE208AF00EEE23B /* fp_skybox.glsl */,
+				8BC261AF1FE208C400EEE23B /* vp_skybox.glsl */,
 			);
 			path = GLSL;
 			sourceTree = "<group>";
@@ -1982,6 +2195,174 @@
 			isa = PBXGroup;
 			children = (
 				8BC2619D1FE12E4B00EEE23B /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8BC261D81FE220A700EEE23B /* MultiTexture */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261D91FE220A700EEE23B /* resources */,
+				8BC261E61FE220A700EEE23B /* source */,
+			);
+			path = MultiTexture;
+			sourceTree = "<group>";
+		};
+		8BC261D91FE220A700EEE23B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261DA1FE220A700EEE23B /* images */,
+				8BC261E11FE220A700EEE23B /* GLSL */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BC261DA1FE220A700EEE23B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261F41FE2215100EEE23B /* tarnish.tga */,
+				8BC261DB1FE220A700EEE23B /* neg_y.tga */,
+				8BC261DC1FE220A700EEE23B /* neg_x.tga */,
+				8BC261DD1FE220A700EEE23B /* neg_z.tga */,
+				8BC261DE1FE220A700EEE23B /* pos_z.tga */,
+				8BC261DF1FE220A700EEE23B /* pos_x.tga */,
+				8BC261E01FE220A700EEE23B /* pos_y.tga */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8BC261E11FE220A700EEE23B /* GLSL */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261E21FE220A700EEE23B /* fp_skybox.glsl */,
+				8BC261E31FE220A700EEE23B /* vp_reflection.glsl */,
+				8BC261E41FE220A700EEE23B /* fp_reflection.glsl */,
+				8BC261E51FE220A700EEE23B /* vp_skybox.glsl */,
+			);
+			path = GLSL;
+			sourceTree = "<group>";
+		};
+		8BC261E61FE220A700EEE23B /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BC261E71FE220A700EEE23B /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8BC2621F1FE224BA00EEE23B /* PointSprites */ = {
+			isa = PBXGroup;
+			children = (
+				8BC262201FE224BA00EEE23B /* resources */,
+				8BC2622E1FE224BA00EEE23B /* source */,
+			);
+			path = PointSprites;
+			sourceTree = "<group>";
+		};
+		8BC262201FE224BA00EEE23B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BC262211FE224BA00EEE23B /* images */,
+				8BC262291FE224BA00EEE23B /* GLSL */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BC262211FE224BA00EEE23B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2623C1FE22F7A00EEE23B /* star.tga */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8BC262291FE224BA00EEE23B /* GLSL */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2622B1FE224BA00EEE23B /* vp.glsl */,
+				8BC2622C1FE224BA00EEE23B /* fp.glsl */,
+			);
+			path = GLSL;
+			sourceTree = "<group>";
+		};
+		8BC2622E1FE224BA00EEE23B /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2622F1FE224BA00EEE23B /* main.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8BC2625E1FE26B8900EEE23B /* TextureArray */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2625F1FE26B8900EEE23B /* resources */,
+				8BC262651FE26B8900EEE23B /* source */,
+			);
+			path = TextureArray;
+			sourceTree = "<group>";
+		};
+		8BC2625F1FE26B8900EEE23B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BC262601FE26B8900EEE23B /* images */,
+				8BC262621FE26B8900EEE23B /* GLSL */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8BC262601FE26B8900EEE23B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8BC2626E1FE26BB700EEE23B /* moon00.tga */,
+				8BC262841FE26BBA00EEE23B /* moon01.tga */,
+				8BC262791FE26BB900EEE23B /* moon02.tga */,
+				8BC262771FE26BB800EEE23B /* moon03.tga */,
+				8BC262701FE26BB700EEE23B /* moon04.tga */,
+				8BC262781FE26BB800EEE23B /* moon05.tga */,
+				8BC262741FE26BB800EEE23B /* moon06.tga */,
+				8BC2626C1FE26BB700EEE23B /* moon07.tga */,
+				8BC2627F1FE26BB900EEE23B /* moon08.tga */,
+				8BC2627A1FE26BB900EEE23B /* moon09.tga */,
+				8BC262761FE26BB800EEE23B /* moon10.tga */,
+				8BC262801FE26BB900EEE23B /* moon11.tga */,
+				8BC2626F1FE26BB700EEE23B /* moon12.tga */,
+				8BC262861FE26BBA00EEE23B /* moon13.tga */,
+				8BC262811FE26BBA00EEE23B /* moon14.tga */,
+				8BC2627E1FE26BB900EEE23B /* moon15.tga */,
+				8BC262871FE26BBA00EEE23B /* moon16.tga */,
+				8BC262731FE26BB800EEE23B /* moon17.tga */,
+				8BC2626D1FE26BB700EEE23B /* moon18.tga */,
+				8BC2626B1FE26BB700EEE23B /* moon19.tga */,
+				8BC2627B1FE26BB900EEE23B /* moon20.tga */,
+				8BC2627C1FE26BB900EEE23B /* moon21.tga */,
+				8BC262711FE26BB800EEE23B /* moon22.tga */,
+				8BC262821FE26BBA00EEE23B /* moon23.tga */,
+				8BC2627D1FE26BB900EEE23B /* moon24.tga */,
+				8BC262751FE26BB800EEE23B /* moon25.tga */,
+				8BC262721FE26BB800EEE23B /* moon26.tga */,
+				8BC262851FE26BBA00EEE23B /* moon27.tga */,
+				8BC262831FE26BBA00EEE23B /* moon28.tga */,
+				8BC262611FE26B8900EEE23B /* star.tga */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8BC262621FE26B8900EEE23B /* GLSL */ = {
+			isa = PBXGroup;
+			children = (
+				8BC262631FE26B8900EEE23B /* fp.glsl */,
+				8BC262641FE26B8900EEE23B /* vp.glsl */,
+				8BC262A51FE26BE700EEE23B /* fp_moon.glsl */,
+				8BC262A71FE26BF500EEE23B /* vp_moon.glsl */,
+			);
+			path = GLSL;
+			sourceTree = "<group>";
+		};
+		8BC262651FE26B8900EEE23B /* source */ = {
+			isa = PBXGroup;
+			children = (
+				8BC262661FE26B8900EEE23B /* main.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -2463,6 +2844,57 @@
 			productReference = 8BC261951FE12DE900EEE23B /* chapter7-CubeMapped.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8BC261B11FE2207100EEE23B /* chapter7-MultiTexture */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC261D41FE2207100EEE23B /* Build configuration list for PBXNativeTarget "chapter7-MultiTexture" */;
+			buildPhases = (
+				8BC261B21FE2207100EEE23B /* Sources */,
+				8BC261C31FE2207100EEE23B /* Frameworks */,
+				8BC261C91FE2207100EEE23B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chapter7-MultiTexture";
+			productName = PfcOgl;
+			productReference = 8BC261D71FE2207100EEE23B /* chapter7-MultiTexture.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8BC261F71FE2248600EEE23B /* chapter7-PointSprites */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC2621B1FE2248600EEE23B /* Build configuration list for PBXNativeTarget "chapter7-PointSprites" */;
+			buildPhases = (
+				8BC261F81FE2248600EEE23B /* Sources */,
+				8BC262091FE2248600EEE23B /* Frameworks */,
+				8BC2620F1FE2248600EEE23B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chapter7-PointSprites";
+			productName = PfcOgl;
+			productReference = 8BC2621E1FE2248600EEE23B /* chapter7-PointSprites.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8BC2623E1FE2470C00EEE23B /* chapter7-TextureArray */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC2625A1FE2470C00EEE23B /* Build configuration list for PBXNativeTarget "chapter7-TextureArray" */;
+			buildPhases = (
+				8BC2623F1FE2470C00EEE23B /* Sources */,
+				8BC262501FE2470C00EEE23B /* Frameworks */,
+				8BC262561FE2470C00EEE23B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chapter7-TextureArray";
+			productName = PfcOgl;
+			productReference = 8BC2625D1FE2470C00EEE23B /* chapter7-TextureArray.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8BDA555E1F7E1B760042C4D9 /* PfcOgl4.x */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BDA55791F7E1B760042C4D9 /* Build configuration list for PBXNativeTarget "PfcOgl4.x" */;
@@ -2586,6 +3018,15 @@
 					8BC261731FE12DE900EEE23B = {
 						DevelopmentTeam = 89VKD6974F;
 					};
+					8BC261B11FE2207100EEE23B = {
+						DevelopmentTeam = 89VKD6974F;
+					};
+					8BC261F71FE2248600EEE23B = {
+						DevelopmentTeam = 89VKD6974F;
+					};
+					8BC2623E1FE2470C00EEE23B = {
+						DevelopmentTeam = 89VKD6974F;
+					};
 					8BDA555E1F7E1B760042C4D9 = {
 						DevelopmentTeam = 89VKD6974F;
 					};
@@ -2633,6 +3074,9 @@
 				8BC2610C1FDFBA1E00EEE23B /* chapter6-ToonShader */,
 				8BC2613C1FE0B63B00EEE23B /* chapter7-TextureRect */,
 				8BC261731FE12DE900EEE23B /* chapter7-CubeMapped */,
+				8BC261B11FE2207100EEE23B /* chapter7-MultiTexture */,
+				8BC261F71FE2248600EEE23B /* chapter7-PointSprites */,
+				8BC2623E1FE2470C00EEE23B /* chapter7-TextureArray */,
 			);
 		};
 /* End PBXProject section */
@@ -2855,13 +3299,84 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BC261A71FE12EAE00EEE23B /* neg_x.tga in Resources */,
-				8BC2619E1FE12E4B00EEE23B /* fp.glsl in Resources */,
+				8BC2619E1FE12E4B00EEE23B /* fp_reflection.glsl in Resources */,
 				8BC261A91FE12EAE00EEE23B /* pos_x.tga in Resources */,
 				8BC261AA1FE12EAE00EEE23B /* neg_y.tga in Resources */,
 				8BC261AB1FE12EAE00EEE23B /* neg_z.tga in Resources */,
 				8BC261AC1FE12EAE00EEE23B /* pos_y.tga in Resources */,
 				8BC261A81FE12EAE00EEE23B /* pos_z.tga in Resources */,
-				8BC2619F1FE12E4B00EEE23B /* vp.glsl in Resources */,
+				8BC261B01FE208C400EEE23B /* vp_skybox.glsl in Resources */,
+				8BC2619F1FE12E4B00EEE23B /* vp_reflection.glsl in Resources */,
+				8BC261AE1FE208AF00EEE23B /* fp_skybox.glsl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC261C91FE2207100EEE23B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC261F61FE222ED00EEE23B /* fp_reflection.glsl in Resources */,
+				8BC261F51FE2215100EEE23B /* tarnish.tga in Resources */,
+				8BC261EF1FE220A700EEE23B /* vp_reflection.glsl in Resources */,
+				8BC261EB1FE220A700EEE23B /* pos_z.tga in Resources */,
+				8BC261E91FE220A700EEE23B /* neg_x.tga in Resources */,
+				8BC261EE1FE220A700EEE23B /* fp_skybox.glsl in Resources */,
+				8BC261EC1FE220A700EEE23B /* pos_x.tga in Resources */,
+				8BC261F11FE220A700EEE23B /* vp_skybox.glsl in Resources */,
+				8BC261E81FE220A700EEE23B /* neg_y.tga in Resources */,
+				8BC261ED1FE220A700EEE23B /* pos_y.tga in Resources */,
+				8BC261EA1FE220A700EEE23B /* neg_z.tga in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC2620F1FE2248600EEE23B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC262391FE224BA00EEE23B /* fp.glsl in Resources */,
+				8BC262381FE224BA00EEE23B /* vp.glsl in Resources */,
+				8BC2623D1FE22F7A00EEE23B /* star.tga in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC262561FE2470C00EEE23B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC262941FE26BBA00EEE23B /* moon03.tga in Resources */,
+				8BC262921FE26BBA00EEE23B /* moon25.tga in Resources */,
+				8BC262A31FE26BBA00EEE23B /* moon13.tga in Resources */,
+				8BC2629D1FE26BBA00EEE23B /* moon11.tga in Resources */,
+				8BC2628C1FE26BBA00EEE23B /* moon12.tga in Resources */,
+				8BC2629A1FE26BBA00EEE23B /* moon24.tga in Resources */,
+				8BC2629F1FE26BBA00EEE23B /* moon23.tga in Resources */,
+				8BC262691FE26B8900EEE23B /* vp.glsl in Resources */,
+				8BC262991FE26BBA00EEE23B /* moon21.tga in Resources */,
+				8BC2628B1FE26BBA00EEE23B /* moon00.tga in Resources */,
+				8BC2629E1FE26BBA00EEE23B /* moon14.tga in Resources */,
+				8BC262671FE26B8900EEE23B /* star.tga in Resources */,
+				8BC262A01FE26BBA00EEE23B /* moon28.tga in Resources */,
+				8BC262911FE26BBA00EEE23B /* moon06.tga in Resources */,
+				8BC262A61FE26BE700EEE23B /* fp_moon.glsl in Resources */,
+				8BC262981FE26BBA00EEE23B /* moon20.tga in Resources */,
+				8BC2628F1FE26BBA00EEE23B /* moon26.tga in Resources */,
+				8BC262931FE26BBA00EEE23B /* moon10.tga in Resources */,
+				8BC262A81FE26BF500EEE23B /* vp_moon.glsl in Resources */,
+				8BC2628A1FE26BBA00EEE23B /* moon18.tga in Resources */,
+				8BC2629C1FE26BBA00EEE23B /* moon08.tga in Resources */,
+				8BC2628D1FE26BBA00EEE23B /* moon04.tga in Resources */,
+				8BC262A41FE26BBA00EEE23B /* moon16.tga in Resources */,
+				8BC262971FE26BBA00EEE23B /* moon09.tga in Resources */,
+				8BC262891FE26BBA00EEE23B /* moon07.tga in Resources */,
+				8BC262A11FE26BBA00EEE23B /* moon01.tga in Resources */,
+				8BC262A21FE26BBA00EEE23B /* moon27.tga in Resources */,
+				8BC2628E1FE26BBA00EEE23B /* moon22.tga in Resources */,
+				8BC262961FE26BBA00EEE23B /* moon02.tga in Resources */,
+				8BC262901FE26BBA00EEE23B /* moon17.tga in Resources */,
+				8BC2629B1FE26BBA00EEE23B /* moon15.tga in Resources */,
+				8BC262681FE26B8900EEE23B /* fp.glsl in Resources */,
+				8BC262951FE26BBA00EEE23B /* moon05.tga in Resources */,
+				8BC262881FE26BBA00EEE23B /* moon19.tga in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3411,6 +3926,75 @@
 				8BC261821FE12DE900EEE23B /* PfCOglTool.cpp in Sources */,
 				8BC261A01FE12E4B00EEE23B /* main.cpp in Sources */,
 				8BC261841FE12DE900EEE23B /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC261B21FE2207100EEE23B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC261F31FE220BA00EEE23B /* main.cpp in Sources */,
+				8BC261B31FE2207100EEE23B /* PfCOglProgram.cpp in Sources */,
+				8BC261B41FE2207100EEE23B /* PfCOglObject.cpp in Sources */,
+				8BC261B51FE2207100EEE23B /* PfCOglShader.cpp in Sources */,
+				8BC261B61FE2207100EEE23B /* PfCOglBitmap.cpp in Sources */,
+				8BC261B71FE2207100EEE23B /* PfCOglTexture.cpp in Sources */,
+				8BC261B81FE2207100EEE23B /* PfCOglCamera.cpp in Sources */,
+				8BC261B91FE2207100EEE23B /* PfCOglModelAsset.cpp in Sources */,
+				8BC261BA1FE2207100EEE23B /* PfCOglBatch.cpp in Sources */,
+				8BC261BB1FE2207100EEE23B /* PfCOglModelInstance.cpp in Sources */,
+				8BC261BC1FE2207100EEE23B /* PfCOglTriangleBatch.cpp in Sources */,
+				8BC261BD1FE2207100EEE23B /* PfCOglLight.cpp in Sources */,
+				8BC261BE1FE2207100EEE23B /* math3d.cpp in Sources */,
+				8BC261BF1FE2207100EEE23B /* glew.c in Sources */,
+				8BC261C01FE2207100EEE23B /* PfCOglTool.cpp in Sources */,
+				8BC261C21FE2207100EEE23B /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC261F81FE2248600EEE23B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC261FA1FE2248600EEE23B /* PfCOglProgram.cpp in Sources */,
+				8BC261FB1FE2248600EEE23B /* PfCOglObject.cpp in Sources */,
+				8BC261FC1FE2248600EEE23B /* PfCOglShader.cpp in Sources */,
+				8BC261FD1FE2248600EEE23B /* PfCOglBitmap.cpp in Sources */,
+				8BC261FE1FE2248600EEE23B /* PfCOglTexture.cpp in Sources */,
+				8BC261FF1FE2248600EEE23B /* PfCOglCamera.cpp in Sources */,
+				8BC262001FE2248600EEE23B /* PfCOglModelAsset.cpp in Sources */,
+				8BC262011FE2248600EEE23B /* PfCOglBatch.cpp in Sources */,
+				8BC262021FE2248600EEE23B /* PfCOglModelInstance.cpp in Sources */,
+				8BC262031FE2248600EEE23B /* PfCOglTriangleBatch.cpp in Sources */,
+				8BC262041FE2248600EEE23B /* PfCOglLight.cpp in Sources */,
+				8BC262051FE2248600EEE23B /* math3d.cpp in Sources */,
+				8BC262061FE2248600EEE23B /* glew.c in Sources */,
+				8BC262071FE2248600EEE23B /* PfCOglTool.cpp in Sources */,
+				8BC2623B1FE224BA00EEE23B /* main.cpp in Sources */,
+				8BC262081FE2248600EEE23B /* platform_osx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC2623F1FE2470C00EEE23B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC262A91FE363DA00EEE23B /* PfCOglTexture.cpp in Sources */,
+				8BC262401FE2470C00EEE23B /* PfCOglProgram.cpp in Sources */,
+				8BC262411FE2470C00EEE23B /* PfCOglObject.cpp in Sources */,
+				8BC262421FE2470C00EEE23B /* PfCOglShader.cpp in Sources */,
+				8BC262431FE2470C00EEE23B /* PfCOglBitmap.cpp in Sources */,
+				8BC262451FE2470C00EEE23B /* PfCOglCamera.cpp in Sources */,
+				8BC262461FE2470C00EEE23B /* PfCOglModelAsset.cpp in Sources */,
+				8BC262471FE2470C00EEE23B /* PfCOglBatch.cpp in Sources */,
+				8BC262481FE2470C00EEE23B /* PfCOglModelInstance.cpp in Sources */,
+				8BC262491FE2470C00EEE23B /* PfCOglTriangleBatch.cpp in Sources */,
+				8BC2624A1FE2470C00EEE23B /* PfCOglLight.cpp in Sources */,
+				8BC2624B1FE2470C00EEE23B /* math3d.cpp in Sources */,
+				8BC2624C1FE2470C00EEE23B /* glew.c in Sources */,
+				8BC2624D1FE2470C00EEE23B /* PfCOglTool.cpp in Sources */,
+				8BC2626A1FE26B8900EEE23B /* main.cpp in Sources */,
+				8BC2624F1FE2470C00EEE23B /* platform_osx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4499,6 +5083,126 @@
 			};
 			name = Release;
 		};
+		8BC261D51FE2207100EEE23B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BC261D61FE2207100EEE23B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8BC2621C1FE2248600EEE23B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BC2621D1FE2248600EEE23B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8BC2625B1FE2470C00EEE23B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BC2625C1FE2470C00EEE23B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89VKD6974F;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/common/platforms/osx",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yawei.PfcOgl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8BDA557A1F7E1B760042C4D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4803,6 +5507,33 @@
 			buildConfigurations = (
 				8BC261931FE12DE900EEE23B /* Debug */,
 				8BC261941FE12DE900EEE23B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC261D41FE2207100EEE23B /* Build configuration list for PBXNativeTarget "chapter7-MultiTexture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC261D51FE2207100EEE23B /* Debug */,
+				8BC261D61FE2207100EEE23B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC2621B1FE2248600EEE23B /* Build configuration list for PBXNativeTarget "chapter7-PointSprites" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC2621C1FE2248600EEE23B /* Debug */,
+				8BC2621D1FE2248600EEE23B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC2625A1FE2470C00EEE23B /* Build configuration list for PBXNativeTarget "chapter7-TextureArray" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC2625B1FE2470C00EEE23B /* Debug */,
+				8BC2625C1FE2470C00EEE23B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

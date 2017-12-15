@@ -1,7 +1,7 @@
 //
 //  main.cpp
 //  PfcOgl
-//
+//  多重纹理
 //  Created by developer on 24/07/2017.
 //  Copyright © 2017 developer. All rights reserved.
 //
@@ -33,19 +33,17 @@
 using namespace std;
 using namespace PfCOgl;
 
-#define NUM_SPHERES 50
+#define NUM_STARS 1000
 
 float gDegreesRotated = 0;
 double gScrollY = 0;
 GLFWwindow *gWindow;
-ModelAsset sphereAsset;
-ModelAsset cubeAsset;
-ModelInstance sphereIns;
-ModelInstance cubeIns;
+ModelAsset starsAsset;
+ModelInstance starsIns;
 
+Texture * mTexture;
 
 Camera gCamera;
-Camera sphereCameras[NUM_SPHERES];
 float secondsElapsed;
 
 //用于全局的model变换   一般update中使用
@@ -83,18 +81,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
     
     if (key == GLFW_KEY_1 && action == GLFW_RELEASE){
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glEnable(GL_POINT_SMOOTH);
-        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_LINE_SMOOTH);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_POLYGON_SMOOTH);
-        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        //设置点的原点在左下  默认是左上
+        glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT);
     }else if (key == GLFW_KEY_2 && action == GLFW_RELEASE){
-        glDisable(GL_BLEND);
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_POINT_SMOOTH);
     }
     
     //    const float moveSpeed = 4.0; //units per second
@@ -208,25 +197,46 @@ void loadAssetAndInstances() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     //init asset and instances
     
-    sphereAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_reflection.glsl", "fp_reflection.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
-    sphereAsset.texture = new Texture(szCubeFaces, cube, 6, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, 1);
-    gltMakeSphereAsset(sphereAsset, 1.0f, 52, 26);
-    sphereIns.asset = &sphereAsset;
+    M3DMatrix44f fColors = {{ 1.0f, 1.0f, 1.0f, 1.0f}, // White
+        { 0.67f, 0.68f, 0.82f, 1.0f}, // Blue Stars
+        { 1.0f, 0.5f, 0.5f, 1.0f}, // Reddish
+        { 1.0f, 0.82f, 0.65f, 1.0f}}; // Orange
     
-    cubeAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_skybox.glsl", "fp_skybox.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
-    gltMakeCubeAsset(cubeAsset, 20.f);
-    cubeIns.asset = &cubeAsset;
-    
-    //init mode
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    // Cull backs of polygons
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
+    starsAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp.glsl", "fp.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal",GLT_ATTRIBUTE_COLOR, "vColor");
+    starsAsset.texture = LoadTGATexture("star.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_TEXTURE_2D);
+    starsAsset.begin(GL_POINTS, NUM_STARS);
+    for(int i = 0; i < NUM_STARS; i++)
+    {
+        int iColor = 0;        // All stars start as white
+        
+        // One in five will be blue
+        if(rand() % 5 == 1)
+            iColor = 1;
+        
+        // One in 50 red
+        if(rand() % 50 == 1)
+            iColor = 2;
+        
+        // One in 100 is amber
+        if(rand() % 100 == 1)
+            iColor = 3;
+        
+        
+        starsAsset.Color4fv(fColors[iColor]);
+        
+        M3DVector3f vPosition;
+        vPosition[0] = float(3000 - (rand() % 6000)) * 0.1f;
+        vPosition[1] = float(3000 - (rand() % 6000)) * 0.1f;
+        vPosition[2] = -float(rand() % 1000)-1.0f;  // -1 to -1000.0f
+        
+        starsAsset.Vertex3fv(vPosition);
+    }
+    starsAsset.endBatchs();
+    starsIns.asset = &starsAsset;
     
     // init cameras
     gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
-    gCamera.offsetPosition(4.f * -gCamera.forward());
+//    gCamera.offsetPosition(4.f * -gCamera.forward());
 }
 
 //M3DMatrix44f proj;
@@ -236,33 +246,32 @@ void RenderScene(void)
     M3DVector4f vTorusColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     M3DVector4f vSphereColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     
-    const GLfloat degreesPerSecond = 60.0f;
+    // Clear the window and the depth buffer
+    glClear(GL_COLOR_BUFFER_BIT);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    
+    // Let the vertex program determine the point size
+    // 让顶点程序决定点的大小
+    glEnable(GL_PROGRAM_POINT_SIZE);
+    
+    const GLfloat degreesPerSecond = 30.0f;
     gDegreesRotated += secondsElapsed * degreesPerSecond;
     while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
     
-    // Clear the window and the depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    M3DMatrix44f mInverseCamera = glm::inverse(gCamera.orientation());
-    m3dInvertMatrix44(mInverseCamera, gCamera.orientation());
+    starsAsset.shaders->use();
+    starsAsset.shaders->setUniform("mvpMatrix", gCamera.matrix() * starsIns.transform);
+    starsAsset.shaders->setUniform("starImage", 0);
+    starsAsset.shaders->setUniform("vAngle", gDegreesRotated);
     
-    sphereAsset.shaders->use();
-    sphereAsset.shaders->setUniform("mvpMatrix", gCamera.matrix() * sphereIns.transform);
-    sphereAsset.shaders->setUniform("mvMatrix", sphereIns.transform);
-    sphereAsset.shaders->setUniform("normalMatrix", sphereIns.getNormalMatrix());
-//    sphereAsset.shaders->setUniform("mInverseCamera", mInverseCamera);
-    sphereAsset.shaders->setUniform("cubeMap", 0);
-    glEnable(GL_CULL_FACE);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, sphereAsset.texture->object());
-    sphereIns.draw();
+    float fTime = glfwGetTime() * 10.0f;
+    fTime = fmod(fTime, 500.0f);
+    starsAsset.shaders->setUniform("timeStamp", fTime);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, starsAsset.texture->object());
+    starsIns.draw();
     glDisable(GL_CULL_FACE);
-    sphereAsset.shaders->stopUsing();
-    
-    cubeAsset.shaders->use();
-    cubeAsset.shaders->setUniform("mvpMatrix", gCamera.matrix() * cubeIns.transform);
-    cubeAsset.shaders->setUniform("cubeMap", 0);
-    cubeIns.draw();
-    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-    cubeAsset.shaders->stopUsing();
+    starsAsset.shaders->stopUsing();
     
     glfwSwapBuffers(gWindow);
 }

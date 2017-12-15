@@ -150,7 +150,7 @@ void initGlew(){
 }
 void loadAssetAndInstances() {
     gCamera.setPosition(glm::vec3(0,0,7));
-    gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
+//    gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
     glClearColor(1, 1, 1, 1); // white
     GLfloat vVerts[SMALL_STARS * 3];       // SMALL_STARS is the largest batch we are going to need
     int i;

@@ -1,7 +1,7 @@
 //
 //  main.cpp
 //  PfcOgl
-//
+//  多重纹理
 //  Created by developer on 24/07/2017.
 //  Copyright © 2017 developer. All rights reserved.
 //
@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include <vector>
 #include <list>
 
@@ -33,19 +34,26 @@
 using namespace std;
 using namespace PfCOgl;
 
-#define NUM_SPHERES 50
+#define SMALL_STARS     100
+#define MEDIUM_STARS     40
+#define LARGE_STARS      15
 
 float gDegreesRotated = 0;
 double gScrollY = 0;
 GLFWwindow *gWindow;
-ModelAsset sphereAsset;
-ModelAsset cubeAsset;
-ModelInstance sphereIns;
-ModelInstance cubeIns;
+ModelAsset smallStarAsset;
+ModelAsset mediumStarAsset;
+ModelAsset largeStarAsset;
+ModelAsset mountainRangeAsset;
+ModelAsset moonAsset;
 
+ModelInstance smallStarIns;
+ModelInstance mediumStarIns;
+ModelInstance largeStarIns;
+ModelInstance mountainRangeIns;
+ModelInstance moonIns;
 
 Camera gCamera;
-Camera sphereCameras[NUM_SPHERES];
 float secondsElapsed;
 
 //用于全局的model变换   一般update中使用
@@ -83,18 +91,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
     
     if (key == GLFW_KEY_1 && action == GLFW_RELEASE){
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glEnable(GL_POINT_SMOOTH);
-        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_LINE_SMOOTH);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-        glEnable(GL_POLYGON_SMOOTH);
-        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        //设置点的原点在左下  默认是左上
+        glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT);
     }else if (key == GLFW_KEY_2 && action == GLFW_RELEASE){
-        glDisable(GL_BLEND);
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_POINT_SMOOTH);
     }
     
     //    const float moveSpeed = 4.0; //units per second
@@ -207,26 +206,121 @@ static std::vector<PfCOgl::Shader> LoadShaders(const char* vertFilename, const c
 void loadAssetAndInstances() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     //init asset and instances
+    M3DVector3f vVerts[SMALL_STARS];
     
-    sphereAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_reflection.glsl", "fp_reflection.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
-    sphereAsset.texture = new Texture(szCubeFaces, cube, 6, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, 1);
-    gltMakeSphereAsset(sphereAsset, 1.0f, 52, 26);
-    sphereIns.asset = &sphereAsset;
+    smallStarAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp.glsl", "fp.glsl"), 1, GLT_ATTRIBUTE_VERTEX, "vVertex");
+    smallStarAsset.drawCount = SMALL_STARS;
+    smallStarAsset.drawStart = 0;
+    smallStarAsset.drawType = GL_POINTS;
+    for(int i = 0; i < SMALL_STARS; i++)
+    {
+        vVerts[i][0] = (GLfloat)(rand() % (int)SCREEN_SIZE.x);
+        vVerts[i][1] = (GLfloat)(rand() % (int)(SCREEN_SIZE.y - 100)) + 100.0f;
+        vVerts[i][2] = 0.0f;
+    }
+    smallStarAsset.bindData(vVerts, SMALL_STARS * 3);
+    smallStarAsset.begin();
+    smallStarAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
+    smallStarAsset.end();
+    smallStarAsset.texture = LoadTGATexture("star.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_TEXTURE_2D);
+    smallStarIns.asset = &smallStarAsset;
     
-    cubeAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_skybox.glsl", "fp_skybox.glsl"), 2,GLT_ATTRIBUTE_VERTEX, "vVertex",GLT_ATTRIBUTE_NORMAL, "vNormal");
-    gltMakeCubeAsset(cubeAsset, 20.f);
-    cubeIns.asset = &cubeAsset;
+    mediumStarAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp.glsl", "fp.glsl"), 1, GLT_ATTRIBUTE_VERTEX, "vVertex");
+    mediumStarAsset.drawCount = MEDIUM_STARS;
+    mediumStarAsset.drawStart = 0;
+    mediumStarAsset.drawType = GL_POINTS;
+    for(int i = 0; i < MEDIUM_STARS; i++)
+    {
+        vVerts[i][0] = (GLfloat)(rand() % (int)SCREEN_SIZE.x);
+        vVerts[i][1] = (GLfloat)(rand() % (int)(SCREEN_SIZE.y - 100)) + 100.0f;
+        vVerts[i][2] = 0.0f;
+    }
+    mediumStarAsset.bindData(vVerts, MEDIUM_STARS * 3);
+    mediumStarAsset.begin();
+    mediumStarAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
+    mediumStarAsset.end();
+    mediumStarAsset.texture = LoadTGATexture("star.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_TEXTURE_2D);
+    mediumStarIns.asset = &mediumStarAsset;
+    
+    largeStarAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp.glsl", "fp.glsl"), 1, GLT_ATTRIBUTE_VERTEX, "vVertex");
+    largeStarAsset.drawCount = LARGE_STARS;
+    largeStarAsset.drawStart = 0;
+    largeStarAsset.drawType = GL_POINTS;
+    for(int i = 0; i < LARGE_STARS; i++)
+    {
+        vVerts[i][0] = (GLfloat)(rand() % (int)SCREEN_SIZE.x);
+        vVerts[i][1] = (GLfloat)(rand() % (int)(SCREEN_SIZE.y - 100)) + 100.0f;
+        vVerts[i][2] = 0.0f;
+    }
+    largeStarAsset.bindData(vVerts, LARGE_STARS * 3);
+    largeStarAsset.begin();
+    largeStarAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
+    largeStarAsset.end();
+    largeStarAsset.texture = LoadTGATexture("star.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_TEXTURE_2D);
+    largeStarIns.asset = & largeStarAsset;
+    
+    mountainRangeAsset.drawCount = 12;
+    mountainRangeAsset.drawType = GL_LINE_STRIP;
+    mountainRangeAsset.drawStart = 0;
+    mountainRangeAsset.shaders = new Program();
+    mountainRangeAsset.shaders->initializeStockShaders();
+    GLfloat vMountains[12 * 3] = {
+        0.0f, 25.0f, 0.0f,
+        50.0f, 100.0f, 0.0f,
+        100.0f, 25.0f, 0.0f,
+        225.0f, 125.0f, 0.0f,
+        300.0f, 50.0f, 0.0f,
+        375.0f, 100.0f, 0.0f,
+        460.0f, 25.0f, 0.0f,
+        525.0f, 100.0f, 0.0f,
+        600.0f, 20.0f, 0.0f,
+        675.0f, 70.0f, 0.0f,
+        750.0f, 25.0f, 0.0f,
+        800.0f, 90.0f, 0.0f };
+    mountainRangeAsset.bindData(vMountains, 36);
+    mountainRangeAsset.begin();
+    mountainRangeAsset.CopyVertexData3f(3, GL_FLOAT, GL_FALSE, 0, NULL);
+    mountainRangeAsset.end();
+    mountainRangeIns.asset = &mountainRangeAsset;
+    
+    GLfloat x = 700.0f;     // Location and radius of moon
+    GLfloat y = 500.0f;
+    GLfloat r = 50.0f;
+    GLfloat angle = 0.0f;   // Another looping variable
+    moonAsset.shaders = Program::getProgramByShadersWithAttr( LoadShaders("vp_moon.glsl", "fp_moon.glsl"), 2, GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoords");
+    char **files = new char*[29];
+    for(int i=0; i<29; i++){
+        files[i] = new char[32];
+        std::sprintf(files[i], "moon%02d.tga", i);
+    }
+    moonAsset.texture = Texture::generateTextureArray(files, 29, 64, 64, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, 1);
+    delete[] files;
+    
+    moonAsset.begin(GL_TRIANGLE_FAN, 4);
+    
+    moonAsset.MultiTexCoord2f(0, 0.0f, 0.0f);
+    moonAsset.Vertex3f(x - r, y - r, 0.0f);
+    
+    moonAsset.MultiTexCoord2f(0, 1.0f, 0.0f);
+    moonAsset.Vertex3f(x + r, y - r, 0.0f);
+    
+    moonAsset.MultiTexCoord2f(0, 1.0f, 1.0f);
+    moonAsset.Vertex3f(x + r, y + r, 0.0f);
+    
+    moonAsset.MultiTexCoord2f(0, 0.0f, 1.0f);
+    moonAsset.Vertex3f(x - r, y + r, 0.0f);
+    moonAsset.endBatchs();
+    moonIns.asset = &moonAsset;
     
     //init mode
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    // Cull backs of polygons
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glEnable(GL_LINE_SMOOTH);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
     
     // init cameras
-    gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
-    gCamera.offsetPosition(4.f * -gCamera.forward());
+//    gCamera.setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
+//    gCamera.offsetPosition(4.f * -gCamera.forward());
 }
 
 //M3DMatrix44f proj;
@@ -235,35 +329,44 @@ void RenderScene(void)
     M3DVector4f vFloorColor = { 1.0f, 1.0f, 1.0f, 0.75f};
     M3DVector4f vTorusColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     M3DVector4f vSphereColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+    M3DVector4f vWhite = { 1.0f, 1.0f, 1.0f, 1.0f };
     
-    const GLfloat degreesPerSecond = 60.0f;
-    gDegreesRotated += secondsElapsed * degreesPerSecond;
-    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
+    proM = gltOrthoMatrix(0.0f, SCREEN_SIZE.x, 0.0f, SCREEN_SIZE.y, -1.0f, 1.0f);
     
-    // Clear the window and the depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    M3DMatrix44f mInverseCamera = glm::inverse(gCamera.orientation());
-    m3dInvertMatrix44(mInverseCamera, gCamera.orientation());
+    glBindTexture(GL_TEXTURE_2D, smallStarAsset.texture->object());
+    smallStarAsset.shaders->use();
+    smallStarAsset.shaders->setUniform("mvpMatrix", proM * smallStarIns.transform);
+    smallStarAsset.shaders->setUniform("starImage", 0);
+    glPointSize(4.0f);
+    smallStarIns.draw();
     
-    sphereAsset.shaders->use();
-    sphereAsset.shaders->setUniform("mvpMatrix", gCamera.matrix() * sphereIns.transform);
-    sphereAsset.shaders->setUniform("mvMatrix", sphereIns.transform);
-    sphereAsset.shaders->setUniform("normalMatrix", sphereIns.getNormalMatrix());
-//    sphereAsset.shaders->setUniform("mInverseCamera", mInverseCamera);
-    sphereAsset.shaders->setUniform("cubeMap", 0);
-    glEnable(GL_CULL_FACE);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, sphereAsset.texture->object());
-    sphereIns.draw();
-    glDisable(GL_CULL_FACE);
-    sphereAsset.shaders->stopUsing();
+    glBindTexture(GL_TEXTURE_2D, mediumStarAsset.texture->object());
+    mediumStarAsset.shaders->use();
+    mediumStarAsset.shaders->setUniform("mvpMatrix", proM * mediumStarIns.transform);
+    mediumStarAsset.shaders->setUniform("starImage", 0);
+    glPointSize(8.0f);
+    mediumStarIns.draw();
     
-    cubeAsset.shaders->use();
-    cubeAsset.shaders->setUniform("mvpMatrix", gCamera.matrix() * cubeIns.transform);
-    cubeAsset.shaders->setUniform("cubeMap", 0);
-    cubeIns.draw();
-    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-    cubeAsset.shaders->stopUsing();
+    glBindTexture(GL_TEXTURE_2D, largeStarAsset.texture->object());
+    largeStarAsset.shaders->use();
+    largeStarAsset.shaders->setUniform("mvpMatrix", proM * largeStarIns.transform);
+    largeStarAsset.shaders->setUniform("starImage", 0);
+    glPointSize(12.0f);
+    largeStarIns.draw();
     
+    mountainRangeAsset.shaders->useStockShader(GLT_SHADER_FLAT, &proM, &vWhite);
+    glLineWidth(3.5);
+    mountainRangeIns.draw();
+    
+    // Draw the "moon"
+    glBindTexture(GL_TEXTURE_2D_ARRAY, moonAsset.texture->object());
+    moonAsset.shaders->use();
+    moonAsset.shaders->setUniform("mvpMatrix", proM);
+    moonAsset.shaders->setUniform("moonImage", 0);
+    
+    float fTime = fmod(glfwGetTime(), 28.0f);
+    moonAsset.shaders->setUniform("fTime", fTime);
+    moonIns.draw();
     glfwSwapBuffers(gWindow);
 }
 
